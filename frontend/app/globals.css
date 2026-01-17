@@ -18,11 +18,7 @@
   }
   
   html {
-    font-size: 16px !important;
-    -webkit-text-size-adjust: 100% !important;
-    -moz-text-size-adjust: 100% !important;
-    text-size-adjust: 100% !important;
-    zoom: 1 !important;
+    font-size: 16px;
   }
   
   * {
@@ -31,11 +27,10 @@
   
   body {
     @apply bg-background text-foreground;
-    font-size: 16px !important;
+    font-size: 1rem;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    zoom: 1 !important;
   }
 }
 

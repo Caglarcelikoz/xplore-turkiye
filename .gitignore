@@ -1,0 +1,114 @@
+# Root .gitignore for monorepo (CMS + Frontend)
+
+############################
+# OS Files
+############################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+############################
+# IDE
+############################
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+############################
+# Node.js
+############################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnp
+.pnp.js
+
+############################
+# Environment Variables
+############################
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+############################
+# Build outputs
+############################
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+############################
+# Logs
+############################
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+############################
+# Database
+############################
+*.sqlite
+*.sqlite3
+*.db
+
+############################
+# Strapi specific
+############################
+cms/.strapi
+cms/.strapi-updater.json
+cms/.strapi-cloud.json
+cms/exports
+cms/license.txt
+cms/public/uploads/*
+!cms/public/uploads/.gitkeep
+
+############################
+# Next.js specific
+############################
+frontend/.next/
+frontend/out/
+frontend/.vercel
+frontend/next-env.d.ts
+
+############################
+# Testing
+############################
+coverage/
+.nyc_output/
+
+############################
+# IDE & Editor
+############################
+.claude/
+.cursor/
+*.swp
+*.swo
+*~
+
+############################
+# Misc
+############################
+*.pem
+.cache/
+.temp/
+.tmp/

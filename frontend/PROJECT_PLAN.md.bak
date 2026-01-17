@@ -1,0 +1,226 @@
+# Travel Tour Agency - Project Plan
+
+## Project Overview
+A modern, marketing-focused frontend for a travel agency promoting group tours and trips to Turkey. Built with Next.js 14+, Tailwind CSS, and shadcn/ui components.
+
+## Tech Stack
+- **Framework**: Next.js 14+ (App Router)
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Maps**: Mapbox GL JS
+- **Language**: TypeScript
+- **Images**: Unsplash API or placeholder images
+
+## Project Structure
+
+```
+travel-tour/
+├── app/
+│   ├── layout.tsx              # Root layout
+│   ├── page.tsx                 # Landing page
+│   ├── reizen/                  # Trips section
+│   │   ├── page.tsx            # All trips with filters
+│   │   ├── [type]/             # Trip type pages
+│   │   │   ├── page.tsx        # Groepsreizen, Maatwerk, etc.
+│   │   │   └── [slug]/         # Individual trip detail
+│   │   │       └── page.tsx
+│   ├── over-ons/                # About us page
+│   └── contact/                 # Contact page
+├── components/
+│   ├── ui/                      # shadcn components
+│   ├── layout/
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   └── Navigation.tsx
+│   ├── sections/
+│   │   ├── HeroSection.tsx
+│   │   ├── AboutSection.tsx
+│   │   ├── FeaturedTrips.tsx
+│   │   ├── WhyUsSection.tsx
+│   │   └── RegionMap.tsx
+│   ├── trips/
+│   │   ├── TripCard.tsx
+│   │   ├── TripCarousel.tsx
+│   │   ├── TripFilters.tsx
+│   │   └── TripDetail.tsx
+│   └── shared/
+│       ├── Button.tsx
+│       └── Badge.tsx
+├── lib/
+│   ├── data/
+│   │   ├── trips.ts            # Dummy trip data
+│   │   ├── regions.ts          # Region definitions
+│   │   └── constants.ts        # Constants
+│   └── utils.ts                # Utility functions
+├── types/
+│   └── index.ts                # TypeScript types
+└── public/
+    └── images/                 # Static images if needed
+```
+
+## Features Breakdown
+
+### 1. Landing Page (`/`)
+- **Hero Section**: Large banner with CTA, hero image
+- **About Us Section**: Brief company introduction
+- **Featured Trips**: Carousel of 4-6 featured trips
+- **Why Us Section**: 5 cards (matching example design)
+  - Persoonlijk reisadvies
+  - Begeleiding bij elke stap
+  - Aangesloten bij garantiefondsen
+  - Vijf sterren bij Google
+  - De mooiste reizen
+- **Footer**: Social links, navigation, contact info
+
+### 2. Trip Types
+- **Groepsreizen** (`/reizen/groepsreizen`)
+- **Maatwerk Reizen** (`/reizen/maatwerk`)
+- **Self Drives** (`/reizen/self-drives`)
+- **City Trips** (`/reizen/citytrips`)
+
+### 3. Regions (Regio's)
+- Centraal Anatolië
+- Egeïsche Kust
+- Mediterrane Rivièra
+- Oost-Turkije
+- Zuidoost & Mesopotamië
+
+### 4. Trip Detail Page (`/reizen/[type]/[slug]`)
+Based on letstravel.nl structure:
+- Hero section with trip name, duration, price
+- Overview section
+- Day-by-day itinerary
+- "Wat kan ik bezoeken?" (What can I visit?) section
+- "Reis is inclusief" (Included) section
+- "Reis is exclusief" (Excluded) section
+- Image gallery
+- CTA buttons (Reis aanvragen, Meer informatie)
+- Map showing route/destinations
+
+### 5. Filtering System
+- Filter by trip type
+- Filter by region
+- Combined filters
+- Search functionality
+- Sort options (price, duration, popularity)
+
+### 6. Mapbox Integration
+- Interactive map showing Turkey regions
+- Clickable regions to filter trips
+- Trip detail pages show route/destinations
+
+## Data Structure
+
+### Trip Object
+```typescript
+interface Trip {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  type: 'groepsreizen' | 'maatwerk' | 'self-drives' | 'citytrips';
+  region: string;
+  duration: number; // days
+  price: number; // from price
+  priceNote: string;
+  bestTravelTime: string;
+  departureCity: string;
+  images: string[];
+  overview: string;
+  highlights: string[];
+  itinerary: DayPlan[];
+  included: string[];
+  excluded: string[];
+  featured: boolean;
+  coordinates?: [number, number]; // for map
+  route?: [number, number][]; // for route display
+}
+
+interface DayPlan {
+  day: number;
+  title: string;
+  description: string;
+  locations?: string[];
+}
+```
+
+## Design Approach
+- Modern, clean design
+- Mobile-first responsive
+- High-quality imagery
+- Smooth animations/transitions
+- Accessible (WCAG compliant)
+- Fast loading (optimized images)
+
+## Implementation Phases
+
+### Phase 1: Setup & Foundation
+1. Initialize Next.js project
+2. Setup Tailwind CSS
+3. Install and configure shadcn/ui
+4. Setup TypeScript types
+5. Create basic layout components
+
+### Phase 2: Landing Page
+1. Hero section
+2. About section
+3. Featured trips carousel
+4. Why us section
+5. Footer
+
+### Phase 3: Trip Pages
+1. Trip type pages with filtering
+2. Trip detail pages
+3. Filter components
+4. Search functionality
+
+### Phase 4: Map Integration
+1. Mapbox setup
+2. Region map component
+3. Trip route visualization
+
+### Phase 5: Polish & Optimization
+1. Animations
+2. Image optimization
+3. Performance optimization
+4. Responsive refinements
+
+## Dummy Data Strategy
+- 20-30 sample trips across all types
+- Mix of regions
+- Varied durations (3-14 days)
+- Realistic pricing
+- Detailed itineraries
+- High-quality placeholder images (Unsplash)
+
+## Questions & Suggestions
+
+### Questions:
+1. **Branding**: Do you have a company name, logo, or color scheme preference?
+2. **Pricing**: Should prices be displayed in EUR? Any specific format?
+3. **Language**: All content in Dutch - any specific tone/voice?
+4. **Contact**: Should contact forms be functional or just UI?
+
+### Suggestions:
+1. **Image Strategy**: Use Unsplash API for high-quality travel images
+2. **Animations**: Add subtle scroll animations (Framer Motion)
+3. **SEO**: Implement proper meta tags and structured data
+4. **Performance**: Use Next.js Image component for optimization
+5. **Accessibility**: Ensure keyboard navigation and screen reader support
+6. **Analytics Ready**: Structure for easy Google Analytics integration later
+
+## Next Steps
+Once approved, I'll:
+1. Initialize the Next.js project
+2. Setup all dependencies
+3. Create the component structure
+4. Implement landing page
+5. Build trip pages and detail views
+6. Integrate Mapbox
+7. Add dummy data
+8. Polish and optimize
+
+---
+
+Ready to proceed? Let me know if you'd like any adjustments to this plan!
+

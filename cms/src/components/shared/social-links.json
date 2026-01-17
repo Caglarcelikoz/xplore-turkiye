@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_social_links",
+  "info": {
+    "name": "Social Links",
+    "icon": "share",
+    "displayName": "Social Links",
+    "description": "Herbruikbare social media links"
+  },
+  "options": {},
+  "attributes": {
+    "instagram": {
+      "type": "string",
+      "required": false
+    },
+    "facebook": {
+      "type": "string",
+      "required": false
+    },
+    "linkedin": {
+      "type": "string",
+      "required": false
+    },
+    "tiktok": {
+      "type": "string",
+      "required": false
+    }
+  }
+}
+

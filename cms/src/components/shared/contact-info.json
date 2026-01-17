@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_contact_infos",
+  "info": {
+    "name": "Contact Info",
+    "icon": "phone",
+    "displayName": "Contact Info",
+    "description": "Herbruikbare contactinformatie (telefoon, email, adres)"
+  },
+  "options": {},
+  "attributes": {
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "openingHours": {
+      "type": "json",
+      "required": false
+    }
+  }
+}

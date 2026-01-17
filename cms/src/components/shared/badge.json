@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_layout_badges",
+  "info": {
+    "displayName": "Badge"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "SPARKLES",
+        "HEART",
+        "STAR",
+        "GLOBE",
+        "SHIELD",
+        "CHECK_CIRCLE",
+        "AWARD",
+        "HEADPHONES",
+        "USERS"
+      ]
+    },
+    "label": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

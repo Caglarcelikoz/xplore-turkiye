@@ -8,6 +8,7 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+  adjustFontFallback: true,
 });
 
 const showComingSoon = process.env.NEXT_PUBLIC_SHOW_COMING_SOON === 'true';
@@ -35,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="nl">
+    <html lang="nl" className="text-base">
       <body className={inter.className} suppressHydrationWarning>
         {!showComingSoon && <Header />}
         <main className="min-h-screen">{children}</main>

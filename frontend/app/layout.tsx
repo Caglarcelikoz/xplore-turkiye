@@ -1,10 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const showComingSoon = process.env.NEXT_PUBLIC_SHOW_COMING_SOON === 'true';
 
@@ -15,6 +19,14 @@ export const metadata: Metadata = {
   description: showComingSoon
     ? "We werken hard aan een geweldige reiservaring voor jou. Blijf op de hoogte!"
     : "Ontdek de mooiste reizen naar Turkije. Groepsreizen, maatwerk reizen, self drives en citytrips. Persoonlijk reisadvies en begeleiding bij elke stap.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: "#294d54",
 };
 
 export default function RootLayout({

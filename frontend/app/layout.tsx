@@ -6,10 +6,15 @@ import Footer from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const showComingSoon = process.env.NEXT_PUBLIC_SHOW_COMING_SOON === 'true';
+
 export const metadata: Metadata = {
-  title: "Xplore Turkiye & Beyond | Groepsreizen en Maatwerk Reizen",
-  description:
-    "Ontdek de mooiste reizen naar Turkije. Groepsreizen, maatwerk reizen, self drives en citytrips. Persoonlijk reisadvies en begeleiding bij elke stap.",
+  title: showComingSoon
+    ? "Xplore Turkiye & Beyond | Binnenkort beschikbaar"
+    : "Xplore Turkiye & Beyond | Groepsreizen en Maatwerk Reizen",
+  description: showComingSoon
+    ? "We werken hard aan een geweldige reiservaring voor jou. Blijf op de hoogte!"
+    : "Ontdek de mooiste reizen naar Turkije. Groepsreizen, maatwerk reizen, self drives en citytrips. Persoonlijk reisadvies en begeleiding bij elke stap.",
 };
 
 export default function RootLayout({
@@ -20,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="nl">
       <body className={inter.className} suppressHydrationWarning>
-        <Header />
+        {!showComingSoon && <Header />}
         <main className="min-h-screen">{children}</main>
-        <Footer />
+        {!showComingSoon && <Footer />}
       </body>
     </html>
   );

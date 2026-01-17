@@ -8,6 +8,7 @@ import {
 } from "@/types/strapi";
 import FeaturedTrips from "@/components/sections/FeaturedTrips";
 import WhyUsSection from "@/components/sections/WhyUsSection";
+import ComingSoon from "@/components/ComingSoon";
 
 /**
  * Helper function to check if a specific block type exists in Strapi blocks
@@ -20,7 +21,14 @@ function hasBlockType(
   return blocks.some((block) => block.__component === componentType);
 }
 
+const SHOW_COMING_SOON = process.env.NEXT_PUBLIC_SHOW_COMING_SOON === 'true';
+
 export default async function Home() {
+  // Als coming soon mode actief is, toon alleen de coming soon pagina
+  if (SHOW_COMING_SOON) {
+    return <ComingSoon />;
+  }
+
   // Fetch landing page data from Strapi
   const landingPage = await getLandingPage();
   const blocks = landingPage?.attributes.blocks || [];

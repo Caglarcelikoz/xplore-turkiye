@@ -19,14 +19,15 @@ async function testAPI() {
 
     if (landingPage) {
       console.log("✅ Landing page fetched successfully!");
-      console.log("   ID:", landingPage.id);
-      console.log("   Document ID:", landingPage.documentId);
-      console.log("   Title:", (landingPage as any).attributes?.title || "N/A");
+      const page = landingPage as any;
+      console.log("   ID:", page.id);
+      console.log("   Document ID:", page.documentId);
+      console.log("   Title:", page.attributes?.title || "N/A");
       console.log(
         "   Description:",
-        (landingPage as any).attributes?.description || "N/A"
+        page.attributes?.description || "N/A"
       );
-      const blocks = (landingPage as any).attributes?.blocks;
+      const blocks = page.attributes?.blocks;
       console.log(
         "   Blocks:",
         blocks
@@ -56,8 +57,9 @@ async function testAPI() {
 
     if (landingPageSimple) {
       console.log("✅ Landing page fetched with simple populate!");
-      console.log("   ID:", landingPageSimple.id);
-      const blocks = (landingPageSimple as any).attributes?.blocks || [];
+      const pageSimple = landingPageSimple as any;
+      console.log("   ID:", pageSimple.id);
+      const blocks = pageSimple.attributes?.blocks || [];
       console.log("   Blocks:", blocks.length);
       if (blocks.length > 0) {
         const firstBlock = blocks[0];

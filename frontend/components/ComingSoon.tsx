@@ -92,6 +92,7 @@ export default function ComingSoon() {
                   height={28}
                   className="h-auto w-auto drop-shadow-lg"
                   priority
+                  unoptimized
                 />
               </div>
             </div>

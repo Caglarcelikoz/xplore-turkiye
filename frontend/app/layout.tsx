@@ -9,6 +9,7 @@ const inter = Inter({
   display: "swap",
   variable: "--font-inter",
   adjustFontFallback: true,
+  preload: true,
 });
 
 const showComingSoon = process.env.NEXT_PUBLIC_SHOW_COMING_SOON === 'true';
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   width: "device-width",
-  initialScale: 1,
+  initialScale: 1.0,
   maximumScale: 5,
   userScalable: true,
   themeColor: "#294d54",

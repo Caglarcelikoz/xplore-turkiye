@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Ensure consistent font rendering
+  experimental: {
+    optimizeCss: false,
+  },
   images: {
     remotePatterns: [
       {

@@ -3,11 +3,6 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Check if API key is set
-if (!process.env.RESEND_API_KEY) {
-  console.warn("RESEND_API_KEY is not set!");
-}
-
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
@@ -22,9 +17,8 @@ export async function POST(request: NextRequest) {
 
     // Send email to your address
     const fromEmail = process.env.RESEND_FROM_EMAIL || "Xplore Turkiye <onboarding@resend.dev>";
-    const toEmail = process.env.NOTIFICATION_EMAIL || "jouw@email.com";
+    const toEmail = process.env.NOTIFICATION_EMAIL || "info@xploreturkiye.be";
 
-    console.log("Attempting to send email:", { fromEmail, toEmail, userEmail: email });
 
     const { data, error } = await resend.emails.send({
       from: fromEmail,
@@ -48,11 +42,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("Email sent successfully:", data);
-
     return NextResponse.json({ success: true, data });
   } catch (error) {
-    console.error("API error:", error);
     const errorMessage = error instanceof Error ? error.message : "Onbekende fout";
     return NextResponse.json(
       { 

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Sparkles, CheckCircle2, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { Sparkles, CheckCircle2, Loader2, Instagram } from "lucide-react";
 
 export default function ComingSoon() {
   const [email, setEmail] = useState("");
@@ -61,9 +62,9 @@ export default function ComingSoon() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto py-20">
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pt-4 pb-8 sm:py-12">
         {/* Logo - Enhanced with fancy effects */}
-        <div className="mb-12 flex justify-center">
+        <div className="mb-4 sm:mb-6 flex justify-center">
           <div className="relative">
             {/* Multiple glow layers for depth */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 rounded-2xl blur-3xl scale-125 opacity-60 animate-pulse-slow" aria-hidden="true" />
@@ -78,7 +79,7 @@ export default function ComingSoon() {
             <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-60" aria-hidden="true" />
             
             {/* Main logo container with glassmorphism */}
-            <div className="relative bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/30 shadow-2xl">
+            <div className="relative bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/30 shadow-2xl">
               {/* Inner glow */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-transparent via-white/5 to-white/10 pointer-events-none" aria-hidden="true" />
               
@@ -87,8 +88,8 @@ export default function ComingSoon() {
                 <Image
                   src="/logo.png"
                   alt="Xplore Turkiye & Beyond logo"
-                  width={280}
-                  height={35}
+                  width={220}
+                  height={28}
                   className="h-auto w-auto drop-shadow-lg"
                   priority
                 />
@@ -104,7 +105,7 @@ export default function ComingSoon() {
         </div>
 
         {/* Main heading */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 sm:mb-4 tracking-tight">
           Binnenkort
           <br />
           <span className="bg-gradient-to-r from-white via-white/90 to-accent/80 bg-clip-text text-transparent">
@@ -113,14 +114,12 @@ export default function ComingSoon() {
         </h1>
 
         {/* Subheading */}
-        <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+        <p className="text-base sm:text-lg md:text-xl text-white/90 mb-4 sm:mb-6 max-w-2xl mx-auto leading-relaxed font-light">
           We werken hard aan een geweldige reiservaring voor jou.
-          <br />
-          <span className="text-white/80">Blijf op de hoogte voor updates!</span>
         </p>
 
         {/* Decorative element */}
-        <div className="flex items-center justify-center gap-3 mb-16" aria-hidden="true">
+        <div className="flex items-center justify-center gap-3 mb-6 sm:mb-8" aria-hidden="true">
           <div className="h-px w-20 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           <Sparkles className="h-6 w-6 text-white/80 animate-pulse" aria-hidden="true" />
           <div className="h-px w-20 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
@@ -129,22 +128,19 @@ export default function ComingSoon() {
         {/* Email signup section */}
         <div className="max-w-lg mx-auto">
           {/* Section heading */}
-          <div className="mb-8">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white">
               Wilt u geïnformeerd worden wanneer we live zijn?
             </h2>
-            <p className="text-base sm:text-lg text-white/80 font-light">
-              Laat uw e-mailadres achter en we sturen u een bericht zodra we klaar zijn
-            </p>
           </div>
 
           {/* Email form with glassmorphism */}
           <div className="relative">
             {/* Glow effect behind form */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 via-primary/20 to-accent/20 rounded-2xl blur-xl opacity-60" aria-hidden="true" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 via-primary/20 to-accent/20 rounded-xl blur-xl opacity-60" aria-hidden="true" />
             
             {/* Form container */}
-            <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 shadow-2xl">
+            <div className="relative bg-white/10 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-white/20 shadow-2xl">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <div className="flex-1 relative">
@@ -152,17 +148,17 @@ export default function ComingSoon() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="jouw@email.nl"
+                      placeholder="e-mailadres"
                       required
                       disabled={status === "loading" || status === "success"}
-                      className="w-full px-6 py-4 rounded-xl bg-white/15 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-base"
+                      className="w-full px-4 py-3 rounded-lg bg-white/15 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                       aria-label="E-mailadres voor updates"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={status === "loading" || status === "success"}
-                    className="px-8 py-4 bg-gradient-to-r from-accent to-accent-hover text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-accent/30 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 min-w-[160px] text-base"
+                    className="px-6 py-3 bg-gradient-to-r from-accent to-accent-hover text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-accent/30 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 min-w-[140px] text-sm sm:text-base"
                   >
                     {status === "loading" && <Loader2 className="h-5 w-5 animate-spin" />}
                     {status === "success" && <CheckCircle2 className="h-5 w-5" />}
@@ -183,6 +179,21 @@ export default function ComingSoon() {
             </div>
           </div>
         </div>
+
+      </div>
+
+      {/* Instagram link - Sticky bottom */}
+      <div className="fixed bottom-0 left-0 right-0 z-20 flex justify-center pb-4 sm:pb-6 pointer-events-none">
+        <Link
+          href="https://instagram.com/xplore.turkiye"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/30 rounded-lg hover:bg-white/20 hover:border-white/40 transition-all group pointer-events-auto shadow-lg"
+          aria-label="Volg ons op Instagram"
+        >
+          <Instagram className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
+          <span className="text-white text-sm sm:text-base font-medium">Volg ons op Instagram</span>
+        </Link>
       </div>
 
       {/* Floating particles animation - subtle */}

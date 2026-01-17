@@ -1,7 +1,25 @@
 # Root .gitignore for monorepo (CMS + Frontend)
+# 
+# Note: Subdirectories (cms/ and frontend/) have their own .gitignore files
+# for framework-specific ignores. This root file handles:
+# - Project-wide patterns (OS, IDE, etc.)
+# - Monorepo-specific paths
+# - Editor-specific files
 
 ############################
-# OS Files
+# IDE & Editor (Project-wide)
+############################
+.claude/
+.cursor/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+
+############################
+# OS Files (Project-wide)
 ############################
 .DS_Store
 .DS_Store?
@@ -13,100 +31,29 @@ Thumbs.db
 Desktop.ini
 
 ############################
-# IDE
+# Monorepo-specific paths
 ############################
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.idea/
-*.swp
-*.swo
-*~
+# These are here because they're referenced from root
+# Subdirectories handle their own specific ignores
 
-############################
-# Node.js
-############################
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-.pnp
-.pnp.js
-
-############################
-# Environment Variables
-############################
-.env
-.env*.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-############################
-# Build outputs
-############################
-dist/
-build/
-.next/
-out/
-*.tsbuildinfo
-
-############################
-# Logs
-############################
-*.log
-logs/
-*.pid
-*.seed
-*.pid.lock
-
-############################
-# Database
-############################
-*.sqlite
-*.sqlite3
-*.db
-
-############################
-# Strapi specific
-############################
+# Strapi specific (cms/)
 cms/.strapi
 cms/.strapi-updater.json
 cms/.strapi-cloud.json
 cms/exports
 cms/license.txt
-cms/public/uploads/*
-!cms/public/uploads/.gitkeep
 
-############################
-# Next.js specific
-############################
-frontend/.next/
-frontend/out/
+# Next.js specific (frontend/)
 frontend/.vercel
-frontend/next-env.d.ts
 
 ############################
-# Testing
+# Testing (Project-wide)
 ############################
 coverage/
 .nyc_output/
 
 ############################
-# IDE & Editor
-############################
-.claude/
-.cursor/
-*.swp
-*.swo
-*~
-
-############################
-# Misc
+# Misc (Project-wide)
 ############################
 *.pem
 .cache/

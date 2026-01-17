@@ -11,6 +11,12 @@
 }
 
 @layer base {
+  :root {
+    --background: 250 249 247;
+    --foreground: 24 46 50;
+    --radius: 0.5rem;
+  }
+  
   html {
     font-size: 16px;
     -webkit-text-size-adjust: 100%;

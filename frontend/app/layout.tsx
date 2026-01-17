@@ -36,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="nl" className="text-base">
+    <html lang="nl" className={inter.variable}>
       <body className={inter.className} suppressHydrationWarning>
         {!showComingSoon && <Header />}
         <main className="min-h-screen">{children}</main>

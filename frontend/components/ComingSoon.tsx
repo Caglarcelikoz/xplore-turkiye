@@ -151,14 +151,14 @@ export default function ComingSoon() {
                       placeholder="e-mailadres"
                       required
                       disabled={status === "loading" || status === "success"}
-                      className="w-full px-4 py-3 rounded-lg bg-white/15 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                      className="w-full px-4 py-3 rounded-lg bg-white/15 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-base"
                       aria-label="E-mailadres voor updates"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={status === "loading" || status === "success"}
-                    className="px-6 py-3 bg-gradient-to-r from-accent to-accent-hover text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-accent/30 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 min-w-[140px] text-sm sm:text-base"
+                    className="px-6 py-3 bg-gradient-to-r from-accent to-accent-hover text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-accent/30 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 min-w-[140px] text-base"
                   >
                     {status === "loading" && <Loader2 className="h-5 w-5 animate-spin" />}
                     {status === "success" && <CheckCircle2 className="h-5 w-5" />}
@@ -180,20 +180,19 @@ export default function ComingSoon() {
           </div>
         </div>
 
-      </div>
-
-      {/* Instagram link - Sticky bottom */}
-      <div className="fixed bottom-0 left-0 right-0 z-20 flex justify-center pb-4 sm:pb-6 pointer-events-none">
-        <Link
-          href="https://instagram.com/xplore.turkiye"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/30 rounded-lg hover:bg-white/20 hover:border-white/40 transition-all group pointer-events-auto shadow-lg"
-          aria-label="Volg ons op Instagram"
-        >
-          <Instagram className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-          <span className="text-white text-sm sm:text-base font-medium">Volg ons op Instagram</span>
-        </Link>
+        {/* Instagram link */}
+        <div className="mt-8 sm:mt-12">
+          <Link
+            href="https://instagram.com/xplore.turkiye"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/30 rounded-lg hover:bg-white/20 hover:border-white/40 transition-all group shadow-lg"
+            aria-label="Volg ons op Instagram"
+          >
+            <Instagram className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
+            <span className="text-white text-sm sm:text-base font-medium">Volg ons op Instagram</span>
+          </Link>
+        </div>
       </div>
 
       {/* Floating particles animation - subtle */}

@@ -35,7 +35,6 @@ const fadeUp = {
 
 export default function ContactSection({ showHero = false }: ContactSectionProps) {
   const [formData, setFormData] = useState({
-    salutation: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -51,16 +50,12 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [apiError, setApiError] = useState("");
-  const [openDropdown, setOpenDropdown] = useState<"salutation" | "requestType" | null>(null);
-  const salutationDropdownRef = useRef<HTMLDivElement>(null);
+  const [openDropdown, setOpenDropdown] = useState<"requestType" | null>(null);
   const requestTypeDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
-      if (openDropdown === "salutation" && !salutationDropdownRef.current?.contains(target)) {
-        setOpenDropdown(null);
-      }
       if (openDropdown === "requestType" && !requestTypeDropdownRef.current?.contains(target)) {
         setOpenDropdown(null);
       }
@@ -70,12 +65,6 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
       return () => document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [openDropdown]);
-
-  const salutationOptions: { value: string; label: string }[] = [
-    { value: "", label: "Selecteer" },
-    { value: "Dhr", label: "Dhr." },
-    { value: "Mevr", label: "Mevr." },
-  ];
 
   const global = staticGlobal;
   const contactInfo = global.attributes.contactInfo!;
@@ -108,7 +97,6 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
         if (value.length < 10) return "Minimaal 10 karakters vereist";
         if (value.length > 2000) return "Maximaal 2000 karakters toegestaan";
         return "";
-      case "salutation":
       case "requestType":
         if (!value) return "Dit veld is verplicht";
         return "";
@@ -143,7 +131,6 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
     const newErrors: FormErrors = {};
 
     const requiredFields = [
-      "salutation",
       "firstName",
       "lastName",
       "email",
@@ -196,7 +183,6 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
         // Reset form after 3 seconds
         setTimeout(() => {
           setFormData({
-            salutation: "",
             firstName: "",
             lastName: "",
             email: "",
@@ -316,75 +302,8 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
               <h3 className="text-2xl font-bold text-primary mb-6">Contactformulier</h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Salutation & Names Row */}
-                <div className="grid sm:grid-cols-3 gap-4">
-                  {/* Salutation */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.05, duration: 0.4 }}
-                  >
-                    <label htmlFor="salutation" className="block text-sm font-semibold text-primary mb-2">
-                      Aanhef <span className="text-accent">*</span>
-                    </label>
-                    <div className="relative" ref={salutationDropdownRef}>
-                      <button
-                        type="button"
-                        id="salutation"
-                        aria-haspopup="listbox"
-                        aria-expanded={openDropdown === "salutation"}
-                        onClick={() => setOpenDropdown(openDropdown === "salutation" ? null : "salutation")}
-                        className="w-full flex items-center justify-between gap-2 bg-white pl-4 pr-4 py-3 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30 cursor-pointer text-left text-foreground"
-                      >
-                        <span className={formData.salutation ? "" : "text-muted-foreground"}>
-                          {salutationOptions.find((o) => o.value === formData.salutation)?.label ?? "Selecteer"}
-                        </span>
-                        <ChevronDown
-                          className={`h-5 w-5 text-primary/50 flex-shrink-0 transition-transform ${openDropdown === "salutation" ? "rotate-180" : ""}`}
-                        />
-                      </button>
-                      <AnimatePresence>
-                        {openDropdown === "salutation" && (
-                          <motion.ul
-                            initial={{ opacity: 0, y: -4 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -4 }}
-                            transition={{ duration: 0.15 }}
-                            role="listbox"
-                            className="absolute z-20 mt-1 w-full bg-white border-2 border-primary/20 rounded-xl shadow-lg py-1 overflow-hidden"
-                          >
-                            {salutationOptions.map((opt) => (
-                              <li
-                                key={opt.value || "empty"}
-                                role="option"
-                                aria-selected={formData.salutation === opt.value}
-                                onClick={() => {
-                                  setFormData((prev) => ({ ...prev, salutation: opt.value }));
-                                  if (errors.salutation) setErrors((prev) => ({ ...prev, salutation: "" }));
-                                  setOpenDropdown(null);
-                                }}
-                                className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${formData.salutation === opt.value ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-primary/10"}`}
-                              >
-                                {opt.label}
-                              </li>
-                            ))}
-                          </motion.ul>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                    {hasAttemptedSubmit && errors.salutation && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                      >
-                        <AlertCircle className="h-3 w-3" />
-                        <span>{errors.salutation}</span>
-                      </motion.div>
-                    )}
-                  </motion.div>
-
+                {/* Names Row */}
+                <div className="grid sm:grid-cols-2 gap-4">
                   {/* First Name */}
                   <motion.div
                     initial={{ opacity: 0, y: 12 }}
@@ -604,7 +523,7 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                       onBlur={handleBlur}
                       rows={5}
                       placeholder="Schrijf hier je bericht..."
-                      className="w-full px-4 py-3 pl-11 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30 resize-y"
+                      className="w-full min-h-[8rem] px-4 py-3 pl-11 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30 resize-y"
                     />
                     <MessageCircle className="absolute left-3 top-3 h-5 w-5 text-primary/40" />
                   </div>

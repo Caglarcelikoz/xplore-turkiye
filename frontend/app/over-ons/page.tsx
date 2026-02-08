@@ -136,8 +136,7 @@ export default function AboutPage() {
               transition={{ delay: 0.25, duration: 0.7 }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
             >
-              Over{" "}
-              <span className="text-accent">XPLORE TÜRKIYE</span>
+              Over <span className="text-accent">XPLORE TÜRKIYE</span>
             </motion.h1>
 
             <motion.p
@@ -158,139 +157,6 @@ export default function AboutPage() {
       <AboutSection />
 
       {/* ════════════════════════════════════════════
-          THREE PILLARS — VISION · EXPERTISE · PROMISE
-      ════════════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 md:py-28 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div {...fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
-              Waar wij voor staan
-            </h2>
-            <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
-          </motion.div>
-
-          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
-            {pillars.map((pillar, index) => {
-              const Icon = pillar.icon;
-              return (
-                <motion.div
-                  key={pillar.title}
-                  {...stagger}
-                  transition={{ delay: index * 0.15, duration: 0.6 }}
-                  whileHover={{ y: -8 }}
-                  className="group relative bg-background rounded-2xl p-8 border border-primary/10 hover:border-primary/30 hover:shadow-xl transition-all duration-300 text-center"
-                >
-                  <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className={cn(
-                      "w-16 h-16 rounded-2xl bg-gradient-to-br flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-shadow mx-auto",
-                      pillar.color
-                    )}
-                  >
-                    <Icon className="h-8 w-8 text-white" />
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-primary mb-3">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {pillar.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════
-          OUR APPROACH — HOW WE WORK
-      ════════════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 md:py-28 bg-background relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2" />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-              {/* Image */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="relative"
-              >
-                <div className="absolute -inset-4 bg-gradient-to-br from-accent/20 to-primary/20 rounded-3xl blur-xl opacity-50" />
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=800&q=80"
-                    alt="Op maat gemaakte reisroute door Turkije"
-                    width={800}
-                    height={600}
-                    className="object-cover w-full h-[300px] sm:h-[400px] md:h-[500px]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/30 via-transparent to-transparent" />
-                </div>
-              </motion.div>
-
-              {/* Content */}
-              <motion.div {...fadeUp} transition={{ duration: 0.8 }}>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-4">
-                  <Compass className="h-4 w-4 text-accent" />
-                  <span className="text-xs font-semibold text-accent uppercase tracking-wider">
-                    Onze aanpak
-                  </span>
-                </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
-                  Reizen die groeien uit de plek zelf
-                </h2>
-                <p className="text-base sm:text-lg text-foreground/80 leading-relaxed mb-8">
-                  Onze reizen zijn volledig op maat en gebaseerd op eigen ervaringen
-                  en diepgaande kennis van het land. Elk traject dat wij uitwerken
-                  vertrekt vanuit de eigen identiteit van een regio en de samenhang
-                  tussen cultuur, geschiedenis en natuur.
-                </p>
-
-                {/* Steps */}
-                <div className="space-y-6">
-                  {approachSteps.map((step, index) => {
-                    const Icon = step.icon;
-                    return (
-                      <motion.div
-                        key={step.title}
-                        {...stagger}
-                        transition={{ delay: 0.2 + index * 0.15, duration: 0.5 }}
-                        className="flex items-start gap-4 group"
-                      >
-                        <div className="flex-shrink-0 relative">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                            <Icon className="h-6 w-6 text-white" />
-                          </div>
-                          <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-accent text-white text-[10px] font-bold flex items-center justify-center">
-                            {step.number}
-                          </span>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-primary mb-1">
-                            {step.title}
-                          </h3>
-                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                            {step.description}
-                          </p>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════
           TURKEY — A LAND OF MANY LAYERS
       ════════════════════════════════════════════ */}
       <section className="py-16 sm:py-20 md:py-28 bg-white relative overflow-hidden">
@@ -300,13 +166,11 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto">
             {/* Section header */}
-            <motion.div {...fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
-                <Globe className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                  Wat wij kennen
-                </span>
-              </div>
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-14"
+            >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
                 Een land met vele lagen
               </h2>
@@ -321,13 +185,28 @@ export default function AboutPage() {
             >
               {/* Intro */}
               <p>
-                Turkije is een land dat je niet kan herleiden tot één periode, één
-                cultuur of één overtuiging. Het is een plek waar lagen van de
-                menselijke geschiedenis zich over elkaar hebben gelegd en vandaag
-                nog steeds zichtbaar zijn.{" "}
+                Turkije is een land dat je niet kan herleiden tot één periode,
+                één cultuur of één overtuiging. Het is een plek waar lagen van
+                de menselijke geschiedenis zich over elkaar hebben gelegd en
+                vandaag nog steeds zichtbaar zijn.{" "}
                 <span className="font-semibold text-primary">
-                  Dat besef vormt het vertrekpunt van alles wat wij doen.
+                  Dat besef vormt het vertrekpunt van XPLORE Türkiye.
                 </span>
+              </p>
+              <p>
+                Wij zijn jullie lokale partner voor Turkije. Onze kennis en
+                ervaring zijn opgebouwd door jarenlange betrokkenheid bij de
+                bestemming en door diepgaande verkenning van haar regio’s. We
+                kennen Turkije niet als één verhaal, maar als een land met vele
+                identiteiten, ritmes en gezichten. Wie het land echt leert
+                kennen, merkt al snel dat elke streek haar eigen karakter,
+                geschiedenis en dynamiek heeft.
+              </p>
+              <p>
+                Onze expertise is gegroeid uit jarenlange ervaring in
+                verschillende regio’s van Turkije en uit een sterke
+                verbondenheid met het land. Die diversiteit vormt de kern van
+                onze aanpak en bepaalt hoe wij reizen vormgeven.
               </p>
 
               {/* History — inline icons as accent */}
@@ -339,26 +218,39 @@ export default function AboutPage() {
                   </h3>
                 </div>
                 <p className="mb-4">
-                  Turkije behoort tot de kerngebieden van de menselijke beschaving.
-                  Van <span className="font-semibold text-foreground">Göbeklitepe</span> tot{" "}
-                  <span className="font-semibold text-foreground">Efeze</span>, van{" "}
-                  <span className="font-semibold text-foreground">Troje</span> tot de oude
-                  steden van Mesopotamië liggen hier de eerste sporen van vaste
-                  nederzettingen, geloof en samenleven. Geschiedenis is hier geen
-                  afgesloten hoofdstuk, maar aanwezig in het landschap, in steden en
-                  in tradities die vandaag nog worden beleefd.
+                  Turkije behoort tot de kerngebieden van de menselijke
+                  beschaving. Van{" "}
+                  <span className="font-semibold text-foreground">
+                    Göbeklitepe
+                  </span>{" "}
+                  tot{" "}
+                  <span className="font-semibold text-foreground">Efeze</span>,
+                  van{" "}
+                  <span className="font-semibold text-foreground">Troje</span>{" "}
+                  tot de oude steden van Mesopotamië liggen hier de eerste
+                  sporen van vaste nederzettingen, geloof en samenleven.
+                  Geschiedenis is hier geen afgesloten hoofdstuk, maar aanwezig
+                  in het landschap, in steden en in tradities die vandaag nog
+                  worden beleefd.
                 </p>
                 <p>
                   Doorheen de eeuwen volgden grote rijken elkaar op. De{" "}
-                  <span className="font-semibold text-foreground">Romeinse grootsheid</span>,
-                  de{" "}
-                  <span className="font-semibold text-foreground">Byzantijnse verfijning</span>{" "}
+                  <span className="font-semibold text-foreground">
+                    Romeinse grootsheid
+                  </span>
+                  , de{" "}
+                  <span className="font-semibold text-foreground">
+                    Byzantijnse verfijning
+                  </span>{" "}
                   en de{" "}
-                  <span className="font-semibold text-foreground">Ottomaanse elegantie</span>{" "}
-                  vormen samen één doorlopend verhaal. Die geschiedenis leeft voort
-                  in stadsstructuren, architectuur, handelsroutes en gebruiken. Van
-                  de skyline van Istanbul tot karavanserais diep in Anatolië loopt
-                  een zichtbare lijn die verleden en heden met elkaar verbindt.
+                  <span className="font-semibold text-foreground">
+                    Ottomaanse elegantie
+                  </span>{" "}
+                  vormen samen één doorlopend verhaal. Die geschiedenis leeft
+                  voort in stadsstructuren, architectuur, handelsroutes en
+                  gebruiken. Van de skyline van Istanbul tot karavanserais diep
+                  in Anatolië loopt een zichtbare lijn die verleden en heden met
+                  elkaar verbindt.
                 </p>
               </div>
 
@@ -371,21 +263,23 @@ export default function AboutPage() {
                   </h3>
                 </div>
                 <p className="mb-4">
-                  Ook cultureel is Turkije gevormd door ontmoeting. Het land ligt op
-                  het{" "}
+                  Ook cultureel is Turkije gevormd door ontmoeting. Het land
+                  ligt op het{" "}
                   <span className="font-semibold text-foreground">
                     kruispunt van Europa en Azië
                   </span>{" "}
-                  en fungeerde eeuwenlang als doorgangsgebied voor volkeren, ideeën
-                  en overtuigingen. Verschillende religies, talen en etnische
-                  gemeenschappen hebben hier hun voetsporen nagelaten. Niet naast
-                  elkaar, maar met elkaar verweven.
+                  en fungeerde eeuwenlang als doorgangsgebied voor volkeren,
+                  ideeën en overtuigingen. Verschillende religies, talen en
+                  etnische gemeenschappen hebben hier hun voetsporen nagelaten.
+                  Niet naast elkaar, maar met elkaar verweven.
                 </p>
                 <p>
                   Turkije vormt een{" "}
-                  <span className="font-semibold text-foreground">cultureel mozaïek</span>{" "}
-                  waarin oosterse gastvrijheid en westerse dynamiek samenkomen en het
-                  dagelijkse leven bepalen.
+                  <span className="font-semibold text-foreground">
+                    cultureel mozaïek
+                  </span>{" "}
+                  waarin oosterse gastvrijheid en westerse dynamiek samenkomen
+                  en het dagelijkse leven bepalen.
                 </p>
               </div>
 
@@ -400,9 +294,12 @@ export default function AboutPage() {
                 <p className="mb-4">
                   Die culturele rijkdom wordt versterkt door de uitzonderlijke
                   geografische ligging. Turkije wordt omringd door{" "}
-                  <span className="font-semibold text-foreground">drie zeeën</span> en kent
-                  een enorme variatie aan landschappen en klimaten. Het noorden,
-                  westen, zuiden en oosten verschillen fundamenteel van elkaar.
+                  <span className="font-semibold text-foreground">
+                    drie zeeën
+                  </span>{" "}
+                  en kent een enorme variatie aan landschappen en klimaten. Het
+                  noorden, westen, zuiden en oosten verschillen fundamenteel van
+                  elkaar.
                 </p>
                 <p>
                   Elke regio heeft haar eigen tradities, keuken, tempo en
@@ -452,7 +349,10 @@ export default function AboutPage() {
             </p>
 
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 sm:p-10 mb-10 inline-block">
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-accent">
+              <p className="text-base sm:text-lg text-white/70">
+                Zoals men in Turkije zegt:
+              </p>
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold my-3 text-accent">
                 &ldquo;Başımızın üstünde yeriniz var.&rdquo;
               </p>
               <p className="text-base sm:text-lg text-white/70">
@@ -475,7 +375,7 @@ export default function AboutPage() {
                   href="/contact"
                   className={cn(
                     buttonStyles.getClasses("default", "lg"),
-                    "bg-accent hover:bg-accent-hover text-white"
+                    "bg-accent hover:bg-accent-hover text-white",
                   )}
                 >
                   <Phone className="mr-2 h-5 w-5" />
@@ -485,7 +385,7 @@ export default function AboutPage() {
                   href="/reizen"
                   className={cn(
                     buttonStyles.getClasses("outline", "lg"),
-                    "border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-primary"
+                    "border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-primary",
                   )}
                 >
                   Ontdek onze reizen

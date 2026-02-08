@@ -56,7 +56,7 @@ export default function Home() {
       {/* These will be replaced incrementally as content is added to Strapi */}
 
       {/* Featured Trips Section - render if not in Strapi */}
-      {!hasBlockType(blocks, "blocks.featured-trips") && <FeaturedTrips />}
+      {/* {!hasBlockType(blocks, "blocks.featured-trips") && <FeaturedTrips />} */}
 
       {/* Why Us Section - render if not in Strapi */}
       {!hasBlockType(blocks, "blocks.why-us") && <WhyUsSection />}

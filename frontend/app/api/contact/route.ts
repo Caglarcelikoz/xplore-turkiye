@@ -4,7 +4,6 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface ContactFormData {
-  salutation: "Dhr" | "Mevr";
   firstName: string;
   lastName: string;
   email: string;
@@ -21,7 +20,6 @@ export async function POST(request: NextRequest) {
 
     // Validation
     const {
-      salutation,
       firstName,
       lastName,
       email,
@@ -33,7 +31,7 @@ export async function POST(request: NextRequest) {
     } = body;
 
     // Check required fields
-    if (!salutation || !firstName || !lastName || !email || !requestType || !message || !privacyAccepted) {
+    if (!firstName || !lastName || !email || !requestType || !message || !privacyAccepted) {
       return NextResponse.json(
         { error: "Alle verplichte velden moeten ingevuld zijn" },
         { status: 400 }
@@ -88,7 +86,7 @@ export async function POST(request: NextRequest) {
 
           <div style="background-color: #faf9f7; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #182e32; margin-top: 0;">Contactgegevens</h3>
-            <p><strong>Naam:</strong> ${salutation} ${firstName} ${lastName}</p>
+            <p><strong>Naam:</strong> ${firstName} ${lastName}</p>
             <p><strong>E-mail:</strong> <a href="mailto:${email}">${email}</a></p>
             ${phone ? `<p><strong>Telefoon:</strong> <a href="tel:${phone}">${phone}</a></p>` : ""}
           </div>

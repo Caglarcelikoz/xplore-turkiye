@@ -1,8 +1,7 @@
 "use client";
 
-import { memo, useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MapPin } from "lucide-react";
+import { memo, useState, useCallback } from "react";
+import { motion } from "framer-motion";
 import {
   ComposableMap,
   Geographies,
@@ -100,7 +99,7 @@ const sc = {
   white: "#ffffff",
 };
 
-/* ─── SVG pin (no tooltip — that's HTML now) ─── */
+/* ─── SVG pin ─── */
 function CityPin({
   city,
   isHovered,
@@ -109,7 +108,7 @@ function CityPin({
 }: {
   city: CityData;
   isHovered: boolean;
-  onHover: (e: React.MouseEvent) => void;
+  onHover: () => void;
   onLeave: () => void;
 }) {
   const r = city.size === "lg" ? 5.5 : city.size === "md" ? 4.5 : 3.5;
@@ -221,46 +220,11 @@ function CityPin({
 
 /* ─── main ─── */
 function TurkeyMap() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCity, setHoveredCity] = useState<CityData | null>(null);
-  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0, align: "center" as "left" | "center" | "right" });
 
-  const handleHover = useCallback(
-    (city: CityData, e: React.MouseEvent) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Tooltip dimensions and padding
-      const tooltipWidth = 220; // max-w-[220px]
-      const padding = 10;
-      const containerWidth = rect.width;
-      const halfWidth = tooltipWidth / 2;
-
-      // Calculate boundaries
-      const leftBoundary = padding + halfWidth;
-      const rightBoundary = containerWidth - padding - halfWidth;
-
-      let finalX = x;
-      let align: "left" | "center" | "right" = "center";
-
-      if (x < leftBoundary) {
-        // Too far left - tooltip starts at left edge
-        finalX = padding;
-        align = "left";
-      } else if (x > rightBoundary) {
-        // Too far right - tooltip ends at right edge
-        finalX = containerWidth - tooltipWidth - padding;
-        align = "left"; // Use left-aligned (no transform)
-      }
-      // else: center is fine, use x as-is
-
-      setTooltipPos({ x: finalX, y, align });
-      setHoveredCity(city);
-    },
-    []
-  );
+  const handleHover = useCallback((city: CityData) => {
+    setHoveredCity(city);
+  }, []);
 
   const handleLeave = useCallback(() => {
     setHoveredCity(null);
@@ -268,7 +232,6 @@ function TurkeyMap() {
 
   return (
     <motion.div
-      ref={containerRef}
       initial={{ opacity: 0, scale: 0.96 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -382,57 +345,11 @@ function TurkeyMap() {
             key={city.name}
             city={city}
             isHovered={hoveredCity?.name === city.name}
-            onHover={(e) => handleHover(city, e)}
+            onHover={() => handleHover(city)}
             onLeave={handleLeave}
           />
         ))}
       </ComposableMap>
-
-      {/* ─── HTML tooltip card ─── */}
-      <AnimatePresence>
-        {hoveredCity && (
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute z-50 pointer-events-none"
-            style={{
-              left: tooltipPos.x,
-              top: tooltipPos.y + 20,
-              transform: tooltipPos.align === "center" ? "translateX(-50%)" : tooltipPos.align === "right" ? "translateX(-100%)" : "translateX(0)",
-            }}
-          >
-            {/* Arrow */}
-            <div className="flex justify-center -mb-1.5">
-              <div className="w-3 h-3 bg-white rotate-45 rounded-sm shadow-sm" />
-            </div>
-
-            {/* Card */}
-            <div className="bg-white rounded-xl shadow-xl border border-primary/10 p-4 min-w-[180px] max-w-[220px]">
-              {/* Header */}
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-3.5 w-3.5 text-white" />
-                </div>
-                <span className="text-sm font-bold text-primary leading-tight">
-                  {hoveredCity.label}
-                </span>
-              </div>
-
-              {/* Description */}
-              <p className="text-xs font-semibold text-foreground/80 mb-1.5">
-                {hoveredCity.description}
-              </p>
-
-              {/* Sub highlights */}
-              <p className="text-[10px] text-muted-foreground leading-relaxed">
-                {hoveredCity.sub}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 }

@@ -223,16 +223,40 @@ function CityPin({
 function TurkeyMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCity, setHoveredCity] = useState<CityData | null>(null);
-  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0, align: "center" as "left" | "center" | "right" });
 
   const handleHover = useCallback(
     (city: CityData, e: React.MouseEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      setTooltipPos({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Tooltip dimensions and padding
+      const tooltipWidth = 220; // max-w-[220px]
+      const padding = 10;
+      const containerWidth = rect.width;
+      const halfWidth = tooltipWidth / 2;
+
+      // Calculate boundaries
+      const leftBoundary = padding + halfWidth;
+      const rightBoundary = containerWidth - padding - halfWidth;
+
+      let finalX = x;
+      let align: "left" | "center" | "right" = "center";
+
+      if (x < leftBoundary) {
+        // Too far left - tooltip starts at left edge
+        finalX = padding;
+        align = "left";
+      } else if (x > rightBoundary) {
+        // Too far right - tooltip ends at right edge
+        finalX = containerWidth - tooltipWidth - padding;
+        align = "left"; // Use left-aligned (no transform)
+      }
+      // else: center is fine, use x as-is
+
+      setTooltipPos({ x: finalX, y, align });
       setHoveredCity(city);
     },
     []
@@ -376,7 +400,7 @@ function TurkeyMap() {
             style={{
               left: tooltipPos.x,
               top: tooltipPos.y + 20,
-              transform: "translateX(-50%)",
+              transform: tooltipPos.align === "center" ? "translateX(-50%)" : tooltipPos.align === "right" ? "translateX(-100%)" : "translateX(0)",
             }}
           >
             {/* Arrow */}

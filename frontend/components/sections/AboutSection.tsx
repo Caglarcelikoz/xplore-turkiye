@@ -30,11 +30,11 @@ export default function AboutSection() {
                 Xplore US
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6 leading-tight">
               Jullie lokale partner voor{" "}
               <span className="text-accent">Turkije</span>
             </h2>
-            <div className="space-y-5 text-base sm:text-lg text-foreground/80 leading-relaxed">
+            <div className="space-y-5 text-sm sm:text-base md:text-lg text-foreground/80 leading-relaxed">
               <p>
                 XPLORE Türkiye is ontstaan vanuit de overtuiging dat deze
                 veelzijdigheid het vertrekpunt moet zijn van elke reis. Wij

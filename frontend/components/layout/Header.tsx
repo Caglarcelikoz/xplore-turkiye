@@ -13,21 +13,22 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4">
+      <nav className="container mx-auto flex h-14 md:h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
             alt="Xplore Turkiye & Beyond"
             width={260}
             height={32}
+            className="h-auto w-[180px] sm:w-[220px] md:w-[240px] lg:w-[260px]"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex md:items-center md:space-x-6">
+        <div className="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
           <Link
             href="/"
-            className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+            className="text-xs md:text-sm font-medium text-foreground transition-colors hover:text-primary"
           >
             Home
           </Link>
@@ -51,13 +52,13 @@ export default function Header() {
           </div> */}
           <Link
             href="/over-ons"
-            className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+            className="text-xs md:text-sm font-medium text-foreground transition-colors hover:text-primary"
           >
             Over Ons
           </Link>
           <Link
             href="/contact"
-            className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+            className="text-xs md:text-sm font-medium text-foreground transition-colors hover:text-primary"
           >
             Contact
           </Link>

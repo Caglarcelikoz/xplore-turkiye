@@ -65,7 +65,7 @@ export default function WhyUsSection() {
               Xplore our values
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
             Wat ons anders maakt
           </h2>
           <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
@@ -98,7 +98,7 @@ export default function WhyUsSection() {
 
                   {/* Content */}
                   <div className="min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold text-primary mb-2 leading-snug">
+                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-primary mb-2 leading-snug">
                       {usp.title}
                     </h3>
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">

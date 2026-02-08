@@ -228,13 +228,13 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                 Neem Contact Op
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
               Laten we kennismaken
             </h1>
-            <p className="text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto">
               Wil je langskomen op kantoor of liever een online gesprek plannen?
             </p>
-            <p className="text-base sm:text-lg text-foreground/60 max-w-2xl mx-auto mt-3">
+            <p className="text-xs sm:text-sm md:text-base text-foreground/60 max-w-2xl mx-auto mt-3">
               Maak vrijblijvend een afspraak via het contactformulier of neem telefonisch contact met ons op.
             </p>
           </motion.div>
@@ -255,10 +255,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                 Neem Contact Op
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-3">
               Wil je langskomen op kantoor of liever een online gesprek plannen?
             </h2>
-            <p className="text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto mb-4">
+            <p className="text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto mb-4">
               Maak vrijblijvend een afspraak via het contactformulier of neem telefonisch contact met ons op.
             </p>
             <div className="w-20 h-1 bg-accent mx-auto rounded-full" />

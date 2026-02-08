@@ -187,6 +187,7 @@ export default async function Footer() {
               alt="Xplore Turkiye & Beyond"
               width={320}
               height={60}
+              className="h-auto w-[220px] sm:w-[260px] md:w-[280px] lg:w-[320px]"
             />
           </Link>
         </div>

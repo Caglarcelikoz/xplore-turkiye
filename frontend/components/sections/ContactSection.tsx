@@ -33,7 +33,9 @@ const fadeUp = {
   transition: { duration: 0.6 },
 };
 
-export default function ContactSection({ showHero = false }: ContactSectionProps) {
+export default function ContactSection({
+  showHero = false,
+}: ContactSectionProps) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -56,13 +58,17 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
-      if (openDropdown === "requestType" && !requestTypeDropdownRef.current?.contains(target)) {
+      if (
+        openDropdown === "requestType" &&
+        !requestTypeDropdownRef.current?.contains(target)
+      ) {
         setOpenDropdown(null);
       }
     }
     if (openDropdown) {
       document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [openDropdown]);
 
@@ -92,6 +98,22 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
           return "Ongeldig e-mailadres";
         }
         return "";
+      case "phone":
+        // Phone is optional, but if provided, must be valid
+        if (!value) return "";
+        // Allow only numbers, spaces, +, -, (, )
+        if (!/^[\d\s\+\-\(\)]+$/.test(value)) {
+          return "Ongeldig telefoonnummer (alleen cijfers, spaties en +-(  ) zijn toegestaan)";
+        }
+        // Check if there are at least 8 digits
+        const digitsOnly = value.replace(/\D/g, "");
+        if (digitsOnly.length < 8) {
+          return "Telefoonnummer moet minimaal 8 cijfers bevatten";
+        }
+        if (digitsOnly.length > 20) {
+          return "Telefoonnummer mag maximaal 20 cijfers bevatten";
+        }
+        return "";
       case "message":
         if (value.length < 10) return "Minimaal 10 karakters vereist";
         if (value.length > 2000) return "Maximaal 2000 karakters toegestaan";
@@ -105,7 +127,9 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
@@ -147,8 +171,15 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
       }
     });
 
+    // Validate phone separately (optional field)
+    if (formData.phone) {
+      const phoneError = validateField("phone", formData.phone);
+      if (phoneError) newErrors.phone = phoneError;
+    }
+
     if (!formData.privacyAccepted) {
-      newErrors.privacyAccepted = "Je moet akkoord gaan met de privacy voorwaarden.";
+      newErrors.privacyAccepted =
+        "Je moet akkoord gaan met de privacy voorwaarden.";
     }
 
     setErrors(newErrors);
@@ -195,11 +226,15 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
           setHasAttemptedSubmit(false);
         }, 3000);
       } else {
-        setApiError(data.error || "Er ging iets mis. Probeer het later opnieuw.");
+        setApiError(
+          data.error || "Er ging iets mis. Probeer het later opnieuw.",
+        );
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      setApiError("Netwerkfout. Controleer je internetverbinding en probeer opnieuw.");
+      setApiError(
+        "Netwerkfout. Controleer je internetverbinding en probeer opnieuw.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -234,7 +269,8 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
               Wil je langskomen op kantoor of liever een online gesprek plannen?
             </p>
             <p className="text-xs sm:text-sm md:text-base text-foreground/60 max-w-2xl mx-auto mt-3">
-              Maak vrijblijvend een afspraak via het contactformulier of neem telefonisch contact met ons op.
+              Maak vrijblijvend een afspraak via het contactformulier of neem
+              telefonisch contact met ons op.
             </p>
           </motion.div>
         )}
@@ -258,7 +294,8 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
               Wil je langskomen op kantoor of liever een online gesprek plannen?
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto mb-4">
-              Maak vrijblijvend een afspraak via het contactformulier of neem telefonisch contact met ons op.
+              Maak vrijblijvend een afspraak via het contactformulier of neem
+              telefonisch contact met ons op.
             </p>
             <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
           </motion.div>
@@ -298,7 +335,9 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                 </motion.div>
               )}
 
-              <h3 className="text-2xl font-bold text-primary mb-6">Contactformulier</h3>
+              <h3 className="text-2xl font-bold text-primary mb-6">
+                Contactformulier
+              </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Names Row */}
@@ -310,7 +349,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                     viewport={{ once: true }}
                     transition={{ delay: 0.1, duration: 0.4 }}
                   >
-                    <label htmlFor="firstName" className="block text-sm font-semibold text-primary mb-2">
+                    <label
+                      htmlFor="firstName"
+                      className="block text-sm font-semibold text-primary mb-2"
+                    >
                       Voornaam <span className="text-accent">*</span>
                     </label>
                     <div className="relative">
@@ -345,7 +387,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                     viewport={{ once: true }}
                     transition={{ delay: 0.15, duration: 0.4 }}
                   >
-                    <label htmlFor="lastName" className="block text-sm font-semibold text-primary mb-2">
+                    <label
+                      htmlFor="lastName"
+                      className="block text-sm font-semibold text-primary mb-2"
+                    >
                       Achternaam <span className="text-accent">*</span>
                     </label>
                     <div className="relative">
@@ -383,7 +428,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                     viewport={{ once: true }}
                     transition={{ delay: 0.2, duration: 0.4 }}
                   >
-                    <label htmlFor="email" className="block text-sm font-semibold text-primary mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-semibold text-primary mb-2"
+                    >
                       E-mailadres <span className="text-accent">*</span>
                     </label>
                     <div className="relative">
@@ -418,7 +466,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                     viewport={{ once: true }}
                     transition={{ delay: 0.25, duration: 0.4 }}
                   >
-                    <label htmlFor="phone" className="block text-sm font-semibold text-primary mb-2">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-semibold text-primary mb-2"
+                    >
                       Telefoonnummer
                     </label>
                     <div className="relative">
@@ -433,6 +484,16 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                       />
                       <PhoneIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
                     </div>
+                    {hasAttemptedSubmit && errors.phone && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-1 mt-1 text-xs text-red-600"
+                      >
+                        <AlertCircle className="h-3 w-3" />
+                        <span>{errors.phone}</span>
+                      </motion.div>
+                    )}
                   </motion.div>
                 </div>
 
@@ -443,7 +504,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                   viewport={{ once: true }}
                   transition={{ delay: 0.3, duration: 0.4 }}
                 >
-                  <label htmlFor="requestType" className="block text-sm font-semibold text-primary mb-2">
+                  <label
+                    htmlFor="requestType"
+                    className="block text-sm font-semibold text-primary mb-2"
+                  >
                     Type aanvraag <span className="text-accent">*</span>
                   </label>
                   <div className="relative" ref={requestTypeDropdownRef}>
@@ -452,10 +516,18 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                       id="requestType"
                       aria-haspopup="listbox"
                       aria-expanded={openDropdown === "requestType"}
-                      onClick={() => setOpenDropdown(openDropdown === "requestType" ? null : "requestType")}
+                      onClick={() =>
+                        setOpenDropdown(
+                          openDropdown === "requestType" ? null : "requestType",
+                        )
+                      }
                       className="w-full flex items-center justify-between gap-2 bg-white pl-4 pr-4 py-3 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30 cursor-pointer text-left text-foreground"
                     >
-                      <span className={formData.requestType ? "" : "text-muted-foreground"}>
+                      <span
+                        className={
+                          formData.requestType ? "" : "text-muted-foreground"
+                        }
+                      >
                         {formData.requestType || "Selecteer type"}
                       </span>
                       <ChevronDown
@@ -478,8 +550,15 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                               role="option"
                               aria-selected={formData.requestType === type}
                               onClick={() => {
-                                setFormData((prev) => ({ ...prev, requestType: type }));
-                                if (errors.requestType) setErrors((prev) => ({ ...prev, requestType: "" }));
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  requestType: type,
+                                }));
+                                if (errors.requestType)
+                                  setErrors((prev) => ({
+                                    ...prev,
+                                    requestType: "",
+                                  }));
                                 setOpenDropdown(null);
                               }}
                               className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${formData.requestType === type ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-primary/10"}`}
@@ -510,7 +589,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                   viewport={{ once: true }}
                   transition={{ delay: 0.4, duration: 0.4 }}
                 >
-                  <label htmlFor="message" className="block text-sm font-semibold text-primary mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-semibold text-primary mb-2"
+                  >
                     Bericht <span className="text-accent">*</span>
                   </label>
                   <div className="relative">
@@ -561,7 +643,8 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                       className="mt-1 w-5 h-5 rounded border-2 border-primary/30 text-primary focus:ring-2 focus:ring-primary/20"
                     />
                     <span className="text-sm text-foreground/80 leading-relaxed">
-                      Ik ontvang graag reisinspiratie, tips en nieuws van XPLORE TÜRKIYE
+                      Ik ontvang graag reisinspiratie, tips en nieuws van XPLORE
+                      TÜRKIYE
                     </span>
                   </label>
                 </motion.div>
@@ -623,8 +706,12 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                 <motion.button
                   type="submit"
                   disabled={!formData.privacyAccepted || isSubmitting}
-                  whileHover={{ scale: formData.privacyAccepted && !isSubmitting ? 1.02 : 1 }}
-                  whileTap={{ scale: formData.privacyAccepted && !isSubmitting ? 0.98 : 1 }}
+                  whileHover={{
+                    scale: formData.privacyAccepted && !isSubmitting ? 1.02 : 1,
+                  }}
+                  whileTap={{
+                    scale: formData.privacyAccepted && !isSubmitting ? 0.98 : 1,
+                  }}
                   className="w-full bg-gradient-to-r from-accent to-accent-hover text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
@@ -651,22 +738,30 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
           >
             {/* Kantoor & contact – één kaart */}
             <div className="bg-white rounded-2xl p-6 border border-primary/10 shadow-lg">
-              <h3 className="text-lg font-bold text-primary mb-4">Kantoor & contact</h3>
+              <h3 className="text-lg font-bold text-primary mb-4">
+                Kantoor & contact
+              </h3>
 
               <div className="flex items-center gap-2 mb-3">
                 <Clock className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-sm font-semibold text-primary">Openingstijden kantoor</span>
+                <span className="text-sm font-semibold text-primary">
+                  Openingstijden kantoor
+                </span>
               </div>
               <div className="space-y-1.5 mb-5 pl-7">
-                {openingHours.map((hours: { day: string; time: string }, index: number) => (
-                  <div
-                    key={index}
-                    className="flex justify-between items-center text-sm"
-                  >
-                    <span className="text-foreground/70">{hours.day}</span>
-                    <span className="font-medium text-primary">{hours.time}</span>
-                  </div>
-                ))}
+                {openingHours.map(
+                  (hours: { day: string; time: string }, index: number) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center text-sm"
+                    >
+                      <span className="text-foreground/70">{hours.day}</span>
+                      <span className="font-medium text-primary">
+                        {hours.time}
+                      </span>
+                    </div>
+                  ),
+                )}
               </div>
 
               <div className="border-t border-primary/10 pt-4 space-y-3">
@@ -687,23 +782,27 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                 <div className="flex items-start gap-2 text-sm text-foreground/80">
                   <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
                   <span>
-                    XPLORE TÜRKIYE<br />
+                    XPLORE TÜRKIYE
+                    <br />
                     {contactInfo.address}
                   </span>
                 </div>
               </div>
 
               <p className="text-xs text-muted-foreground italic mt-4 pt-4 border-t border-primary/10">
-                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair Willebroek Travel.
+                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair
+                Willebroek Travel.
               </p>
             </div>
 
             {/* Quick Response Promise */}
             <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-6 border border-primary/10">
-              <h3 className="text-lg font-bold text-primary mb-3">Snelle Reactie</h3>
+              <h3 className="text-lg font-bold text-primary mb-3">
+                Snelle Reactie
+              </h3>
               <p className="text-sm text-foreground/70 leading-relaxed">
-                We streven ernaar om binnen 24 uur te reageren op je bericht. Voor dringende
-                vragen kun je ons ook telefonisch bereiken.
+                We streven ernaar om binnen 24 uur te reageren op je bericht.
+                Voor dringende vragen kun je ons ook telefonisch bereiken.
               </p>
             </div>
           </motion.div>

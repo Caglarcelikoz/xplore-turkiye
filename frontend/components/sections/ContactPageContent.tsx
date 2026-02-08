@@ -206,7 +206,7 @@ export default function ContactPageContent({
                             setFormData({ ...formData, email: e.target.value })
                           }
                           className="w-full px-4 py-3 border-2 border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all bg-background"
-                          placeholder="jouw@email.nl"
+                          placeholder="jouw@email.be"
                         />
                       </div>
                     </div>

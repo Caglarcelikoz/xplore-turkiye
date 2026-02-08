@@ -8,18 +8,20 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
-import { tripTypes } from "@/lib/data/constants";
+import { tripTypes, contactInfo as defaultContactInfo } from "@/lib/data/constants";
 import { getGlobal } from "@/lib/strapi/queries";
 import CookiePreferencesButton from "@/components/layout/CookiePreferencesButton";
+import NewsletterSignup from "@/components/layout/NewsletterSignup";
 
 export default async function Footer() {
   const global = await getGlobal();
 
-  // Fallback to constants if Strapi data is not available
-  const contactInfo = global?.attributes?.contactInfo || {
-    phone: "+31-85-080-5222",
-    email: "info@xploreturkiye.nl",
-    address: "Amsterdam, Nederland",
+  // Always use canonical phone/email from constants; address from CMS or fallback
+  const cmsContact = global?.attributes?.contactInfo;
+  const contactInfo = {
+    phone: defaultContactInfo.phone,
+    email: defaultContactInfo.email,
+    address: cmsContact?.address ?? defaultContactInfo.address,
   };
 
   const socialLinks = global?.attributes?.socialLinks || {
@@ -61,17 +63,6 @@ export default async function Footer() {
                   aria-label="Facebook"
                 >
                   <Facebook className="h-5 w-5" />
-                </a>
-              )}
-              {socialLinks.linkedin && (
-                <a
-                  href={socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="h-5 w-5" />
                 </a>
               )}
             </div>
@@ -147,7 +138,7 @@ export default async function Footer() {
             </h4>
             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
               <li className="flex items-center space-x-2 text-white/80">
-                <Phone className="h-4 w-4" />
+                <Phone className="h-4 w-4 flex-shrink-0" />
                 <a
                   href={`tel:${contactInfo.phone}`}
                   className="hover:text-white transition-colors"
@@ -156,7 +147,7 @@ export default async function Footer() {
                 </a>
               </li>
               <li className="flex items-center space-x-2 text-white/80">
-                <Mail className="h-4 w-4" />
+                <Mail className="h-4 w-4 flex-shrink-0" />
                 <a
                   href={`mailto:${contactInfo.email}`}
                   className="hover:text-white transition-colors"
@@ -164,11 +155,24 @@ export default async function Footer() {
                   {contactInfo.email}
                 </a>
               </li>
-              <li className="flex items-center space-x-2 text-white/80">
-                <MapPin className="h-4 w-4" />
-                <span>{contactInfo.address}</span>
+              <li className="flex items-start space-x-2 text-white/80">
+                <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                <span>
+                  XPLORE TÜRKIYE<br />
+                  {contactInfo.address}
+                </span>
+              </li>
+              <li className="text-white/60 text-xs italic mt-2">
+                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair Willebroek Travel.
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Newsletter Section */}
+        <div className="mt-8 sm:mt-10 pt-8 sm:pt-10 border-t border-white/20">
+          <div className="max-w-md mx-auto">
+            <NewsletterSignup />
           </div>
         </div>
 
@@ -205,4 +209,3 @@ export default async function Footer() {
     </footer>
   );
 }
-

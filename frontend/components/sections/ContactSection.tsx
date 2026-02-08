@@ -76,8 +76,7 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
 
   const requestTypes = [
     "Eerste kennismaking",
-    "Rondreis op maat",
-    "Groepsreis",
+    "Offerteaanvraag",
     "Algemene vraag",
   ];
 

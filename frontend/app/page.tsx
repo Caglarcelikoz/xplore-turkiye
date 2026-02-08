@@ -7,6 +7,7 @@ import {
 import AboutSection from "@/components/sections/AboutSection";
 import FeaturedTrips from "@/components/sections/FeaturedTrips";
 import WhyUsSection from "@/components/sections/WhyUsSection";
+import ContactSection from "@/components/sections/ContactSection";
 import ComingSoon from "@/components/ComingSoon";
 
 /**
@@ -60,6 +61,9 @@ export default function Home() {
 
       {/* Why Us Section - render if not in Strapi */}
       {!hasBlockType(blocks, "blocks.why-us") && <WhyUsSection />}
+
+      {/* Contact Section */}
+      <ContactSection showHero={false} />
     </>
   );
 }

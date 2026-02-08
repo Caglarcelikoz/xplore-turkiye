@@ -112,7 +112,7 @@ export default function HeroSection({
               {/* Turkish Map Background Overlay */}
               <div className="relative">
                 {/* Turkey Map Silhouette */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-35 scale-100 sm:scale-125 md:scale-150">
+                <div className="absolute inset-0 flex items-center justify-center opacity-35 scale-100 sm:scale-110 md:scale-125">
                   <Image
                     src="/tr.svg"
                     alt=""
@@ -130,7 +130,7 @@ export default function HeroSection({
                     alt="Xplore Turkiye & Beyond"
                     width={400}
                     height={50}
-                    className="relative h-auto w-[300px] sm:w-[360px] md:w-[500px]"
+                    className="relative h-auto w-[280px] sm:w-[320px] md:w-[380px] lg:w-[440px]"
                     style={{
                       filter:
                         "drop-shadow(0 0 60px rgba(255,255,255,0.9)) drop-shadow(0 0 30px rgba(255,255,255,0.8)) drop-shadow(0 4px 20px rgba(0,0,0,0.5))",
@@ -148,7 +148,7 @@ export default function HeroSection({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 leading-tight px-2"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 sm:mb-8 leading-tight px-2"
           >
             Wij gidsen je door het{" "}
             <span className="bg-gradient-to-r from-white via-white/95 to-accent/85 bg-clip-text text-transparent">
@@ -162,7 +162,7 @@ export default function HeroSection({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 sm:mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed px-4 font-light"
+              className="text-sm sm:text-base md:text-lg lg:text-xl mb-10 sm:mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed px-4 font-light"
             >
               {description}
             </motion.p>

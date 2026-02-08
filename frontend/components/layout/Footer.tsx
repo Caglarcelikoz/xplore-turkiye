@@ -8,7 +8,10 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
-import { tripTypes, contactInfo as defaultContactInfo } from "@/lib/data/constants";
+import {
+  tripTypes,
+  contactInfo as defaultContactInfo,
+} from "@/lib/data/constants";
 import { getGlobal } from "@/lib/strapi/queries";
 import CookiePreferencesButton from "@/components/layout/CookiePreferencesButton";
 import NewsletterSignup from "@/components/layout/NewsletterSignup";
@@ -107,21 +110,20 @@ export default async function Footer() {
                   Contact
                 </Link>
               </li>
-
               <li>
                 <Link
                   href="/disclaimer"
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  Voorwaarden
+                  Disclaimer
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/disclaimer"
+                  href="/privacy"
                   className="text-white/80 hover:text-white transition-colors"
                 >
-                  Voorwaarden
+                  Privacy
                 </Link>
               </li>
               <li>
@@ -157,12 +159,14 @@ export default async function Footer() {
               <li className="flex items-start space-x-2 text-white/80">
                 <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
                 <span>
-                  XPLORE TÜRKIYE<br />
+                  XPLORE TÜRKIYE
+                  <br />
                   {contactInfo.address}
                 </span>
               </li>
               <li className="text-white/60 text-xs italic mt-2">
-                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair Willebroek Travel.
+                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair
+                Willebroek Travel.
               </li>
             </ul>
           </div>

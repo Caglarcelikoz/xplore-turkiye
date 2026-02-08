@@ -83,12 +83,12 @@ export const staticGlobal: Global = {
     siteDescription: "Ontdek de mooiste reizen naar Turkije",
     contactInfo: {
       id: 1,
-      phone: "+31-85-080-5222",
-      email: "info@xploreturkiye.nl",
-      address: "Amsterdam, Nederland",
+      phone: "+32 3 886 04 00",
+      email: "info@xploreturkiye.be",
+      address: "Dokter Persoonslaan 8, 2830 Willebroek",
       openingHours: [
-        { day: "Maandag - Vrijdag", time: "09:00 - 18:00" },
-        { day: "Zaterdag", time: "10:00 - 16:00" },
+        { day: "Maandag – Vrijdag", time: "09:00 – 18:00" },
+        { day: "Zaterdag", time: "Gesloten" },
         { day: "Zondag", time: "Gesloten" },
       ],
     },

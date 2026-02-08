@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MessageSquare,
   Send,
@@ -14,6 +14,7 @@ import {
   MapPin,
   Clock,
   MessageCircle,
+  ChevronDown,
 } from "lucide-react";
 import { staticGlobal } from "@/lib/data/static-content";
 
@@ -40,15 +41,41 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
     email: "",
     phone: "",
     requestType: "",
-    contactPreference: "",
     message: "",
     newsletterOptIn: false,
+    privacyAccepted: false,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [apiError, setApiError] = useState("");
+  const [openDropdown, setOpenDropdown] = useState<"salutation" | "requestType" | null>(null);
+  const salutationDropdownRef = useRef<HTMLDivElement>(null);
+  const requestTypeDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+      if (openDropdown === "salutation" && !salutationDropdownRef.current?.contains(target)) {
+        setOpenDropdown(null);
+      }
+      if (openDropdown === "requestType" && !requestTypeDropdownRef.current?.contains(target)) {
+        setOpenDropdown(null);
+      }
+    }
+    if (openDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [openDropdown]);
+
+  const salutationOptions: { value: string; label: string }[] = [
+    { value: "", label: "Selecteer" },
+    { value: "Dhr", label: "Dhr." },
+    { value: "Mevr", label: "Mevr." },
+  ];
 
   const global = staticGlobal;
   const contactInfo = global.attributes.contactInfo!;
@@ -63,13 +90,6 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
     "Rondreis op maat",
     "Groepsreis",
     "Algemene vraag",
-  ];
-
-  const contactPreferences = [
-    "Telefonisch",
-    "E-mail",
-    "Online meeting",
-    "Afspraak op kantoor",
   ];
 
   const validateField = (name: string, value: string): string => {
@@ -90,7 +110,6 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
         return "";
       case "salutation":
       case "requestType":
-      case "contactPreference":
         if (!value) return "Dit veld is verplicht";
         return "";
       default:
@@ -116,12 +135,8 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
     setApiError("");
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    const error = validateField(name, value);
-    if (error) {
-      setErrors((prev) => ({ ...prev, [name]: error }));
-    }
+  const handleBlur = () => {
+    // Errors worden enkel getoond na een mislukte submit (hasAttemptedSubmit)
   };
 
   const validateForm = (): boolean => {
@@ -133,7 +148,6 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
       "lastName",
       "email",
       "requestType",
-      "contactPreference",
       "message",
     ];
 
@@ -147,6 +161,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
       }
     });
 
+    if (!formData.privacyAccepted) {
+      newErrors.privacyAccepted = "Je moet akkoord gaan met de privacy voorwaarden.";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -154,6 +172,7 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setApiError("");
+    setHasAttemptedSubmit(true);
 
     if (!validateForm()) {
       return;
@@ -183,11 +202,12 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
             email: "",
             phone: "",
             requestType: "",
-            contactPreference: "",
             message: "",
             newsletterOptIn: false,
+            privacyAccepted: false,
           });
           setIsSuccess(false);
+          setHasAttemptedSubmit(false);
         }, 3000);
       } else {
         setApiError(data.error || "Er ging iets mis. Probeer het later opnieuw.");
@@ -226,7 +246,10 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
               Laten we kennismaken
             </h1>
             <p className="text-lg sm:text-xl text-foreground/70 max-w-2xl mx-auto">
-              Heb je een vraag of wil je een reis op maat bespreken? Wij staan voor je klaar.
+              Wil je langskomen op kantoor of liever een online gesprek plannen?
+            </p>
+            <p className="text-base sm:text-lg text-foreground/60 max-w-2xl mx-auto mt-3">
+              Maak vrijblijvend een afspraak via het contactformulier of neem telefonisch contact met ons op.
             </p>
           </motion.div>
         )}
@@ -246,72 +269,15 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                 Neem Contact Op
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
-              Begin je Turkse avontuur
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3">
+              Wil je langskomen op kantoor of liever een online gesprek plannen?
             </h2>
+            <p className="text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto mb-4">
+              Maak vrijblijvend een afspraak via het contactformulier of neem telefonisch contact met ons op.
+            </p>
             <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
           </motion.div>
         )}
-
-        {/* Contact Methods Cards */}
-        <motion.div
-          {...fadeUp}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto"
-        >
-          {/* Phone */}
-          <motion.a
-            href={`tel:${contactInfo.phone}`}
-            whileHover={{ y: -6, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="group bg-white rounded-2xl p-6 border border-primary/10 hover:border-primary/30 hover:shadow-xl transition-all duration-300"
-          >
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center mb-4 shadow-lg"
-            >
-              <PhoneIcon className="h-6 w-6 text-white" />
-            </motion.div>
-            <h3 className="text-sm font-semibold text-primary mb-1">Telefoon</h3>
-            <p className="text-base text-foreground/80">{contactInfo.phone}</p>
-          </motion.a>
-
-          {/* Email */}
-          <motion.a
-            href={`mailto:${contactInfo.email}`}
-            whileHover={{ y: -6, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="group bg-white rounded-2xl p-6 border border-primary/10 hover:border-accent/30 hover:shadow-xl transition-all duration-300"
-          >
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-accent-hover flex items-center justify-center mb-4 shadow-lg"
-            >
-              <Mail className="h-6 w-6 text-white" />
-            </motion.div>
-            <h3 className="text-sm font-semibold text-primary mb-1">E-mail</h3>
-            <p className="text-base text-foreground/80">{contactInfo.email}</p>
-          </motion.a>
-
-          {/* Address */}
-          <motion.div
-            whileHover={{ y: -6, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="group bg-white rounded-2xl p-6 border border-primary/10 hover:border-primary/30 hover:shadow-xl transition-all duration-300"
-          >
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-light to-primary flex items-center justify-center mb-4 shadow-lg"
-            >
-              <MapPin className="h-6 w-6 text-white" />
-            </motion.div>
-            <h3 className="text-sm font-semibold text-primary mb-1">Adres</h3>
-            <p className="text-base text-foreground/80">{contactInfo.address}</p>
-          </motion.div>
-        </motion.div>
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -362,19 +328,52 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                     <label htmlFor="salutation" className="block text-sm font-semibold text-primary mb-2">
                       Aanhef <span className="text-accent">*</span>
                     </label>
-                    <select
-                      id="salutation"
-                      name="salutation"
-                      value={formData.salutation}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className="w-full px-4 py-3 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30"
-                    >
-                      <option value="">Selecteer</option>
-                      <option value="Dhr">Dhr.</option>
-                      <option value="Mevr">Mevr.</option>
-                    </select>
-                    {errors.salutation && (
+                    <div className="relative" ref={salutationDropdownRef}>
+                      <button
+                        type="button"
+                        id="salutation"
+                        aria-haspopup="listbox"
+                        aria-expanded={openDropdown === "salutation"}
+                        onClick={() => setOpenDropdown(openDropdown === "salutation" ? null : "salutation")}
+                        className="w-full flex items-center justify-between gap-2 bg-white pl-4 pr-4 py-3 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30 cursor-pointer text-left text-foreground"
+                      >
+                        <span className={formData.salutation ? "" : "text-muted-foreground"}>
+                          {salutationOptions.find((o) => o.value === formData.salutation)?.label ?? "Selecteer"}
+                        </span>
+                        <ChevronDown
+                          className={`h-5 w-5 text-primary/50 flex-shrink-0 transition-transform ${openDropdown === "salutation" ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {openDropdown === "salutation" && (
+                          <motion.ul
+                            initial={{ opacity: 0, y: -4 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -4 }}
+                            transition={{ duration: 0.15 }}
+                            role="listbox"
+                            className="absolute z-20 mt-1 w-full bg-white border-2 border-primary/20 rounded-xl shadow-lg py-1 overflow-hidden"
+                          >
+                            {salutationOptions.map((opt) => (
+                              <li
+                                key={opt.value || "empty"}
+                                role="option"
+                                aria-selected={formData.salutation === opt.value}
+                                onClick={() => {
+                                  setFormData((prev) => ({ ...prev, salutation: opt.value }));
+                                  if (errors.salutation) setErrors((prev) => ({ ...prev, salutation: "" }));
+                                  setOpenDropdown(null);
+                                }}
+                                className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${formData.salutation === opt.value ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-primary/10"}`}
+                              >
+                                {opt.label}
+                              </li>
+                            ))}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                    {hasAttemptedSubmit && errors.salutation && (
                       <motion.div
                         initial={{ opacity: 0, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -409,7 +408,7 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                       />
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
                     </div>
-                    {errors.firstName && (
+                    {hasAttemptedSubmit && errors.firstName && (
                       <motion.div
                         initial={{ opacity: 0, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -444,7 +443,7 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                       />
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
                     </div>
-                    {errors.lastName && (
+                    {hasAttemptedSubmit && errors.lastName && (
                       <motion.div
                         initial={{ opacity: 0, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -482,7 +481,7 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                       />
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
                     </div>
-                    {errors.email && (
+                    {hasAttemptedSubmit && errors.email && (
                       <motion.div
                         initial={{ opacity: 0, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -519,82 +518,72 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                   </motion.div>
                 </div>
 
-                {/* Request Type & Contact Preference Row */}
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {/* Request Type */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3, duration: 0.4 }}
-                  >
-                    <label htmlFor="requestType" className="block text-sm font-semibold text-primary mb-2">
-                      Type aanvraag <span className="text-accent">*</span>
-                    </label>
-                    <select
+                {/* Request Type */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
+                >
+                  <label htmlFor="requestType" className="block text-sm font-semibold text-primary mb-2">
+                    Type aanvraag <span className="text-accent">*</span>
+                  </label>
+                  <div className="relative" ref={requestTypeDropdownRef}>
+                    <button
+                      type="button"
                       id="requestType"
-                      name="requestType"
-                      value={formData.requestType}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className="w-full px-4 py-3 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30"
+                      aria-haspopup="listbox"
+                      aria-expanded={openDropdown === "requestType"}
+                      onClick={() => setOpenDropdown(openDropdown === "requestType" ? null : "requestType")}
+                      className="w-full flex items-center justify-between gap-2 bg-white pl-4 pr-4 py-3 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30 cursor-pointer text-left text-foreground"
                     >
-                      <option value="">Selecteer type</option>
-                      {requestTypes.map((type) => (
-                        <option key={type} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.requestType && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                      >
-                        <AlertCircle className="h-3 w-3" />
-                        <span>{errors.requestType}</span>
-                      </motion.div>
-                    )}
-                  </motion.div>
-
-                  {/* Contact Preference */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.35, duration: 0.4 }}
-                  >
-                    <label htmlFor="contactPreference" className="block text-sm font-semibold text-primary mb-2">
-                      Voorkeur contact <span className="text-accent">*</span>
-                    </label>
-                    <select
-                      id="contactPreference"
-                      name="contactPreference"
-                      value={formData.contactPreference}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className="w-full px-4 py-3 border-2 border-primary/20 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none hover:border-primary/30"
+                      <span className={formData.requestType ? "" : "text-muted-foreground"}>
+                        {formData.requestType || "Selecteer type"}
+                      </span>
+                      <ChevronDown
+                        className={`h-5 w-5 text-primary/50 flex-shrink-0 transition-transform ${openDropdown === "requestType" ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {openDropdown === "requestType" && (
+                        <motion.ul
+                          initial={{ opacity: 0, y: -4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
+                          transition={{ duration: 0.15 }}
+                          role="listbox"
+                          className="absolute z-20 mt-1 w-full bg-white border-2 border-primary/20 rounded-xl shadow-lg py-1 overflow-hidden"
+                        >
+                          {requestTypes.map((type) => (
+                            <li
+                              key={type}
+                              role="option"
+                              aria-selected={formData.requestType === type}
+                              onClick={() => {
+                                setFormData((prev) => ({ ...prev, requestType: type }));
+                                if (errors.requestType) setErrors((prev) => ({ ...prev, requestType: "" }));
+                                setOpenDropdown(null);
+                              }}
+                              className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${formData.requestType === type ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-primary/10"}`}
+                            >
+                              {type}
+                            </li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  {hasAttemptedSubmit && errors.requestType && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-center gap-1 mt-1 text-xs text-red-600"
                     >
-                      <option value="">Selecteer voorkeur</option>
-                      {contactPreferences.map((pref) => (
-                        <option key={pref} value={pref}>
-                          {pref}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.contactPreference && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                      >
-                        <AlertCircle className="h-3 w-3" />
-                        <span>{errors.contactPreference}</span>
-                      </motion.div>
-                    )}
-                  </motion.div>
-                </div>
+                      <AlertCircle className="h-3 w-3" />
+                      <span>{errors.requestType}</span>
+                    </motion.div>
+                  )}
+                </motion.div>
 
                 {/* Message */}
                 <motion.div
@@ -620,7 +609,7 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                     <MessageCircle className="absolute left-3 top-3 h-5 w-5 text-primary/40" />
                   </div>
                   <div className="flex items-center justify-between mt-1">
-                    {errors.message ? (
+                    {hasAttemptedSubmit && errors.message ? (
                       <motion.div
                         initial={{ opacity: 0, y: -4 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -659,6 +648,47 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                   </label>
                 </motion.div>
 
+                {/* Privacy voorwaarden */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                >
+                  <label className="flex items-start gap-3 p-4 rounded-xl border-2 border-primary/10 hover:border-primary/30 hover:bg-primary/5 cursor-pointer transition-all duration-200">
+                    <input
+                      type="checkbox"
+                      name="privacyAccepted"
+                      checked={formData.privacyAccepted}
+                      onChange={handleChange}
+                      className="mt-1 w-5 h-5 rounded border-2 border-primary/30 text-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                    <span className="text-sm text-foreground/80 leading-relaxed">
+                      Ik ga akkoord met de{" "}
+                      <a
+                        href="/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary underline hover:text-accent"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        privacy voorwaarden
+                      </a>{" "}
+                      <span className="text-accent">*</span>
+                    </span>
+                  </label>
+                  {hasAttemptedSubmit && errors.privacyAccepted && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-center gap-1 mt-1 text-xs text-red-600"
+                    >
+                      <AlertCircle className="h-3 w-3" />
+                      <span>{errors.privacyAccepted}</span>
+                    </motion.div>
+                  )}
+                </motion.div>
+
                 {/* API Error */}
                 {apiError && (
                   <motion.div
@@ -674,9 +704,9 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
                 {/* Submit Button */}
                 <motion.button
                   type="submit"
-                  disabled={isSubmitting}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={!formData.privacyAccepted || isSubmitting}
+                  whileHover={{ scale: formData.privacyAccepted && !isSubmitting ? 1.02 : 1 }}
+                  whileTap={{ scale: formData.privacyAccepted && !isSubmitting ? 0.98 : 1 }}
                   className="w-full bg-gradient-to-r from-accent to-accent-hover text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
@@ -701,23 +731,53 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
             transition={{ delay: 0.4, duration: 0.6 }}
             className="space-y-6"
           >
-            {/* Opening Hours */}
+            {/* Kantoor & contact – één kaart */}
             <div className="bg-white rounded-2xl p-6 border border-primary/10 shadow-lg">
-              <div className="flex items-center gap-2 mb-4">
-                <Clock className="h-5 w-5 text-primary" />
-                <h3 className="text-lg font-bold text-primary">Openingstijden</h3>
+              <h3 className="text-lg font-bold text-primary mb-4">Kantoor & contact</h3>
+
+              <div className="flex items-center gap-2 mb-3">
+                <Clock className="h-5 w-5 text-primary flex-shrink-0" />
+                <span className="text-sm font-semibold text-primary">Openingstijden kantoor</span>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5 mb-5 pl-7">
                 {openingHours.map((hours: { day: string; time: string }, index: number) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center py-2 border-b border-primary/5 last:border-0"
+                    className="flex justify-between items-center text-sm"
                   >
-                    <span className="text-sm font-medium text-foreground/70">{hours.day}</span>
-                    <span className="text-sm font-semibold text-primary">{hours.time}</span>
+                    <span className="text-foreground/70">{hours.day}</span>
+                    <span className="font-medium text-primary">{hours.time}</span>
                   </div>
                 ))}
               </div>
+
+              <div className="border-t border-primary/10 pt-4 space-y-3">
+                <a
+                  href={`tel:${contactInfo.phone}`}
+                  className="flex items-center gap-2 text-sm text-foreground/80 hover:text-primary transition-colors"
+                >
+                  <PhoneIcon className="h-4 w-4 flex-shrink-0" />
+                  {contactInfo.phone}
+                </a>
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="flex items-center gap-2 text-sm text-foreground/80 hover:text-primary transition-colors"
+                >
+                  <Mail className="h-4 w-4 flex-shrink-0" />
+                  {contactInfo.email}
+                </a>
+                <div className="flex items-start gap-2 text-sm text-foreground/80">
+                  <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                  <span>
+                    XPLORE TÜRKIYE<br />
+                    {contactInfo.address}
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-xs text-muted-foreground italic mt-4 pt-4 border-t border-primary/10">
+                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair Willebroek Travel.
+              </p>
             </div>
 
             {/* Quick Response Promise */}
@@ -726,18 +786,6 @@ export default function ContactSection({ showHero = false }: ContactSectionProps
               <p className="text-sm text-foreground/70 leading-relaxed">
                 We streven ernaar om binnen 24 uur te reageren op je bericht. Voor dringende
                 vragen kun je ons ook telefonisch bereiken.
-              </p>
-            </div>
-
-            {/* Company Info */}
-            <div className="bg-white rounded-2xl p-6 border border-primary/10 shadow-lg">
-              <h3 className="text-lg font-bold text-primary mb-3">Bezoekadres</h3>
-              <p className="text-sm text-foreground/70 leading-relaxed mb-3">
-                Dokter Persoonslaan 8<br />
-                2830 Willebroek
-              </p>
-              <p className="text-xs text-muted-foreground italic">
-                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair Willebroek Travel.
               </p>
             </div>
           </motion.div>

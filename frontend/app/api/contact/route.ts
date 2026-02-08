@@ -10,9 +10,9 @@ interface ContactFormData {
   email: string;
   phone?: string;
   requestType: string;
-  contactPreference: string;
   message: string;
   newsletterOptIn: boolean;
+  privacyAccepted: boolean;
 }
 
 export async function POST(request: NextRequest) {
@@ -27,13 +27,13 @@ export async function POST(request: NextRequest) {
       email,
       phone,
       requestType,
-      contactPreference,
       message,
       newsletterOptIn,
+      privacyAccepted,
     } = body;
 
     // Check required fields
-    if (!salutation || !firstName || !lastName || !email || !requestType || !contactPreference || !message) {
+    if (!salutation || !firstName || !lastName || !email || !requestType || !message || !privacyAccepted) {
       return NextResponse.json(
         { error: "Alle verplichte velden moeten ingevuld zijn" },
         { status: 400 }
@@ -96,7 +96,6 @@ export async function POST(request: NextRequest) {
           <div style="background-color: #faf9f7; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #182e32; margin-top: 0;">Details Aanvraag</h3>
             <p><strong>Type aanvraag:</strong> ${requestType}</p>
-            <p><strong>Voorkeur contact:</strong> ${contactPreference}</p>
           </div>
 
           <div style="background-color: #faf9f7; padding: 20px; border-radius: 8px; margin: 20px 0;">

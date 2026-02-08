@@ -33,8 +33,8 @@ export const socialLinks = {
 };
 
 export const contactInfo = {
-  phone: "+31-85-080-5222",
-  email: "info@xploreturkiye.nl",
-  address: "Amsterdam, Nederland",
+  phone: "+32 3 886 04 00",
+  email: "info@xploreturkiye.be",
+  address: "Dokter Persoonslaan 8, 2830 Willebroek",
 };
 

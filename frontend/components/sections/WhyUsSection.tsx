@@ -33,7 +33,7 @@ const usps = [
     title: "Persoonlijke begeleiding van begin tot einde",
     description:
       "Van het eerste idee tot na de terugkeer begeleiden wij elke stap van jouw reis.",
-    gradient: "from-accent to-primary",
+    gradient: "from-accent to-accent-hover",
     accentBorder: "group-hover:border-accent/30",
   },
 ];
@@ -57,12 +57,12 @@ export default function WhyUsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-10 sm:mb-14"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-4">
             <span className="text-xs font-semibold text-accent uppercase tracking-wider">
-              Waarom wij
+              Xplore our values
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">

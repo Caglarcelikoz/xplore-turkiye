@@ -27,7 +27,7 @@ export default function AboutSection() {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
               <Users className="h-4 w-4 text-primary" />
               <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                Wie wij zijn
+                Xplore US
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
@@ -36,21 +36,29 @@ export default function AboutSection() {
             </h2>
             <div className="space-y-5 text-base sm:text-lg text-foreground/80 leading-relaxed">
               <p>
-                XPLORE Türkiye is ontstaan vanuit de overtuiging dat de
-                veelzijdigheid van Turkije het vertrekpunt moet zijn van elke
-                reis. Wij brachten een team samen met één gedeelde visie: Turkije
-                laten ontdekken zoals het werkelijk is.
+                XPLORE Türkiye is ontstaan vanuit de overtuiging dat deze
+                veelzijdigheid het vertrekpunt moet zijn van elke reis. Wij
+                brachten een team samen met één gedeelde visie: Turkije laten
+                ontdekken zoals het werkelijk is. Elk traject dat wij uitwerken
+                vertrekt vanuit de eigen identiteit van een regio en de
+                samenhang tussen cultuur, geschiedenis en natuur. Reizen groeien
+                bij ons uit de plek zelf, niet uit een vast stramien.
               </p>
               <p>
-                Onze kennis en ervaring zijn opgebouwd door jarenlange
-                betrokkenheid bij de bestemming en door diepgaande verkenning van
-                haar regio&apos;s. We kennen Turkije niet als één verhaal, maar als
-                een land met vele identiteiten, ritmes en gezichten.
+                Onze reizen zijn volledig op maat en gebaseerd op eigen
+                ervaringen en diepgaande kennis van het land. Wij luisteren,
+                denken mee en begeleiden elke stap. Van het eerste idee tot na
+                de terugkeer blijven wij betrokken. Als lokale partner voor
+                Turkije, met overzicht, verantwoordelijkheid en oprechte
+                betrokkenheid.
               </p>
               <p>
-                Onze expertise is gegroeid uit een sterke verbondenheid met het
-                land. Die diversiteit vormt de kern van onze aanpak en bepaalt hoe
-                wij reizen vormgeven.
+                Gastvrijheid vormt de kern van Turkije en diezelfde houding
+                dragen wij uit in onze manier van werken. Met aandacht,
+                bereikbaarheid en zorg voor elk detail begeleiden wij elke reis
+                van begin tot einde. XPLORE Türkiye staat klaar om deze
+                bestemming te laten ontdekken met kennis, overtuiging en respect
+                voor haar vele lagen.
               </p>
             </div>
             <div className="w-20 h-1 bg-accent rounded-full mt-8" />

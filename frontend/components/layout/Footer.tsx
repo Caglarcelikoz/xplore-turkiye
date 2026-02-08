@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { tripTypes } from "@/lib/data/constants";
 import { getGlobal } from "@/lib/strapi/queries";
+import CookiePreferencesButton from "@/components/layout/CookiePreferencesButton";
 
 export default async function Footer() {
   const global = await getGlobal();
@@ -132,6 +133,9 @@ export default async function Footer() {
                 >
                   Voorwaarden
                 </a>
+              </li>
+              <li>
+                <CookiePreferencesButton />
               </li>
             </ul>
           </div>

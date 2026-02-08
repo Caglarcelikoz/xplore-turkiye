@@ -118,12 +118,12 @@ export default async function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/disclaimer"
                   className="text-white/80 hover:text-white transition-colors"
                 >
                   Voorwaarden
-                </a>
+                </Link>
               </li>
               <li>
                 <CookiePreferencesButton />

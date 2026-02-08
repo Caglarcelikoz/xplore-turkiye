@@ -117,6 +117,14 @@ export default async function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/disclaimer"
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  Voorwaarden
+                </Link>
+              </li>
+              <li>
                 <CookiePreferencesButton />
               </li>
             </ul>
@@ -149,14 +157,12 @@ export default async function Footer() {
               <li className="flex items-start space-x-2 text-white/80">
                 <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
                 <span>
-                  XPLORE TÜRKIYE
-                  <br />
+                  XPLORE TÜRKIYE<br />
                   {contactInfo.address}
                 </span>
               </li>
               <li className="text-white/60 text-xs italic mt-2">
-                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair
-                Willebroek Travel.
+                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair Willebroek Travel.
               </li>
             </ul>
           </div>

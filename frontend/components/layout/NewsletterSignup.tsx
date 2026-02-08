@@ -65,7 +65,7 @@ export default function NewsletterSignup() {
 
   return (
     <div className="w-full">
-      <h4 className=" text-center font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
+      <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
         Nieuwsbrief
       </h4>
       <p className="text-xs sm:text-sm text-white/80 mb-3">

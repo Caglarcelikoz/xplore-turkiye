@@ -34,7 +34,7 @@ export default function HeroSection({
   }, [nextSlide]);
 
   return (
-    <section className="relative overflow-hidden h-[calc(100vh-4rem)] flex items-center justify-center">
+    <section className="relative overflow-hidden min-h-[600px] lg:min-h-[calc(100vh-4rem)] py-12 sm:py-16 flex items-center justify-center">
       {/* Background Slideshow */}
       <div className="absolute inset-0 -z-10">
         <AnimatePresence mode="popLayout">

@@ -112,7 +112,7 @@ export default function HeroSection({
               {/* Turkish Map Background Overlay */}
               <div className="relative">
                 {/* Turkey Map Silhouette */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-35 scale-90 sm:scale-100 md:scale-110 lg:scale-125">
+                <div className="absolute inset-0 flex items-center justify-center opacity-35 scale-100 sm:scale-100 md:scale-110 lg:scale-125">
                   <Image
                     src="/tr.svg"
                     alt=""
@@ -130,7 +130,7 @@ export default function HeroSection({
                     alt="Xplore Turkiye & Beyond"
                     width={400}
                     height={50}
-                    className="relative h-auto w-[240px] sm:w-[280px] md:w-[320px] lg:w-[380px] xl:w-[440px]"
+                    className="relative h-auto w-[280px] sm:w-[280px] md:w-[320px] lg:w-[380px] xl:w-[440px]"
                     style={{
                       filter:
                         "drop-shadow(0 0 60px rgba(255,255,255,0.9)) drop-shadow(0 0 30px rgba(255,255,255,0.8)) drop-shadow(0 4px 20px rgba(0,0,0,0.5))",

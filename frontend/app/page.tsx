@@ -1,11 +1,10 @@
-import { getLandingPage } from "@/lib/strapi/queries";
+import { staticLandingPage } from "@/lib/data/static-content";
 import HeroSectionMapper from "@/components/sections/mappers/HeroSectionMapper";
-import AboutSectionMapper from "@/components/sections/mappers/AboutSectionMapper";
 import {
   isHeroBlock,
-  isAboutBlock,
   type DynamicZoneBlock,
 } from "@/types/strapi";
+import AboutSection from "@/components/sections/AboutSection";
 import FeaturedTrips from "@/components/sections/FeaturedTrips";
 import WhyUsSection from "@/components/sections/WhyUsSection";
 import ComingSoon from "@/components/ComingSoon";
@@ -23,14 +22,14 @@ function hasBlockType(
 
 const SHOW_COMING_SOON = process.env.NEXT_PUBLIC_SHOW_COMING_SOON === 'true';
 
-export default async function Home() {
+export default function Home() {
   // Als coming soon mode actief is, toon alleen de coming soon pagina
   if (SHOW_COMING_SOON) {
     return <ComingSoon />;
   }
 
-  // Fetch landing page data from Strapi
-  const landingPage = await getLandingPage();
+  // Use static landing page data
+  const landingPage = staticLandingPage;
   const blocks = landingPage?.attributes.blocks || [];
 
   // Check which block types exist in Strapi
@@ -47,11 +46,11 @@ export default async function Home() {
         if (isHeroBlock(block)) {
           return <HeroSectionMapper key={block.id || index} data={block} />;
         }
-        if (isAboutBlock(block)) {
-          return <AboutSectionMapper key={block.id || index} data={block} />;
-        }
         return null;
       })}
+
+      {/* Wie wij zijn — replaces the old Strapi about section */}
+      <AboutSection />
 
       {/* Render hardcoded sections that are not yet in Strapi */}
       {/* These will be replaced incrementally as content is added to Strapi */}

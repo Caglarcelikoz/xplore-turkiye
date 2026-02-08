@@ -1,21 +1,12 @@
-import { getGlobal } from "@/lib/strapi/queries";
+import { staticGlobal } from "@/lib/data/static-content";
 import ContactPageContent from "@/components/sections/ContactPageContent";
-import { contactInfo } from "@/lib/data/constants";
 
-export default async function ContactPage() {
-  const global = await getGlobal();
+export default function ContactPage() {
+  // Use static global data
+  const global = staticGlobal;
+  const contactInfoData = global.attributes.contactInfo!;
 
-  console.log("global", global);
-
-  // Fallback to constants if Strapi data is not available
-  const contactInfoData = global?.attributes?.contactInfo || {
-    id: 0,
-    phone: contactInfo.phone,
-    email: contactInfo.email,
-    address: contactInfo.address,
-  };
-
-  // Parse opening hours from Strapi if available, otherwise use defaults
+  // Parse opening hours from static data
   const openingHours = contactInfoData.openingHours
     ? Array.isArray(contactInfoData.openingHours)
       ? contactInfoData.openingHours

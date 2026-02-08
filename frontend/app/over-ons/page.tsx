@@ -2,198 +2,202 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Award, Heart, Users, Globe, Sparkles, Shield, Check } from "lucide-react";
+import Link from "next/link";
+import {
+  Sparkles,
+  Compass,
+  Route,
+  Ear,
+  PenTool,
+  Phone,
+  ArrowRight,
+  Quote,
+  Eye,
+  Target,
+  ShieldCheck,
+  Globe,
+  Landmark,
+  Waypoints,
+  Mountain,
+} from "lucide-react";
+import { buttonStyles } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import AboutSection from "@/components/sections/AboutSection";
+
+/* ─── animation helpers ─── */
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+};
+
+const stagger = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+};
+
+/* ─── data ─── */
+const pillars = [
+  {
+    icon: Eye,
+    title: "Onze visie",
+    description:
+      "Turkije laten ontdekken zoals het werkelijk is — met respect voor haar vele lagen, identiteiten en gezichten.",
+    color: "from-primary to-primary-dark",
+  },
+  {
+    icon: Target,
+    title: "Onze expertise",
+    description:
+      "Gegroeid uit jarenlange ervaring in verschillende regio's van Turkije en een sterke verbondenheid met het land.",
+    color: "from-accent to-accent-hover",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Onze belofte",
+    description:
+      "Volledig op maat gemaakte reizen, gebaseerd op eigen ervaringen en diepgaande kennis. Van het eerste idee tot na de terugkeer.",
+    color: "from-primary-light to-primary",
+  },
+];
+
+const approachSteps = [
+  {
+    icon: Ear,
+    title: "Wij luisteren",
+    description:
+      "Elk traject begint met jullie verhaal. Wij nemen de tijd om wensen, interesses en verwachtingen te begrijpen.",
+    number: "01",
+  },
+  {
+    icon: PenTool,
+    title: "Wij ontwerpen",
+    description:
+      "Op basis van eigen ervaringen en diepgaande kennis werken wij een reis uit die vertrekt vanuit de identiteit van een regio.",
+    number: "02",
+  },
+  {
+    icon: Route,
+    title: "Wij begeleiden",
+    description:
+      "Van het eerste idee tot na de terugkeer blijven wij betrokken. Als lokale partner met overzicht, verantwoordelijkheid en oprechte betrokkenheid.",
+    number: "03",
+  },
+];
+
 
 export default function AboutPage() {
-  const values = [
-    {
-      icon: Heart,
-      title: "Passie",
-      description: "Onze diepe liefde voor Turkije drijft ons om de mooiste reizen te creëren",
-      color: "from-accent/20 to-accent/5",
-    },
-    {
-      icon: Award,
-      title: "Expertise",
-      description: "Jarenlange ervaring en uitgebreide kennis van alle regio's in Turkije",
-      color: "from-primary/20 to-primary/5",
-    },
-    {
-      icon: Users,
-      title: "Persoonlijk",
-      description: "Elke reis wordt met persoonlijke aandacht en zorg samengesteld",
-      color: "from-primary-light/20 to-primary-light/5",
-    },
-    {
-      icon: Globe,
-      title: "Uniek",
-      description: "Ontdek verborgen pareltjes en unieke ervaringen die je nergens anders vindt",
-      color: "from-accent/20 to-accent/5",
-    },
-  ];
-
-  const features = [
-    "Diepgaande kennis van Turkije en alle regio's",
-    "Zorgvuldige planning met aandacht voor detail",
-    "Aangesloten bij garantiefondsen voor jouw gemoedsrust",
-    "Van groepsreizen tot volledig op maat gemaakte reizen",
-    "Begeleiding van boeking tot thuiskomst",
-  ];
-
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center overflow-hidden">
+      {/* ════════════════════════════════════════════
+          HERO
+      ════════════════════════════════════════════ */}
+      <section className="relative py-20 sm:py-24 md:py-28 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
-            alt="Over Xplore Turkiye & Beyond"
+            src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1920&q=80"
+            alt="Istanbul skyline — waar Oost en West samenkomen"
             fill
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/80 to-primary-dark/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/80 to-primary-dark/50" />
+          <div
+            className="absolute inset-0 opacity-[0.06]"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+              backgroundSize: "40px 40px",
+            }}
+          />
         </div>
+
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             className="max-w-3xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/20 backdrop-blur-sm border border-accent/30 rounded-full mb-6">
-              <Sparkles className="h-4 w-4" />
-              <span className="text-sm font-medium">Over Ons</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              Xplore Turkiye & Beyond
-            </h1>
-            <p className="text-xl sm:text-2xl text-white/90">
-              Jouw betrouwbare partner voor onvergetelijke reizen naar Turkije
-            </p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.15, duration: 0.4 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-accent/20 backdrop-blur-sm border border-accent/30 rounded-full mb-5"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              <span className="text-xs font-medium">Over Ons</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.7 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
+            >
+              Over{" "}
+              <span className="text-accent">XPLORE TÜRKIYE</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+              className="text-lg sm:text-xl md:text-2xl text-white/90 font-light"
+            >
+              Waar passie en expertise samenkomen
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* Who We Are Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-1 h-12 bg-accent rounded-full" />
-                <h2 className="text-3xl sm:text-4xl font-bold text-primary">
-                  Wie zijn wij?
-                </h2>
-              </div>
-              <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
-                <div className="space-y-4">
-                  <p className="text-lg text-foreground leading-relaxed">
-                    Xplore Turkiye & Beyond is een gespecialiseerde reisorganisatie
-                    die zich volledig richt op het organiseren van onvergetelijke reizen
-                    naar Turkije. Met jarenlange ervaring en een diepe passie voor dit
-                    prachtige land, helpen wij reizigers om de mooiste plekken te
-                    ontdekken.
-                  </p>
-                  <p className="text-lg text-foreground leading-relaxed">
-                    Ons team bestaat uit ervaren reisexperts die Turkije door en door
-                    kennen. We hebben alle regio&apos;s zelf bezocht, van de bruisende
-                    stranden van de Mediterrane kust tot de mysterieuze landschappen
-                    van Cappadocië, en van de historische steden in het oosten tot de
-                    moderne metropool Istanbul.
-                  </p>
-                </div>
-                <div className="relative h-[300px] sm:h-[400px] rounded-2xl overflow-hidden shadow-xl">
-                  <Image
-                    src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80"
-                    alt="Team Xplore Turkiye"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/40 to-transparent" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* ════════════════════════════════════════════
+          WHO WE ARE — XPLORE IDENTITY
+      ════════════════════════════════════════════ */}
+      <AboutSection />
 
-      {/* Mission Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center gap-3 mb-8">
-                <Globe className="h-8 w-8 text-primary" />
-                <h2 className="text-3xl sm:text-4xl font-bold text-primary">
-                  Onze Missie
-                </h2>
-              </div>
-              <div className="bg-gradient-to-br from-primary/5 to-background rounded-2xl p-8 border border-primary/10">
-                <p className="text-lg sm:text-xl text-foreground leading-relaxed mb-6">
-                  Wij geloven dat elke reis een uniek avontuur zou moeten zijn. Onze
-                  missie is om reizigers te helpen de perfecte reis te vinden die
-                  aansluit bij hun wensen, budget en reisstijl.
-                </p>
-                <p className="text-lg text-foreground leading-relaxed">
-                  We streven ernaar om niet alleen reizen te verkopen, maar echte
-                  ervaringen te creëren die een blijvende indruk achterlaten. Met
-                  persoonlijk reisadvies, zorgvuldige planning en begeleiding bij
-                  elke stap van je reis, zorgen wij ervoor dat je je volledig kunt
-                  concentreren op het genieten van je avontuur.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-4">
-              Onze Waarden
+      {/* ════════════════════════════════════════════
+          THREE PILLARS — VISION · EXPERTISE · PROMISE
+      ════════════════════════════════════════════ */}
+      <section className="py-16 sm:py-20 md:py-28 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div {...fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
+              Waar wij voor staan
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Wat ons drijft en onderscheidt
-            </p>
+            <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {values.map((value, index) => {
-              const Icon = value.icon;
+          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+            {pillars.map((pillar, index) => {
+              const Icon = pillar.icon;
               return (
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className={`bg-gradient-to-br ${value.color} rounded-2xl p-6 border border-primary/10 hover:border-primary/30 transition-all`}
+                  key={pillar.title}
+                  {...stagger}
+                  transition={{ delay: index * 0.15, duration: 0.6 }}
+                  whileHover={{ y: -8 }}
+                  className="group relative bg-background rounded-2xl p-8 border border-primary/10 hover:border-primary/30 hover:shadow-xl transition-all duration-300 text-center"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                    <Icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold text-primary mb-2">{value.title}</h3>
-                  <p className="text-sm text-muted-foreground">{value.description}</p>
+                  <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className={cn(
+                      "w-16 h-16 rounded-2xl bg-gradient-to-br flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-shadow mx-auto",
+                      pillar.color
+                    )}
+                  >
+                    <Icon className="h-8 w-8 text-white" />
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-primary mb-3">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {pillar.description}
+                  </p>
                 </motion.div>
               );
             })}
@@ -201,44 +205,295 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center gap-3 mb-8">
-                <Shield className="h-8 w-8 text-primary" />
-                <h2 className="text-3xl sm:text-4xl font-bold text-primary">
-                  Waarom Xplore Turkiye & Beyond?
+      {/* ════════════════════════════════════════════
+          OUR APPROACH — HOW WE WORK
+      ════════════════════════════════════════════ */}
+      <section className="py-16 sm:py-20 md:py-28 bg-background relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+              {/* Image */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                <div className="absolute -inset-4 bg-gradient-to-br from-accent/20 to-primary/20 rounded-3xl blur-xl opacity-50" />
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=800&q=80"
+                    alt="Op maat gemaakte reisroute door Turkije"
+                    width={800}
+                    height={600}
+                    className="object-cover w-full h-[300px] sm:h-[400px] md:h-[500px]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/30 via-transparent to-transparent" />
+                </div>
+              </motion.div>
+
+              {/* Content */}
+              <motion.div {...fadeUp} transition={{ duration: 0.8 }}>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-4">
+                  <Compass className="h-4 w-4 text-accent" />
+                  <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+                    Onze aanpak
+                  </span>
+                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
+                  Reizen die groeien uit de plek zelf
                 </h2>
+                <p className="text-base sm:text-lg text-foreground/80 leading-relaxed mb-8">
+                  Onze reizen zijn volledig op maat en gebaseerd op eigen ervaringen
+                  en diepgaande kennis van het land. Elk traject dat wij uitwerken
+                  vertrekt vanuit de eigen identiteit van een regio en de samenhang
+                  tussen cultuur, geschiedenis en natuur.
+                </p>
+
+                {/* Steps */}
+                <div className="space-y-6">
+                  {approachSteps.map((step, index) => {
+                    const Icon = step.icon;
+                    return (
+                      <motion.div
+                        key={step.title}
+                        {...stagger}
+                        transition={{ delay: 0.2 + index * 0.15, duration: 0.5 }}
+                        className="flex items-start gap-4 group"
+                      >
+                        <div className="flex-shrink-0 relative">
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                            <Icon className="h-6 w-6 text-white" />
+                          </div>
+                          <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-accent text-white text-[10px] font-bold flex items-center justify-center">
+                            {step.number}
+                          </span>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-primary mb-1">
+                            {step.title}
+                          </h3>
+                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            {step.description}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════
+          TURKEY — A LAND OF MANY LAYERS
+      ════════════════════════════════════════════ */}
+      <section className="py-16 sm:py-20 md:py-28 bg-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto">
+            {/* Section header */}
+            <motion.div {...fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
+                <Globe className="h-4 w-4 text-primary" />
+                <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                  Wat wij kennen
+                </span>
               </div>
-              <div className="space-y-4">
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="flex items-start gap-4 p-4 bg-gradient-to-r from-primary/5 to-transparent rounded-xl border border-primary/10 hover:border-primary/30 transition-all"
-                  >
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center">
-                      <Check className="h-5 w-5" />
-                    </div>
-                    <p className="text-base sm:text-lg text-foreground pt-1">
-                      <strong className="text-primary">{feature.split(":")[0]}:</strong>{" "}
-                      {feature.includes(":") ? feature.split(":")[1] : feature}
-                    </p>
-                  </motion.div>
-                ))}
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
+                Een land met vele lagen
+              </h2>
+              <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
+            </motion.div>
+
+            {/* Editorial narrative */}
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.8 }}
+              className="space-y-8 text-base sm:text-lg text-foreground/80 leading-relaxed"
+            >
+              {/* Intro */}
+              <p>
+                Turkije is een land dat je niet kan herleiden tot één periode, één
+                cultuur of één overtuiging. Het is een plek waar lagen van de
+                menselijke geschiedenis zich over elkaar hebben gelegd en vandaag
+                nog steeds zichtbaar zijn.{" "}
+                <span className="font-semibold text-primary">
+                  Dat besef vormt het vertrekpunt van alles wat wij doen.
+                </span>
+              </p>
+
+              {/* History — inline icons as accent */}
+              <div className="bg-gradient-to-br from-primary/5 to-background rounded-2xl p-6 sm:p-8 border border-primary/10">
+                <div className="flex items-center gap-3 mb-4">
+                  <Landmark className="h-6 w-6 text-primary flex-shrink-0" />
+                  <h3 className="text-xl sm:text-2xl font-bold text-primary">
+                    Duizenden jaren beschaving
+                  </h3>
+                </div>
+                <p className="mb-4">
+                  Turkije behoort tot de kerngebieden van de menselijke beschaving.
+                  Van <span className="font-semibold text-foreground">Göbeklitepe</span> tot{" "}
+                  <span className="font-semibold text-foreground">Efeze</span>, van{" "}
+                  <span className="font-semibold text-foreground">Troje</span> tot de oude
+                  steden van Mesopotamië liggen hier de eerste sporen van vaste
+                  nederzettingen, geloof en samenleven. Geschiedenis is hier geen
+                  afgesloten hoofdstuk, maar aanwezig in het landschap, in steden en
+                  in tradities die vandaag nog worden beleefd.
+                </p>
+                <p>
+                  Doorheen de eeuwen volgden grote rijken elkaar op. De{" "}
+                  <span className="font-semibold text-foreground">Romeinse grootsheid</span>,
+                  de{" "}
+                  <span className="font-semibold text-foreground">Byzantijnse verfijning</span>{" "}
+                  en de{" "}
+                  <span className="font-semibold text-foreground">Ottomaanse elegantie</span>{" "}
+                  vormen samen één doorlopend verhaal. Die geschiedenis leeft voort
+                  in stadsstructuren, architectuur, handelsroutes en gebruiken. Van
+                  de skyline van Istanbul tot karavanserais diep in Anatolië loopt
+                  een zichtbare lijn die verleden en heden met elkaar verbindt.
+                </p>
+              </div>
+
+              {/* Culture */}
+              <div className="bg-gradient-to-br from-accent/5 to-background rounded-2xl p-6 sm:p-8 border border-accent/10">
+                <div className="flex items-center gap-3 mb-4">
+                  <Waypoints className="h-6 w-6 text-accent flex-shrink-0" />
+                  <h3 className="text-xl sm:text-2xl font-bold text-primary">
+                    Cultureel kruispunt
+                  </h3>
+                </div>
+                <p className="mb-4">
+                  Ook cultureel is Turkije gevormd door ontmoeting. Het land ligt op
+                  het{" "}
+                  <span className="font-semibold text-foreground">
+                    kruispunt van Europa en Azië
+                  </span>{" "}
+                  en fungeerde eeuwenlang als doorgangsgebied voor volkeren, ideeën
+                  en overtuigingen. Verschillende religies, talen en etnische
+                  gemeenschappen hebben hier hun voetsporen nagelaten. Niet naast
+                  elkaar, maar met elkaar verweven.
+                </p>
+                <p>
+                  Turkije vormt een{" "}
+                  <span className="font-semibold text-foreground">cultureel mozaïek</span>{" "}
+                  waarin oosterse gastvrijheid en westerse dynamiek samenkomen en het
+                  dagelijkse leven bepalen.
+                </p>
+              </div>
+
+              {/* Geography */}
+              <div className="bg-gradient-to-br from-primary/5 to-background rounded-2xl p-6 sm:p-8 border border-primary/10">
+                <div className="flex items-center gap-3 mb-4">
+                  <Mountain className="h-6 w-6 text-primary flex-shrink-0" />
+                  <h3 className="text-xl sm:text-2xl font-bold text-primary">
+                    Eindeloze verscheidenheid
+                  </h3>
+                </div>
+                <p className="mb-4">
+                  Die culturele rijkdom wordt versterkt door de uitzonderlijke
+                  geografische ligging. Turkije wordt omringd door{" "}
+                  <span className="font-semibold text-foreground">drie zeeën</span> en kent
+                  een enorme variatie aan landschappen en klimaten. Het noorden,
+                  westen, zuiden en oosten verschillen fundamenteel van elkaar.
+                </p>
+                <p>
+                  Elke regio heeft haar eigen tradities, keuken, tempo en
+                  seizoensbeleving. In één land ervaar je{" "}
+                  <span className="font-semibold text-foreground">
+                    berggebieden en hoogvlaktes
+                  </span>
+                  , uitgestrekte kustlijnen, vruchtbare valleien en levendige
+                  steden. Dat maakt Turkije uitzonderlijk veelzijdig en tegelijk
+                  onmogelijk te vatten in één beeld.
+                </p>
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════
+          HOSPITALITY QUOTE & CTA
+      ════════════════════════════════════════════ */}
+      <section className="py-16 sm:py-20 md:py-28 bg-gradient-to-br from-primary via-primary-dark to-primary text-white relative overflow-hidden">
+        <div className="absolute top-10 left-10 w-40 h-40 border border-white/10 rounded-full" />
+        <div className="absolute bottom-10 right-10 w-64 h-64 border border-white/5 rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/[0.03] rounded-full" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              <Quote className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-8 text-accent/60" />
+            </motion.div>
+
+            <p className="text-lg sm:text-xl text-white/80 leading-relaxed mb-10 max-w-3xl mx-auto">
+              Gastvrijheid vormt de kern van Turkije en diezelfde houding dragen
+              wij uit in onze manier van werken. Met aandacht, bereikbaarheid en
+              zorg voor elk detail begeleiden wij elke reis van begin tot einde.
+            </p>
+
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 sm:p-10 mb-10 inline-block">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-accent">
+                &ldquo;Başımızın üstünde yeriniz var.&rdquo;
+              </p>
+              <p className="text-base sm:text-lg text-white/70">
+                Je bent hier meer dan welkom.
+              </p>
+            </div>
+
+            <motion.div
+              {...fadeUp}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="space-y-6"
+            >
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">
+                XPLORE Türkiye staat klaar om deze bestemming te laten ontdekken
+                met kennis, overtuiging en respect voor haar vele lagen.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <Link
+                  href="/contact"
+                  className={cn(
+                    buttonStyles.getClasses("default", "lg"),
+                    "bg-accent hover:bg-accent-hover text-white"
+                  )}
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  Neem contact op
+                </Link>
+                <Link
+                  href="/reizen"
+                  className={cn(
+                    buttonStyles.getClasses("outline", "lg"),
+                    "border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-primary"
+                  )}
+                >
+                  Ontdek onze reizen
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </div>

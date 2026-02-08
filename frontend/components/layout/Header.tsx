@@ -31,7 +31,7 @@ export default function Header() {
           >
             Home
           </Link>
-          <div className="relative group">
+          {/* <div className="relative group">
             <button className="text-sm font-medium text-foreground transition-colors hover:text-primary flex items-center">
               Reizen
             </button>
@@ -48,7 +48,7 @@ export default function Header() {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
           <Link
             href="/over-ons"
             className="text-sm font-medium text-foreground transition-colors hover:text-primary"
@@ -88,7 +88,7 @@ export default function Header() {
             >
               Home
             </Link>
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <div className="text-sm font-semibold text-primary">Reizen</div>
               {tripTypes.map((type) => (
                 <Link
@@ -100,7 +100,7 @@ export default function Header() {
                   {type.name}
                 </Link>
               ))}
-            </div>
+            </div> */}
             <Link
               href="/over-ons"
               className="block text-sm font-medium text-foreground"

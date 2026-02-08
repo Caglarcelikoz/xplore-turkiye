@@ -25,9 +25,8 @@ export default async function Footer() {
   };
 
   const socialLinks = global?.attributes?.socialLinks || {
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
+    instagram: "https://www.instagram.com/xplore.turkiye/",
+    facebook: "https://www.facebook.com/xploreturkiyebe",
   };
   return (
     <footer className="border-t border-primary/20 bg-primary-dark text-white">
@@ -39,8 +38,7 @@ export default async function Footer() {
               Xplore Turkiye & Beyond
             </h3>
             <p className="text-xs sm:text-sm text-white/80 mb-3 sm:mb-4">
-              Ontdek de mooiste reizen naar Turkije. Persoonlijk reisadvies en
-              begeleiding bij elke stap.
+              Wij gidsen je door het authentieke Turkije
             </p>
             <div className="flex space-x-4">
               {socialLinks.instagram && (
@@ -69,7 +67,7 @@ export default async function Footer() {
           </div>
 
           {/* Reizen */}
-          <div>
+          {/* <div>
             <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
               Onze Reizen
             </h4>
@@ -85,7 +83,7 @@ export default async function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Info */}
           <div>
@@ -109,14 +107,7 @@ export default async function Footer() {
                   Contact
                 </Link>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  Veelgestelde Vragen
-                </a>
-              </li>
+
               <li>
                 <Link
                   href="/disclaimer"
@@ -158,12 +149,14 @@ export default async function Footer() {
               <li className="flex items-start space-x-2 text-white/80">
                 <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
                 <span>
-                  XPLORE TÜRKIYE<br />
+                  XPLORE TÜRKIYE
+                  <br />
                   {contactInfo.address}
                 </span>
               </li>
               <li className="text-white/60 text-xs italic mt-2">
-                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair Willebroek Travel.
+                XPLORE TÜRKIYE is een gespecialiseerd merk binnen Selectair
+                Willebroek Travel.
               </li>
             </ul>
           </div>

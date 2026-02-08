@@ -61,9 +61,6 @@ export default function Header() {
           >
             Contact
           </Link>
-          <Link href="/contact" className={buttonStyles.getClasses()}>
-            Reis Aanvragen
-          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -117,13 +114,6 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
-            </Link>
-            <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className={cn(buttonStyles.getClasses(), "w-full")}
-            >
-              Reis Aanvragen
             </Link>
           </div>
         </div>

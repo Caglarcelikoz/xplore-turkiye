@@ -4,11 +4,10 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Button, buttonStyles } from "@/components/ui/button";
+import { buttonStyles } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import type { HeroSectionProps } from "@/lib/strapi/mappers/hero";
-import { getIconComponent } from "@/lib/strapi/mappers/icons";
 
 const SLIDESHOW_IMAGES = [
   { src: "/cappadocie2.jpg", alt: "Cappadocia hot air balloons" },
@@ -20,14 +19,8 @@ const SLIDESHOW_IMAGES = [
 const SLIDE_INTERVAL = 5000;
 
 export default function HeroSection({
-  title,
-  subtitle,
   description,
-  backgroundImage,
-  badgeText,
   primaryButton,
-  secondaryButton,
-  stats,
 }: HeroSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -41,9 +34,9 @@ export default function HeroSection({
   }, [nextSlide]);
 
   return (
-    <section className="relative min-h-[100vh] sm:min-h-[90vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden py-12 sm:py-0">
+    <section className="relative overflow-hidden h-[calc(100vh-4rem)] flex items-center justify-center">
       {/* Background Slideshow */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 -z-10">
         <AnimatePresence mode="popLayout">
           <motion.div
             key={currentIndex}
@@ -59,151 +52,163 @@ export default function HeroSection({
               fill
               priority={currentIndex === 0}
               sizes="100vw"
-              className="object-cover scale-105"
+              className="object-cover object-center"
               quality={90}
             />
           </motion.div>
         </AnimatePresence>
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/80 via-primary-dark/70 to-primary-dark/90 z-[1]" />
+        {/* Enhanced Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/85 via-primary-dark/75 to-primary-dark/90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/60 via-transparent to-primary-dark/40" />
+
         {/* Decorative Pattern */}
         <div
-          className="absolute inset-0 opacity-10 z-[1]"
+          className="absolute inset-0 opacity-[0.07]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
             backgroundSize: "40px 40px",
           }}
         />
+      </div>
 
-        {/* Slide Indicators */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-[2] flex gap-2">
-          {SLIDESHOW_IMAGES.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={cn(
-                "h-1.5 rounded-full transition-all duration-500",
-                index === currentIndex
-                  ? "w-8 bg-white"
-                  : "w-3 bg-white/40 hover:bg-white/60"
-              )}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+      {/* Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        {SLIDESHOW_IMAGES.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={cn(
+              "h-1.5 rounded-full transition-all duration-500",
+              index === currentIndex
+                ? "w-8 bg-white"
+                : "w-3 bg-white/40 hover:bg-white/60",
+            )}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center text-white">
+      <div className="relative container mx-auto px-4 text-center text-white">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-4xl mx-auto"
         >
-          {/* Badge */}
-          {badgeText && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-block mb-4 sm:mb-6"
-            >
-              <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-accent/20 backdrop-blur-sm border border-accent/30 rounded-full text-xs sm:text-sm font-medium">
-                {badgeText}
-              </span>
-            </motion.div>
-          )}
+          {/* Logo Section - Turkish Map Background */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mb-10 sm:mb-14 flex justify-center"
+          >
+            <div className="relative">
+              {/* Outer glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/30 via-white/20 to-accent/30 blur-3xl opacity-60" />
 
+              {/* Turkish Map Background Overlay */}
+              <div className="relative">
+                {/* Turkey Map Silhouette */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-35 scale-100 sm:scale-125 md:scale-150">
+                  <Image
+                    src="/tr.svg"
+                    alt=""
+                    width={500}
+                    height={300}
+                    className="w-full h-auto"
+                    aria-hidden="true"
+                  />
+                </div>
+
+                {/* Logo - Enhanced Visibility */}
+                <div className="relative px-8 py-6 sm:px-10 sm:py-8">
+                  <Image
+                    src="/logo.png"
+                    alt="Xplore Turkiye & Beyond"
+                    width={400}
+                    height={50}
+                    className="relative h-auto w-[300px] sm:w-[360px] md:w-[400px]"
+                    style={{
+                      filter: 'drop-shadow(0 0 60px rgba(255,255,255,0.9)) drop-shadow(0 0 30px rgba(255,255,255,0.8)) drop-shadow(0 4px 20px rgba(0,0,0,0.5))'
+                    }}
+                    priority
+                    unoptimized
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight px-2"
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 leading-tight px-2"
           >
-            {title}
-            {subtitle && (
-              <>
-                <br />
-                <span className="text-accent">{subtitle}</span>
-              </>
-            )}
+            Wij gidsen je door het{" "}
+            <span className="bg-gradient-to-r from-white via-white/95 to-accent/85 bg-clip-text text-transparent">
+              authentieke Turkije
+            </span>
           </motion.h1>
 
+          {/* Description */}
           {description && (
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 md:mb-10 text-white/95 max-w-3xl mx-auto leading-relaxed px-4"
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 sm:mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed px-4 font-light"
             >
               {description}
             </motion.p>
           )}
 
-          {(primaryButton || secondaryButton) && (
+          {/* Call to Action */}
+          {primaryButton && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 px-4"
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="flex justify-center px-4 mb-12"
             >
-              {primaryButton && (
-                <div className="group w-full sm:w-auto">
-                  {primaryButton.isExternal ? (
-                    <a
-                      href={primaryButton.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={cn(
-                        buttonStyles.getClasses("default", "lg"),
-                        "flex items-center justify-center"
-                      )}
-                    >
-                      {primaryButton.text}
-                      <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  ) : (
-                    <Link
-                      href={primaryButton.link}
-                      className={cn(
-                        buttonStyles.getClasses("default", "lg"),
-                        "flex items-center justify-center"
-                      )}
-                    >
-                      {primaryButton.text}
-                      <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  )}
-                </div>
-              )}
-        
+              <div className="group relative">
+                {/* Button glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-accent/40 via-accent/30 to-accent/40 rounded-lg blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-300" />
+
+                {primaryButton.isExternal ? (
+                  <a
+                    href={primaryButton.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      buttonStyles.getClasses("default", "lg"),
+                      "relative flex items-center justify-center gap-2 shadow-2xl min-w-[200px]",
+                    )}
+                  >
+                    {primaryButton.text}
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                ) : (
+                  <Link
+                    href={primaryButton.link}
+                    className={cn(
+                      buttonStyles.getClasses("default", "lg"),
+                      "relative flex items-center justify-center gap-2 shadow-2xl min-w-[200px]",
+                    )}
+                  >
+                    {primaryButton.text}
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
+              </div>
             </motion.div>
           )}
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1.5 h-1.5 bg-white rounded-full mt-2"
-          />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

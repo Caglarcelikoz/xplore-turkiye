@@ -5,12 +5,22 @@
 
 import { getSingleType, getEntries, getEntryBySlug } from "./client";
 import type { LandingPage, Global } from "../../types/strapi";
+import { staticLandingPage, staticGlobal } from "../data/static-content";
+
+// Environment flag to enable/disable Strapi CMS
+const USE_CMS = process.env.NEXT_PUBLIC_USE_CMS === "true";
 
 /**
  * Get landing page data
- * Optimized: Uses field selection and specific populate to reduce payload
+ * Returns static data if USE_CMS is false, otherwise fetches from Strapi
  */
 export async function getLandingPage(): Promise<LandingPage | null> {
+  if (!USE_CMS) {
+    console.log("[Static Mode] Using static landing page data");
+    return staticLandingPage;
+  }
+
+  // Original Strapi query (preserved)
   return getSingleType<LandingPage>("landing-page", {
     fields: ["title", "description"], // Only scalar fields - relations go in populate
     populate: [

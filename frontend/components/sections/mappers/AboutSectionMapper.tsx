@@ -4,7 +4,6 @@
  */
 
 import AboutSection from "../AboutSection";
-import { mapAboutBlockToProps } from "@/lib/strapi/mappers/about";
 import type { BlockAbout } from "@/types/strapi";
 
 interface AboutSectionMapperProps {
@@ -12,12 +11,5 @@ interface AboutSectionMapperProps {
 }
 
 export default function AboutSectionMapper({ data }: AboutSectionMapperProps) {
-  // Transform Strapi data to component props
-  const props = mapAboutBlockToProps(data);
-
-  return <AboutSection {...props} />;
+  return <AboutSection />;
 }
-
-
-
-

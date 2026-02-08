@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Button, buttonStyles } from "@/components/ui/button";
@@ -8,6 +9,15 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import type { HeroSectionProps } from "@/lib/strapi/mappers/hero";
 import { getIconComponent } from "@/lib/strapi/mappers/icons";
+
+const SLIDESHOW_IMAGES = [
+  { src: "/cappadocie2.jpg", alt: "Cappadocia hot air balloons" },
+  { src: "/mardin.jpg", alt: "Historic city of Mardin" },
+  { src: "/efes.jpg", alt: "Ancient ruins of Ephesus" },
+  { src: "/karadeniz.jpg", alt: "Karadeniz region" },
+];
+
+const SLIDE_INTERVAL = 5000;
 
 export default function HeroSection({
   title,
@@ -19,32 +29,70 @@ export default function HeroSection({
   secondaryButton,
   stats,
 }: HeroSectionProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % SLIDESHOW_IMAGES.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, SLIDE_INTERVAL);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
   return (
     <section className="relative min-h-[100vh] sm:min-h-[90vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden py-12 sm:py-0">
-      {/* Background Image with Parallax Effect */}
+      {/* Background Slideshow */}
       <div className="absolute inset-0">
-        <div className="relative w-full h-full">
-          <Image
-            src={backgroundImage}
-            alt={badgeText || "Hero background"}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover scale-110 transition-transform duration-700 hover:scale-100"
-            quality={90}
-          />
-        </div>
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={SLIDESHOW_IMAGES[currentIndex].src}
+              alt={SLIDESHOW_IMAGES[currentIndex].alt}
+              fill
+              priority={currentIndex === 0}
+              sizes="100vw"
+              className="object-cover scale-105"
+              quality={90}
+            />
+          </motion.div>
+        </AnimatePresence>
+
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/80 via-primary-dark/70 to-primary-dark/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/80 via-primary-dark/70 to-primary-dark/90 z-[1]" />
         {/* Decorative Pattern */}
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-10 z-[1]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
             backgroundSize: "40px 40px",
           }}
         />
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-[2] flex gap-2">
+          {SLIDESHOW_IMAGES.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-500",
+                index === currentIndex
+                  ? "w-8 bg-white"
+                  : "w-3 bg-white/40 hover:bg-white/60"
+              )}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Content */}
@@ -131,66 +179,7 @@ export default function HeroSection({
                   )}
                 </div>
               )}
-              {secondaryButton && (
-                <div className="w-full sm:w-auto">
-                  {secondaryButton.isExternal ? (
-                    <a
-                      href={secondaryButton.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={cn(
-                        buttonStyles.getClasses("outline", "lg"),
-                        "border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-primary"
-                      )}
-                    >
-                      {secondaryButton.text}
-                    </a>
-                  ) : (
-                    <Link
-                      href={secondaryButton.link}
-                      className={cn(
-                        buttonStyles.getClasses("outline", "lg"),
-                        "border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-primary"
-                      )}
-                    >
-                      {secondaryButton.text}
-                    </Link>
-                  )}
-                </div>
-              )}
-            </motion.div>
-          )}
-
-          {/* Stats */}
-          {stats && stats.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.8 }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto mt-8 sm:mt-12 md:mt-16 px-4"
-            >
-              {stats.map((stat, index) => {
-                const Icon = stat.icon ? getIconComponent(stat.icon) : null;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1 + index * 0.1, duration: 0.5 }}
-                    className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 sm:p-6"
-                  >
-                    {Icon && (
-                      <Icon className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-2 sm:mb-3 text-accent" />
-                    )}
-                    <div className="text-xl sm:text-2xl font-bold mb-1">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs sm:text-sm text-white/80">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                );
-              })}
+        
             </motion.div>
           )}
         </motion.div>

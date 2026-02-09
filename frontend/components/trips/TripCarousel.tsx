@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import TripCard from "./TripCard";
 import { Trip } from "@/types";
@@ -65,7 +66,10 @@ export default function TripCarousel({ trips }: TripCarouselProps) {
       {/* Scrollable Container */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-4 overflow-x-hidden overflow-y-hidden pb-4"
+        className={cn(
+          "flex gap-4 overflow-x-hidden overflow-y-hidden pb-4",
+          trips.length <= cardsPerView && "justify-center",
+        )}
       >
         {trips.map((trip) => (
           <div
@@ -89,10 +93,11 @@ export default function TripCarousel({ trips }: TripCarouselProps) {
         >
           <ChevronLeft className="h-5 w-5" />
         </Button>
-        
+
         {/* Counter */}
         <div className="text-sm text-muted-foreground font-medium px-2">
-          {currentIndex + 1} - {Math.min(currentIndex + cardsPerView, trips.length)} / {trips.length}
+          {currentIndex + 1} -{" "}
+          {Math.min(currentIndex + cardsPerView, trips.length)} / {trips.length}
         </div>
 
         <Button

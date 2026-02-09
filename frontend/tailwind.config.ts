@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        heading: ["var(--font-lora)", "Georgia", "serif"],
+      },
       colors: {
         background: "#faf9f7",
         foreground: "#182e32",

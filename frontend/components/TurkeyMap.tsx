@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState, useCallback } from "react";
+import { memo, useState, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   ComposableMap,
@@ -8,8 +8,20 @@ import {
   Geography,
   Marker,
 } from "react-simple-maps";
+import type { Region } from "@/types";
+import { getProvincesForRegion } from "@/lib/data/regionProvinces";
+import { getRegionById } from "@/lib/data/regions";
 
 const TURKEY_GEO_URL = "/turkey-provinces.json";
+
+export interface TurkeyMapProps {
+  /** When set, only this region's provinces are highlighted (arcered); no city pins shown. */
+  highlightRegion?: Region;
+  /** Show city pins. Default: true when no highlightRegion, false when highlightRegion is set. */
+  showMarkers?: boolean;
+  /** Optional accent color for highlighted provinces (defaults to region color or theme accent). */
+  highlightColor?: string;
+}
 
 /* ─── city data ─── */
 const cityMarkers = [
@@ -219,8 +231,24 @@ function CityPin({
 }
 
 /* ─── main ─── */
-function TurkeyMap() {
+function TurkeyMap({
+  highlightRegion,
+  showMarkers: showMarkersProp,
+  highlightColor: highlightColorProp,
+}: TurkeyMapProps) {
   const [hoveredCity, setHoveredCity] = useState<CityData | null>(null);
+
+  const highlightProvinces = useMemo(
+    () => (highlightRegion ? getProvincesForRegion(highlightRegion) : null),
+    [highlightRegion]
+  );
+  const regionColor = useMemo(
+    () => (highlightRegion ? getRegionById(highlightRegion)?.color : null),
+    [highlightRegion]
+  );
+  const highlightColor = highlightColorProp ?? regionColor ?? sc.hover;
+  const showMarkers =
+    showMarkersProp ?? (highlightRegion == null);
 
   const handleHover = useCallback((city: CityData) => {
     setHoveredCity(city);
@@ -229,6 +257,49 @@ function TurkeyMap() {
   const handleLeave = useCallback(() => {
     setHoveredCity(null);
   }, []);
+
+  const getProvinceStyle = useCallback(
+    (provinceName: string) => {
+      const isHighlighted =
+        highlightProvinces != null && highlightProvinces.includes(provinceName);
+      const fill = isHighlighted ? highlightColor : "url(#mapGrad)";
+      const fillOpacity =
+        highlightProvinces != null
+          ? isHighlighted
+            ? 0.75
+            : 0.35
+          : 0.8;
+      const stroke = isHighlighted ? highlightColor : sc.stroke;
+      const strokeWidth = isHighlighted ? 0.5 : 0.35;
+      return {
+        default: {
+          fill,
+          fillOpacity,
+          stroke,
+          strokeWidth,
+          outline: "none" as const,
+          pointerEvents: "none" as const,
+        },
+        hover: {
+          fill,
+          fillOpacity,
+          stroke,
+          strokeWidth,
+          outline: "none" as const,
+          pointerEvents: "none" as const,
+        },
+        pressed: {
+          fill,
+          fillOpacity,
+          stroke,
+          strokeWidth,
+          outline: "none" as const,
+          pointerEvents: "none" as const,
+        },
+      };
+    },
+    [highlightProvinces, highlightColor]
+  );
 
   return (
     <motion.div
@@ -264,42 +335,20 @@ function TurkeyMap() {
           </filter>
         </defs>
 
-        {/* Static provinces */}
+        {/* Provinces: highlighted region or default fill */}
         <g filter="url(#mapShadow)">
           <Geographies geography={TURKEY_GEO_URL}>
             {({ geographies }) =>
-              geographies.map((geo) => (
-                <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  style={{
-                    default: {
-                      fill: "url(#mapGrad)",
-                      fillOpacity: 0.8,
-                      stroke: sc.stroke,
-                      strokeWidth: 0.35,
-                      outline: "none",
-                      pointerEvents: "none" as const,
-                    },
-                    hover: {
-                      fill: "url(#mapGrad)",
-                      fillOpacity: 0.8,
-                      stroke: sc.stroke,
-                      strokeWidth: 0.35,
-                      outline: "none",
-                      pointerEvents: "none" as const,
-                    },
-                    pressed: {
-                      fill: "url(#mapGrad)",
-                      fillOpacity: 0.8,
-                      stroke: sc.stroke,
-                      strokeWidth: 0.35,
-                      outline: "none",
-                      pointerEvents: "none" as const,
-                    },
-                  }}
-                />
-              ))
+              geographies.map((geo) => {
+                const name = (geo.properties?.name as string) ?? "";
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    style={getProvinceStyle(name)}
+                  />
+                );
+              })
             }
           </Geographies>
         </g>
@@ -339,16 +388,17 @@ function TurkeyMap() {
           }
         </Geographies>
 
-        {/* City pins */}
-        {cityMarkers.map((city) => (
-          <CityPin
-            key={city.name}
-            city={city}
-            isHovered={hoveredCity?.name === city.name}
-            onHover={() => handleHover(city)}
-            onLeave={handleLeave}
-          />
-        ))}
+        {/* City pins – only when showMarkers */}
+        {showMarkers &&
+          cityMarkers.map((city) => (
+            <CityPin
+              key={city.name}
+              city={city}
+              isHovered={hoveredCity?.name === city.name}
+              onHover={() => handleHover(city)}
+              onLeave={handleLeave}
+            />
+          ))}
       </ComposableMap>
     </motion.div>
   );

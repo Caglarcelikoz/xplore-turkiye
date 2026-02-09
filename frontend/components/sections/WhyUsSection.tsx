@@ -46,7 +46,7 @@ const stagger = {
 
 export default function WhyUsSection() {
   return (
-    <section className="py-16 sm:py-20 md:py-28 bg-white relative overflow-hidden">
+    <section className="py-16 bg-white relative overflow-hidden">
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3" />

@@ -1,0 +1,712 @@
+import { Trip } from "@/types";
+
+export const trips: Trip[] = [
+  {
+    id: "1",
+    slug: "istanbul-citytrip",
+    title: "Istanbul in 5 dagen",
+    subtitle: "XPLORE CITIES: ontworpen door locals, met een verfijnde kijk op de bestemming",
+    type: "citytrips",
+    region: "centraal-anatolie",
+    duration: 5,
+    price: 790,
+    priceNote: "Opgelet: dit is slechts een richtprijs gebaseerd op vertrek in laagseizoen. Wij maken voor jullie steeds een voorstel op maat.",
+    bestTravelTime: "april - mei, september - oktober",
+    bestTravelTimeDetailed: [
+      {
+        season: "Lente en Herfst (Beste reistijd)",
+        months: "april, mei, september, oktober",
+        description: "Istanbul is het hele jaar door te bezoeken, maar elk seizoen geeft de stad een ander karakter. Lente en herfst zijn over het algemeen de meest aangename periodes.",
+        pros: ["Milde temperaturen", "Mooi licht", "Culturele evenementen en tentoonstellingen", "Ideaal om monumenten te bezoeken", "Perfect om wijken te voet te verkennen", "Geen extreme drukte of hitte"],
+      },
+      {
+        season: "Zomer",
+        months: "juli, augustus",
+        description: "De zomermaanden kunnen warm en soms drukkend aanvoelen. Tegelijk is dit een periode waarin het leven zich nog meer naar buiten verplaatst en terrassen, ferry's en avondwandelingen langs de Bosporus hun charme hebben.",
+        pros: ["Levendig terrassenweather", "Ferry's en avondwandelingen langs de Bosporus", "Rustiger omdat locals naar de kust trekken", "Lagere prijzen voor accommodaties"],
+        cons: ["Warm en soms drukkend", "Kan warm zijn in juli en augustus"],
+      },
+      {
+        season: "Winter",
+        months: "december - februari",
+        description: "De winter toont een meer ingetogen Istanbul. De stad is rustiger, musea en bezienswaardigheden zijn minder druk en het dagelijkse leven speelt zich meer binnen af.",
+        pros: ["Rustiger en minder toeristisch", "Musea en bezienswaardigheden minder druk", "Authentieke ervaring"],
+        cons: ["Koud weer", "Bij slecht weer kunnen ferryverbindingen tijdelijk worden onderbroken"],
+      },
+    ],
+    departureCity: "Brussel",
+    departureNote: "Brussel of naar keuze",
+    images: [
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80",
+      "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=1200&q=80",
+      "https://images.unsplash.com/photo-1527838832700-5059252407fa?w=1200&q=80",
+      "https://images.unsplash.com/photo-1589397192680-0a513b5b7500?w=1200&q=80",
+      "https://images.unsplash.com/photo-1605627077060-ad7a1b40f160?w=1200&q=80",
+    ],
+    overview:
+      "Istanbul is een stad die zich laag per laag onthult op het kruispunt van Europa en Azië. Byzantijnse kerken, Ottomaanse moskeeën, joodse synagogen en moderne wijken bestaan naast elkaar.",
+    introductionText:
+      "Istanbul is een stad die zich laag per laag onthult. Ze ligt op het kruispunt van Europa en Azië en werd gevormd door beschavingen die elk hun sporen nalieten. Byzantijnse kerken, Ottomaanse moskeeën, joodse synagogen en moderne stadswijken bestaan hier naast elkaar en maken van Istanbul een stad met een uitzonderlijke culturele rijkdom. Het dagelijkse leven speelt zich af op straat, aan het water en in de wijken waar verschillende gemeenschappen al eeuwenlang samenleven.\n\nDit vijfdaagse programma biedt een inhoudelijk kader om Istanbul te ontdekken. Het is opgebouwd als suggestie en laat ruimte om de stad op eigen tempo te verkennen, met aandacht voor zowel de grote historische lijnen als het hedendaagse stadsleven.",
+    highlights: [
+      "Sultanahmet: Hagia Sophia, Blauwe Moskee en Hippodroom",
+      "Basilica Cisterne - ondergronds waterreservoir",
+      "Istanbul Archeologisch Museum",
+      "Topkapi Paleis met tuinen en uitzicht op de Bosporus",
+      "Boottocht op de Bosporus",
+      "Galata en Beyoğlu: culturele diversiteit en hedendaagse kunst",
+      "Istanbul Modern museum",
+      "Historische synagogen, kerken en moskeeën",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Aankomst in Istanbul",
+        description:
+          "Na aankomst op de luchthaven volgt een privétransfer naar het gekozen hotel. De rest van de dag is vrij om rustig kennis te maken met de stad. Een eerste wandeling in de buurt van het hotel, een diner aan de Bosporus of gewoon observeren hoe de stad beweegt, volstaat vaak om het ritme van Istanbul aan te voelen.\n\nOvernachting in Istanbul.",
+        locations: ["Istanbul"],
+        image: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&q=80",
+      },
+      {
+        day: 2,
+        title: "Sultanahmet en het ontstaan van de stad",
+        description:
+          "Vandaag verken je het historische hart van Istanbul, waar de fundamenten van de stad werden gelegd. In de wijk Sultanahmet wandel je door het voormalige Constantinopel, een plek waar religie, macht en publiek leven eeuwenlang samenkwamen. Een bezoek aan Hagia Sophia vormt een natuurlijk beginpunt en maakt meteen duidelijk hoe deze stad door de eeuwen heen van functie en betekenis veranderde.\n\nVlakbij liggen de Blauwe Moskee en het Hippodroom, ooit het sociale en ceremoniële centrum van de Byzantijnse hoofdstad. Hoewel de oorspronkelijke tribunes verdwenen zijn, blijft de open ruimte herkenbaar en vertellen monumenten zoals de obelisk en de Slangenzuil het verhaal van een stad die zich al vroeg als wereldstad profileerde.\n\nOnder de straten van Sultanahmet bevindt zich de indrukwekkende Basilica Cisterne, een ondergronds waterreservoir dat eeuwenlang essentieel was voor de bevoorrading van de stad. Het bezoek vormt een bijzonder contrast met het leven bovengronds en laat zien hoe ingenieus Constantinopel was opgebouwd.\n\nWie de historische lijn verder wil doortrekken, kan aansluitend het Istanbul Archeologisch Museum bezoeken. De collecties plaatsen de monumenten van vandaag in een bredere context en tonen hoe verschillende beschavingen de stad en haar omgeving hebben gevormd.\n\nOvernachting in Istanbul.",
+        locations: ["Sultanahmet", "Hagia Sophia", "Blauwe Moskee", "Basilica Cisterne"],
+        image: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=800&q=80",
+      },
+      {
+        day: 3,
+        title: "Ottomaanse paleizen en leven langs het water",
+        description:
+          "De relatie tussen Istanbul en de Bosporus staat vandaag centraal. Een bezoek aan het Topkapi Paleis laat zien hoe strategisch de ligging van de stad was en hoe het Ottomaanse Rijk van hieruit werd bestuurd. De tuinen en terrassen bieden uitzicht op het water en maken duidelijk waarom deze plek eeuwenlang het centrum van de macht vormde.\n\nLater op de dag kan je Istanbul ervaren vanaf de Bosporus zelf. Tijdens een boottocht glijden de Europese en Aziatische oevers langzaam voorbij en wordt zichtbaar hoe wonen, werken en leven hier altijd met het water verbonden zijn. Een lunch aan boord vormt een mooie aanvulling op deze ervaring.\n\nOvernachting in Istanbul.",
+        locations: ["Topkapi Paleis", "Bosporus"],
+        image: "https://images.unsplash.com/photo-1527838832700-5059252407fa?w=800&q=80",
+      },
+      {
+        day: 4,
+        title: "Galata, minderheden en hedendaags Istanbul",
+        description:
+          "Vandaag ontdek je een ander gezicht van de stad. In Galata en Beyoğlu wandel je door wijken waar verschillende culturen en religies eeuwenlang samenleefden. Naast kerken en moskeeën vind je hier ook historische synagogen. Samen vormen ze een tastbare weerspiegeling van de culturele en religieuze diversiteit die Istanbul door de eeuwen heen heeft gekenmerkt en die vandaag nog steeds zichtbaar is in het straatbeeld.\n\nGalata is tegelijk een van de meest levendige wijken van vandaag. Kunstgalerieën, cafés en musea zoals Istanbul Modern laten zien hoe Istanbul zich blijft heruitvinden en hoe hedendaagse cultuur hier een vaste plaats heeft.\n\nOvernachting in Istanbul.",
+        locations: ["Galata", "Beyoğlu", "Istanbul Modern"],
+        image: "https://images.unsplash.com/photo-1589397192680-0a513b5b7500?w=800&q=80",
+      },
+      {
+        day: 5,
+        title: "Vrije tijd & vertrek",
+        description:
+          "Afhankelijk van de vertrektijd van de vlucht is er nog vrije tijd in de stad. Dit moment leent zich voor een laatste wandeling, een bezoek aan een markt of een koffie met zicht op het water. Nadien volgt de privétransfer naar de luchthaven voor de terugvlucht naar huis.",
+        locations: ["Istanbul"],
+        image: "https://images.unsplash.com/photo-1605627077060-ad7a1b40f160?w=800&q=80",
+      },
+    ],
+    included: [
+      "Vluchten",
+      "Hotelovernachting",
+      "Pocketguide Istanbul",
+      "24/7 noodnummer",
+      "Privetransfer van en naar het hotel",
+    ],
+    excluded: [
+      "Persoonlijke uitgaven",
+      "Reisverzekeringen (bijstand, annulatie..)",
+      "Niet vermelde diensten bij inbegrepen",
+    ],
+    accommodation: "Doubletree by Hilton Sirkeci 4* of gelijkwaardig",
+    transportationIncluded: true,
+    importantNotes:
+      "Dit programma is opgevat als een suggestie voor eigen invulling en geeft een beeld van wat Istanbul te bieden heeft. Wens je een begeleide citytrip met privégids, excursies op maat of een andere invulling van de dagen, dan werken wij graag een persoonlijk reisvoorstel uit.",
+    tags: ["xplore cities", "Istanbul", "citytrip"],
+    featured: true,
+    coordinates: [28.9784, 41.0082],
+  },
+];
+
+export const getTripBySlug = (slug: string): Trip | undefined => {
+    subtitle: "5-daagse citytrip aan de Turkse Rivièra",
+    type: "citytrips",
+    region: "mediterrane-riviera",
+    duration: 5,
+    price: 699,
+    priceNote: "Deze prijs is op basis van 2 personen",
+    bestTravelTime: "april - oktober",
+    departureCity: "Amsterdam/Brussel",
+    images: [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200",
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=1200",
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80",
+    ],
+    overview:
+      "Combineer cultuur en ontspanning in Antalya. Ontdek de oude stad, geniet van de stranden en bezoek de antieke ruïnes in de omgeving.",
+    highlights: [
+      "Kaleiçi oude stad",
+      "Antalya Museum",
+      "Aspendos theater",
+      "Stranden van Lara",
+      "Düden watervallen",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Aankomst Antalya",
+        description: "Transfer naar hotel",
+        locations: ["Antalya"],
+      },
+      {
+        day: 2,
+        title: "Oude Stad & Museum",
+        description: "Ontdek Kaleiçi en het archeologisch museum",
+        locations: ["Antalya"],
+      },
+      {
+        day: 3,
+        title: "Aspendos & Side",
+        description: "Dagtocht naar de antieke steden",
+        locations: ["Aspendos", "Side"],
+      },
+      {
+        day: 4,
+        title: "Strand & Watervallen",
+        description: "Geniet van de stranden en bezoek de Düden watervallen",
+        locations: ["Antalya"],
+      },
+      {
+        day: 5,
+        title: "Vertrek",
+        description: "Transfer naar luchthaven",
+        locations: ["Antalya"],
+      },
+    ],
+    included: [
+      "Retourvluchten",
+      "Overnachtingen",
+      "Alle ontbijten",
+      "Luchthaventransfers",
+    ],
+    excluded: ["Lunch en diner", "Entreegelden", "Excursies"],
+    featured: false,
+    coordinates: [30.7133, 36.8969],
+  },
+  // More trips to reach 20-30
+  {
+    id: "7",
+    slug: "oost-turkije-cultuur",
+    title: "Oost-Turkije Cultuur & Natuur",
+    subtitle: "12-daagse groepsreis door het onontdekte oosten",
+    type: "groepsreizen",
+    region: "oost-turkije",
+    duration: 12,
+    price: 1699,
+    priceNote: "Deze prijs is op basis van 2 personen",
+    bestTravelTime: "juni - september",
+    departureCity: "Amsterdam/Brussel",
+    images: [
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=1200",
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200",
+    ],
+    overview:
+      "Ontdek het ongerepte oosten van Turkije met zijn rijke cultuur, indrukwekkende berglandschappen en warme gastvrijheid.",
+    highlights: [
+      "Mount Ararat",
+      "Van meer en kasteel",
+      "Ishak Pasha Paleis",
+      "Nemrut Dağı",
+      "Traditionele Koerdische cultuur",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Aankomst Van",
+        description: "Transfer naar hotel",
+        locations: ["Van"],
+      },
+      {
+        day: 2,
+        title: "Van Meer",
+        description: "Bezoek aan het Van kasteel en het meer",
+        locations: ["Van"],
+      },
+      {
+        day: 3,
+        title: "Rit naar Doğubayazıt",
+        description: "Bezoek aan Ishak Pasha Paleis",
+        locations: ["Doğubayazıt"],
+      },
+      {
+        day: 4,
+        title: "Mount Ararat",
+        description: "Dagtocht naar de voet van Mount Ararat",
+        locations: ["Mount Ararat"],
+      },
+      {
+        day: 5,
+        title: "Rit naar Erzurum",
+        description: "Ontdek de historische stad",
+        locations: ["Erzurum"],
+      },
+      {
+        day: 6,
+        title: "Erzurum naar Kars",
+        description: "Bezoek aan Ani, de spookstad",
+        locations: ["Kars", "Ani"],
+      },
+      {
+        day: 7,
+        title: "Kars naar Muş",
+        description: "Rit door het bergachtige landschap",
+        locations: ["Muş"],
+      },
+      {
+        day: 8,
+        title: "Muş naar Diyarbakır",
+        description: "Bezoek aan de oude stad met zijn muren",
+        locations: ["Diyarbakır"],
+      },
+      {
+        day: 9,
+        title: "Diyarbakır naar Şanlıurfa",
+        description: "Bezoek aan Göbekli Tepe",
+        locations: ["Şanlıurfa", "Göbekli Tepe"],
+      },
+      {
+        day: 10,
+        title: "Şanlıurfa",
+        description: "Ontdek de stad en de vijvers van Abraham",
+        locations: ["Şanlıurfa"],
+      },
+      {
+        day: 11,
+        title: "Nemrut Dağı",
+        description: "Zonsopgang bij de koningsgraven",
+        locations: ["Nemrut Dağı"],
+      },
+      {
+        day: 12,
+        title: "Vertrek",
+        description: "Transfer naar luchthaven",
+        locations: ["Adıyaman"],
+      },
+    ],
+    included: [
+      "Retourvluchten",
+      "Overnachtingen",
+      "Alle ontbijten",
+      "Alle transfers",
+      "Nederlandssprekende gids",
+    ],
+    excluded: ["Lunch en diner", "Entreegelden", "Persoonlijke uitgaven"],
+    featured: false,
+    coordinates: [43.0, 39.0],
+  },
+  {
+    id: "8",
+    slug: "mesopotamie-geschiedenis",
+    title: "Mesopotamië: Cradle of Civilization",
+    subtitle: "9-daagse maatwerk reis door het historische zuidoosten",
+    type: "maatwerk",
+    region: "zuidoost-mesopotamie",
+    duration: 9,
+    price: 1799,
+    priceNote: "Prijs op basis van maatwerk",
+    bestTravelTime: "maart - mei, september - november",
+    departureCity: "Amsterdam/Brussel",
+    images: [
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=1200&q=80",
+    ],
+    overview:
+      "Reis terug in de tijd naar de wieg van de beschaving. Ontdek Göbekli Tepe, de oudste tempel ter wereld, en andere historische schatten.",
+    highlights: [
+      "Göbekli Tepe (UNESCO)",
+      "Nemrut Dağı",
+      "Diyarbakır oude stad",
+      "Mardin met zijn unieke architectuur",
+      "Hasankeyf (historische site)",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Aankomst Şanlıurfa",
+        description: "Transfer naar hotel",
+        locations: ["Şanlıurfa"],
+      },
+      {
+        day: 2,
+        title: "Göbekli Tepe",
+        description: "Bezoek aan de oudste tempel ter wereld",
+        locations: ["Göbekli Tepe"],
+      },
+      {
+        day: 3,
+        title: "Şanlıurfa Stad",
+        description: "Ontdek de stad en de vijvers",
+        locations: ["Şanlıurfa"],
+      },
+      {
+        day: 4,
+        title: "Rit naar Diyarbakır",
+        description: "Bezoek aan de oude stad met zijn muren",
+        locations: ["Diyarbakır"],
+      },
+      {
+        day: 5,
+        title: "Diyarbakır naar Mardin",
+        description: "Ontdek de unieke architectuur van Mardin",
+        locations: ["Mardin"],
+      },
+      {
+        day: 6,
+        title: "Mardin & Dara",
+        description: "Bezoek aan de antieke site Dara",
+        locations: ["Mardin", "Dara"],
+      },
+      {
+        day: 7,
+        title: "Rit naar Adıyaman",
+        description: "Voorbereiding voor Nemrut Dağı",
+        locations: ["Adıyaman"],
+      },
+      {
+        day: 8,
+        title: "Nemrut Dağı",
+        description: "Vroege ochtend bezoek voor zonsopgang",
+        locations: ["Nemrut Dağı"],
+      },
+      {
+        day: 9,
+        title: "Vertrek",
+        description: "Transfer naar luchthaven",
+        locations: ["Adıyaman"],
+      },
+    ],
+    included: [
+      "Retourvluchten",
+      "Luxe accommodaties",
+      "Alle ontbijten",
+      "Privé transfers",
+      "Privé gids",
+    ],
+    excluded: ["Lunch en diner", "Entreegelden", "Optionele excursies"],
+    featured: true,
+    coordinates: [38.8, 37.2],
+  },
+  // More trips
+  {
+    id: "9",
+    slug: "bodrum-luxe-escape",
+    title: "Bodrum Luxe Escape",
+    subtitle: "7-daagse maatwerk reis naar de parel van de Egeïsche kust",
+    type: "maatwerk",
+    region: "egeische-kust",
+    duration: 7,
+    price: 1899,
+    priceNote: "Prijs op basis van maatwerk",
+    bestTravelTime: "mei - september",
+    departureCity: "Amsterdam/Brussel",
+    images: [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200",
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=1200",
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80",
+    ],
+    overview:
+      "Geniet van een luxe verblijf in Bodrum, de parel van de Egeïsche kust. Deze maatwerk reis combineert ontspanning aan de stranden met cultuur en historie.",
+    highlights: [
+      "Luxe resort aan de kust",
+      "Bodrum kasteel en onderwatermuseum",
+      "Privé jachttocht langs de kust",
+      "Bezoek aan antieke Halicarnassus",
+      "Exclusieve restaurants en nachtleven",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Aankomst Bodrum",
+        description: "Transfer naar luxe resort",
+        locations: ["Bodrum"],
+      },
+      {
+        day: 2,
+        title: "Bodrum Stad",
+        description: "Bezoek aan kasteel en onderwatermuseum",
+        locations: ["Bodrum"],
+      },
+      {
+        day: 3,
+        title: "Jachttocht",
+        description: "Privé boottocht langs de kust met stops voor zwemmen",
+        locations: ["Bodrum"],
+      },
+      {
+        day: 4,
+        title: "Halicarnassus",
+        description: "Bezoek aan de antieke stad en het mausoleum",
+        locations: ["Halicarnassus"],
+      },
+      {
+        day: 5,
+        title: "Vrije Dag",
+        description: "Geniet van het resort en de faciliteiten",
+        locations: ["Bodrum"],
+      },
+      {
+        day: 6,
+        title: "Gümüşlük",
+        description: "Bezoek aan het charmante vissersdorpje",
+        locations: ["Gümüşlük"],
+      },
+      {
+        day: 7,
+        title: "Vertrek",
+        description: "Transfer naar luchthaven",
+        locations: ["Bodrum"],
+      },
+    ],
+    included: [
+      "Retourvluchten",
+      "Luxe accommodatie",
+      "Alle ontbijten",
+      "Privé transfers",
+      "Jachttocht",
+    ],
+    excluded: ["Lunch en diner", "Persoonlijke uitgaven"],
+    featured: false,
+    coordinates: [27.4306, 37.0344],
+  },
+  {
+    id: "10",
+    slug: "ankara-citytrip",
+    title: "Ankara Citytrip",
+    subtitle: "3-daagse stedentrip naar de hoofdstad van Turkije",
+    type: "citytrips",
+    region: "centraal-anatolie",
+    duration: 3,
+    price: 449,
+    priceNote: "Deze prijs is op basis van 2 personen",
+    bestTravelTime: "maart - november",
+    departureCity: "Amsterdam/Brussel",
+    images: [
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=1200",
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200",
+    ],
+    overview:
+      "Ontdek Ankara, de moderne hoofdstad van Turkije. Bezoek het indrukwekkende Anıtkabir, het mausoleum van Atatürk, en het Museum van Anatolische Beschavingen.",
+    highlights: [
+      "Anıtkabir (Atatürk Mausoleum)",
+      "Museum van Anatolische Beschavingen",
+      "Ankara Kasteel",
+      "Kocatepe Moskee",
+      "Moderne winkelstraten",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Aankomst Ankara",
+        description: "Transfer naar hotel in centrum",
+        locations: ["Ankara"],
+      },
+      {
+        day: 2,
+        title: "Stadstour",
+        description: "Bezoek aan Anıtkabir, museum en kasteel",
+        locations: ["Ankara"],
+      },
+      {
+        day: 3,
+        title: "Vertrek",
+        description: "Transfer naar luchthaven",
+        locations: ["Ankara"],
+      },
+    ],
+    included: [
+      "Retourvluchten",
+      "Overnachtingen",
+      "Alle ontbijten",
+      "Luchthaventransfers",
+    ],
+    excluded: ["Lunch en diner", "Entreegelden"],
+    featured: false,
+    coordinates: [32.8597, 39.9334],
+  },
+  {
+    id: "11",
+    slug: "mediterrane-kust-self-drive",
+    title: "Mediterrane Kust Self Drive",
+    subtitle: "10-daagse self drive langs de mooiste kustplaatsen",
+    type: "self-drives",
+    region: "mediterrane-riviera",
+    duration: 10,
+    price: 999,
+    priceNote: "Exclusief huurauto, vanaf €250 per week",
+    bestTravelTime: "april - oktober",
+    departureCity: "Amsterdam/Brussel",
+    images: [
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200",
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=1200",
+    ],
+    overview:
+      "Ontdek de prachtige Mediterrane kust op je eigen tempo. Van Antalya tot Kaş, geniet van kristalhelder water, historische steden en adembenemende uitzichten.",
+    highlights: [
+      "Flexibele route langs de kust",
+      "Antalya, Side, Kaş en Kalkan",
+      "Aspendos en Perge antieke steden",
+      "Prachtige stranden en baaien",
+      "Volledige vrijheid",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Aankomst Antalya",
+        description: "Ophaal huurauto en eerste overnachting",
+        locations: ["Antalya"],
+      },
+      {
+        day: 2,
+        title: "Antalya Stad",
+        description: "Ontdek de oude stad Kaleiçi",
+        locations: ["Antalya"],
+      },
+      {
+        day: 3,
+        title: "Side",
+        description: "Bezoek aan de antieke stad en stranden",
+        locations: ["Side"],
+      },
+      {
+        day: 4,
+        title: "Aspendos",
+        description: "Bezoek aan het Romeinse theater",
+        locations: ["Aspendos"],
+      },
+      {
+        day: 5,
+        title: "Rit naar Kaş",
+        description: "Charmante kustplaats met prachtige baaien",
+        locations: ["Kaş"],
+      },
+      {
+        day: 6,
+        title: "Kaş Vrije Dag",
+        description: "Geniet van de stranden en wateractiviteiten",
+        locations: ["Kaş"],
+      },
+      {
+        day: 7,
+        title: "Kalkan",
+        description: "Bezoek aan het pittoreske Kalkan",
+        locations: ["Kalkan"],
+      },
+      {
+        day: 8,
+        title: "Patara",
+        description: "Bezoek aan het antieke Patara en het strand",
+        locations: ["Patara"],
+      },
+      {
+        day: 9,
+        title: "Terug naar Antalya",
+        description: "Rit terug langs de kust",
+        locations: ["Antalya"],
+      },
+      {
+        day: 10,
+        title: "Vertrek",
+        description: "Inleveren auto en vertrek",
+        locations: ["Antalya"],
+      },
+    ],
+    included: [
+      "Retourvluchten",
+      "Overnachtingen (flexibel)",
+      "Routebeschrijving",
+      "24/7 support",
+    ],
+    excluded: ["Huurauto", "Brandstof", "Maaltijden"],
+    featured: false,
+    coordinates: [30.7133, 36.8969],
+  },
+  {
+    id: "12",
+    slug: "izmir-citytrip",
+    title: "Izmir Citytrip",
+    subtitle: "4-daagse stedentrip naar de parel van de Egeïsche kust",
+    type: "citytrips",
+    region: "egeische-kust",
+    duration: 4,
+    price: 549,
+    priceNote: "Deze prijs is op basis van 2 personen",
+    bestTravelTime: "april - oktober",
+    departureCity: "Amsterdam/Brussel",
+    images: [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200",
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=1200",
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80",
+    ],
+    overview:
+      "Ontdek Izmir, de levendige metropool aan de Egeïsche kust. Geniet van de prachtige kustlijn, historische bezienswaardigheden en heerlijke lokale keuken.",
+    highlights: [
+      "Kordon kustpromenade",
+      "Kadifekale (Fluwelen Kasteel)",
+      "Agora antieke stad",
+      "Alsancak wijk",
+      "Lokale markten en keuken",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Aankomst Izmir",
+        description: "Transfer naar hotel",
+        locations: ["Izmir"],
+      },
+      {
+        day: 2,
+        title: "Stadstour",
+        description: "Bezoek aan Kadifekale, Agora en Kordon",
+        locations: ["Izmir"],
+      },
+      {
+        day: 3,
+        title: "Efeze Dagtocht",
+        description: "Optionele dagtocht naar de antieke stad Efeze",
+        locations: ["Efeze"],
+      },
+      {
+        day: 4,
+        title: "Vertrek",
+        description: "Transfer naar luchthaven",
+        locations: ["Izmir"],
+      },
+    ],
+    included: [
+      "Retourvluchten",
+      "Overnachtingen",
+      "Alle ontbijten",
+      "Luchthaventransfers",
+    ],
+    excluded: ["Lunch en diner", "Entreegelden", "Excursies"],
+    featured: false,
+    coordinates: [27.1428, 38.4237],
+  },
+];
+
+export const getTripBySlug = (slug: string): Trip | undefined => {
+  return trips.find((trip) => trip.slug === slug);
+};
+
+export const getTripsByType = (type: string): Trip[] => {
+  return trips.filter((trip) => trip.type === type);
+};
+
+export const getTripsByRegion = (region: string): Trip[] => {
+  return trips.filter((trip) => trip.region === region);
+};
+
+export const getFeaturedTrips = (): Trip[] => {
+  return trips.filter((trip) => trip.featured);
+};
+
+export const getAllTrips = (): Trip[] => {
+  return trips;
+};

@@ -1,3 +1,4 @@
+import * as React from "react";
 import { cn } from "@/lib/utils";
 
 type ButtonVariant = "default" | "outline";
@@ -7,6 +8,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  asChild?: boolean;
 }
 
 const baseStyles =
@@ -29,13 +31,27 @@ export function Button({
   className,
   variant = "default",
   size = "default",
+  asChild = false,
+  children,
   ...props
 }: ButtonProps) {
+  const buttonClassName = cn(
+    baseStyles,
+    variants[variant],
+    sizes[size],
+    className
+  );
+
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children as React.ReactElement<{ className?: string }>, {
+      className: cn(buttonClassName, (children as React.ReactElement<{ className?: string }>).props?.className),
+    });
+  }
+
   return (
-    <button
-      className={cn(baseStyles, variants[variant], sizes[size], className)}
-      {...props}
-    />
+    <button className={buttonClassName} {...props}>
+      {children}
+    </button>
   );
 }
 

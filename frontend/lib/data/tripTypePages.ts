@@ -1,7 +1,12 @@
-import { TripType } from "@/types";
+/** Slug-style trip type used in /reizen/[slug] and this content map (Dutch/URL convention). */
+export type TripTypeSlug =
+  | "groepsreizen"
+  | "maatwerk"
+  | "self-drives"
+  | "citytrips";
 
 export interface TripTypePageContent {
-  type: TripType;
+  type: TripTypeSlug;
   heroTitle: string;
   heroSubtitle: string;
   heroImage: string;
@@ -17,7 +22,7 @@ export interface TripTypePageContent {
   }[];
 }
 
-export const tripTypePages: Record<TripType, TripTypePageContent> = {
+export const tripTypePages: Record<TripTypeSlug, TripTypePageContent> = {
   groepsreizen: {
     type: "groepsreizen",
     heroTitle: "Groepsreizen naar Turkije",
@@ -172,7 +177,7 @@ export const tripTypePages: Record<TripType, TripTypePageContent> = {
   },
 };
 
-export const getTripTypePage = (type: TripType): TripTypePageContent => {
+export const getTripTypePage = (type: TripTypeSlug): TripTypePageContent => {
   return tripTypePages[type];
 };
 

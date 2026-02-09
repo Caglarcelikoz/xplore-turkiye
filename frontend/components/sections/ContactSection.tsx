@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   MessageSquare,
   Send,
@@ -25,13 +24,6 @@ interface ContactSectionProps {
 interface FormErrors {
   [key: string]: string;
 }
-
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 },
-};
 
 export default function ContactSection({
   showHero = false,
@@ -241,7 +233,7 @@ export default function ContactSection({
   };
 
   return (
-    <section className="py-16 sm:py-20 md:py-28 bg-background relative overflow-hidden">
+    <section className="py-16 bg-background relative overflow-hidden">
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3" />
@@ -249,13 +241,7 @@ export default function ContactSection({
       <div className="container mx-auto px-4 relative z-10">
         {/* Hero Section (conditional) */}
         {showHero && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-6">
               <MessageSquare className="h-4 w-4 text-accent" />
               <span className="text-xs font-semibold text-accent uppercase tracking-wider">
@@ -272,18 +258,12 @@ export default function ContactSection({
               Maak vrijblijvend een afspraak via het contactformulier of neem
               telefonisch contact met ons op.
             </p>
-          </motion.div>
+          </div>
         )}
 
         {/* Section Header (when no hero) */}
         {!showHero && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-10 sm:mb-14"
-          >
+          <div className="text-center mb-10 sm:mb-14">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-4">
               <MessageSquare className="h-4 w-4 text-accent" />
               <span className="text-xs font-semibold text-accent uppercase tracking-wider">
@@ -298,33 +278,21 @@ export default function ContactSection({
               telefonisch contact met ons op.
             </p>
             <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
-          </motion.div>
+          </div>
         )}
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {/* Contact Form */}
-          <motion.div
-            {...fadeUp}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="lg:col-span-2"
-          >
+          <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl p-6 sm:p-8 md:p-10 border border-primary/10 shadow-xl relative">
               {/* Success Overlay */}
               {isSuccess && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-2xl flex items-center justify-center z-10"
-                >
+                <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-2xl flex items-center justify-center z-10">
                   <div className="text-center p-8">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 200 }}
-                    >
+                    <div>
                       <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                    </motion.div>
+                    </div>
                     <h3 className="text-2xl font-bold text-primary mb-2">
                       Bericht verstuurd!
                     </h3>
@@ -332,7 +300,7 @@ export default function ContactSection({
                       Bedankt! We nemen spoedig contact met je op.
                     </p>
                   </div>
-                </motion.div>
+                </div>
               )}
 
               <h3 className="text-2xl font-bold text-primary mb-6">
@@ -343,12 +311,7 @@ export default function ContactSection({
                 {/* Names Row */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   {/* First Name */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1, duration: 0.4 }}
-                  >
+                  <div>
                     <label
                       htmlFor="firstName"
                       className="block text-sm font-semibold text-primary mb-2"
@@ -369,24 +332,15 @@ export default function ContactSection({
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
                     </div>
                     {hasAttemptedSubmit && errors.firstName && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                      >
+                      <div className="flex items-center gap-1 mt-1 text-xs text-red-600">
                         <AlertCircle className="h-3 w-3" />
                         <span>{errors.firstName}</span>
-                      </motion.div>
+                      </div>
                     )}
-                  </motion.div>
+                  </div>
 
                   {/* Last Name */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.15, duration: 0.4 }}
-                  >
+                  <div>
                     <label
                       htmlFor="lastName"
                       className="block text-sm font-semibold text-primary mb-2"
@@ -407,27 +361,18 @@ export default function ContactSection({
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
                     </div>
                     {hasAttemptedSubmit && errors.lastName && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                      >
+                      <div className="flex items-center gap-1 mt-1 text-xs text-red-600">
                         <AlertCircle className="h-3 w-3" />
                         <span>{errors.lastName}</span>
-                      </motion.div>
+                      </div>
                     )}
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Email & Phone Row */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   {/* Email */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2, duration: 0.4 }}
-                  >
+                  <div>
                     <label
                       htmlFor="email"
                       className="block text-sm font-semibold text-primary mb-2"
@@ -448,24 +393,15 @@ export default function ContactSection({
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
                     </div>
                     {hasAttemptedSubmit && errors.email && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                      >
+                      <div className="flex items-center gap-1 mt-1 text-xs text-red-600">
                         <AlertCircle className="h-3 w-3" />
                         <span>{errors.email}</span>
-                      </motion.div>
+                      </div>
                     )}
-                  </motion.div>
+                  </div>
 
                   {/* Phone */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.25, duration: 0.4 }}
-                  >
+                  <div>
                     <label
                       htmlFor="phone"
                       className="block text-sm font-semibold text-primary mb-2"
@@ -485,25 +421,16 @@ export default function ContactSection({
                       <PhoneIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-primary/40" />
                     </div>
                     {hasAttemptedSubmit && errors.phone && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                      >
+                      <div className="flex items-center gap-1 mt-1 text-xs text-red-600">
                         <AlertCircle className="h-3 w-3" />
                         <span>{errors.phone}</span>
-                      </motion.div>
+                      </div>
                     )}
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Request Type */}
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3, duration: 0.4 }}
-                >
+                <div>
                   <label
                     htmlFor="requestType"
                     className="block text-sm font-semibold text-primary mb-2"
@@ -534,61 +461,46 @@ export default function ContactSection({
                         className={`h-5 w-5 text-primary/50 flex-shrink-0 transition-transform ${openDropdown === "requestType" ? "rotate-180" : ""}`}
                       />
                     </button>
-                    <AnimatePresence>
-                      {openDropdown === "requestType" && (
-                        <motion.ul
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -4 }}
-                          transition={{ duration: 0.15 }}
-                          role="listbox"
-                          className="absolute z-20 mt-1 w-full bg-white border-2 border-primary/20 rounded-xl shadow-lg py-1 overflow-hidden"
-                        >
-                          {requestTypes.map((type) => (
-                            <li
-                              key={type}
-                              role="option"
-                              aria-selected={formData.requestType === type}
-                              onClick={() => {
-                                setFormData((prev) => ({
+                    {openDropdown === "requestType" && (
+                      <ul
+                        role="listbox"
+                        className="absolute z-20 mt-1 w-full bg-white border-2 border-primary/20 rounded-xl shadow-lg py-1 overflow-hidden"
+                      >
+                        {requestTypes.map((type) => (
+                          <li
+                            key={type}
+                            role="option"
+                            aria-selected={formData.requestType === type}
+                            onClick={() => {
+                              setFormData((prev) => ({
+                                ...prev,
+                                requestType: type,
+                              }));
+                              if (errors.requestType)
+                                setErrors((prev) => ({
                                   ...prev,
-                                  requestType: type,
+                                  requestType: "",
                                 }));
-                                if (errors.requestType)
-                                  setErrors((prev) => ({
-                                    ...prev,
-                                    requestType: "",
-                                  }));
-                                setOpenDropdown(null);
-                              }}
-                              className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${formData.requestType === type ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-primary/10"}`}
-                            >
-                              {type}
-                            </li>
-                          ))}
-                        </motion.ul>
-                      )}
-                    </AnimatePresence>
+                              setOpenDropdown(null);
+                            }}
+                            className={`px-4 py-2.5 text-sm cursor-pointer transition-colors ${formData.requestType === type ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-primary/10"}`}
+                          >
+                            {type}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                   {hasAttemptedSubmit && errors.requestType && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                    >
+                    <div className="flex items-center gap-1 mt-1 text-xs text-red-600">
                       <AlertCircle className="h-3 w-3" />
                       <span>{errors.requestType}</span>
-                    </motion.div>
+                    </div>
                   )}
-                </motion.div>
+                </div>
 
                 {/* Message */}
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4, duration: 0.4 }}
-                >
+                <div>
                   <label
                     htmlFor="message"
                     className="block text-sm font-semibold text-primary mb-2"
@@ -610,14 +522,10 @@ export default function ContactSection({
                   </div>
                   <div className="flex items-center justify-between mt-1">
                     {hasAttemptedSubmit && errors.message ? (
-                      <motion.div
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 text-xs text-red-600"
-                      >
+                      <div className="flex items-center gap-1 text-xs text-red-600">
                         <AlertCircle className="h-3 w-3" />
                         <span>{errors.message}</span>
-                      </motion.div>
+                      </div>
                     ) : (
                       <div />
                     )}
@@ -625,15 +533,10 @@ export default function ContactSection({
                       {formData.message.length} / 2000
                     </span>
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Newsletter Checkbox */}
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.45, duration: 0.4 }}
-                >
+                <div>
                   <label className="flex items-start gap-3 p-4 rounded-xl border-2 border-primary/10 hover:border-primary/30 hover:bg-primary/5 cursor-pointer transition-all duration-200">
                     <input
                       type="checkbox"
@@ -647,15 +550,10 @@ export default function ContactSection({
                       TÜRKIYE
                     </span>
                   </label>
-                </motion.div>
+                </div>
 
                 {/* Privacy voorwaarden */}
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.4 }}
-                >
+                <div>
                   <label className="flex items-start gap-3 p-4 rounded-xl border-2 border-primary/10 hover:border-primary/30 hover:bg-primary/5 cursor-pointer transition-all duration-200">
                     <input
                       type="checkbox"
@@ -679,39 +577,25 @@ export default function ContactSection({
                     </span>
                   </label>
                   {hasAttemptedSubmit && errors.privacyAccepted && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-1 mt-1 text-xs text-red-600"
-                    >
+                    <div className="flex items-center gap-1 mt-1 text-xs text-red-600">
                       <AlertCircle className="h-3 w-3" />
                       <span>{errors.privacyAccepted}</span>
-                    </motion.div>
+                    </div>
                   )}
-                </motion.div>
+                </div>
 
                 {/* API Error */}
                 {apiError && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600"
-                  >
+                  <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600">
                     <AlertCircle className="h-5 w-5 flex-shrink-0" />
                     <span>{apiError}</span>
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Submit Button */}
-                <motion.button
+                <button
                   type="submit"
                   disabled={!formData.privacyAccepted || isSubmitting}
-                  whileHover={{
-                    scale: formData.privacyAccepted && !isSubmitting ? 1.02 : 1,
-                  }}
-                  whileTap={{
-                    scale: formData.privacyAccepted && !isSubmitting ? 0.98 : 1,
-                  }}
                   className="w-full bg-gradient-to-r from-accent to-accent-hover text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
@@ -725,17 +609,13 @@ export default function ContactSection({
                       <span>Verstuur Bericht</span>
                     </>
                   )}
-                </motion.button>
+                </button>
               </form>
             </div>
-          </motion.div>
+          </div>
 
           {/* Sidebar */}
-          <motion.div
-            {...fadeUp}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             {/* Kantoor & contact – één kaart */}
             <div className="bg-white rounded-2xl p-6 border border-primary/10 shadow-lg">
               <h3 className="text-lg font-bold text-primary mb-4">
@@ -805,7 +685,7 @@ export default function ContactSection({
                 Voor dringende vragen kun je ons ook telefonisch bereiken.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

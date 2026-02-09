@@ -27,7 +27,7 @@ export default function XploreYourWaySection() {
             </span>
           </div>
 
-          <p className="text-start text-lg sm:text-xl text-foreground/70 max-w-[1600px] mx-auto">
+          <p className="text-start text-lg text-foreground/70 max-w-[1600px] mx-auto">
             Hoe je reist, bepaalt wat je ziet én wat je onthoudt. Turkije
             verandert niet alleen per regio, maar ook per ritme, invalshoek en
             reisvorm. Daarom werkt XPLORE TÜRKIYE met verschillende reistypes.

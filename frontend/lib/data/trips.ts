@@ -209,7 +209,7 @@ export const trips: Trip[] = [
         day: 5,
         title: "Panorama's en terugreis",
         description:
-          "Op weg naar Ankara wordt nog halt gehouden bij het glazen uitkijkpunt boven de Ihlara-vallei, waar je geniet van een panoramisch uitzicht over het diepe groen uitgesneden landschap. De reis wordt in stijl afgesloten met een stop aan Tuz Gölü, het uitgestrekte Zoutmeer, dat met zijn witte vlakte en weerspiegelingen een bijzonder contrast vormt met het vulkanische landschap van de voorbije dagen.\n\nAansluitend transfer naar Ankara voor de terugvlucht naar huis.",
+          "Op weg naar Ankara voor onze terugvlucht, wordt nog halt gehouden bij het glazen uitkijkpunt boven de Ihlara-vallei waar je geniet van een panoramisch uitzicht over het diepe groen uitgesneden landschap. De reis wordt in stijl afgesloten met een stop aan Tuz Gölü, het uitgestrekte Zoutmeer, dat met zijn witte vlakte en weerspiegelingen een bijzonder contrast vormt met het vulkanische landschap van de voorbije dagen.\n\nAansluitend terugvlucht naar huis.",
         locations: ["Ihlara-vallei", "Tuz Gölü", "Ankara"],
       },
     ],

@@ -19,9 +19,12 @@ const regionPositions: Record<
   "centraal-anatolie": { left: 45, top: 42, label: "Centraal" },
   "egeische-kust": { left: 18, top: 45, label: "Egeïsche" },
   "mediterrane-riviera": { left: 22, top: 68, label: "Mediterrane" },
+  marmara: { left: 12, top: 28, label: "Marmara" },
+  "zwarte-zee": { left: 38, top: 18, label: "Zwarte Zee" },
   "oost-turkije": { left: 78, top: 38, label: "Oost" },
   "zuidoost-mesopotamie": { left: 72, top: 65, label: "Zuidoost" },
 };
+
 
 export default function RegionMap({
   selectedRegion,

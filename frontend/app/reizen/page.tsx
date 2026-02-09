@@ -20,7 +20,11 @@ export default function AllTripsPage() {
       if (!typeMatch) {
         if (trip.tripTypes) {
           // Use new tripTypes array
-          typeMatch = trip.tripTypes.includes(selectedType);
+          // Only check inclusion if selectedType is a TripType (not "all")
+          typeMatch =
+            selectedType === "all"
+              ? false
+              : trip.tripTypes.includes(selectedType as TripType);
         } else {
           // Fallback to old type field with mapping
           const typeMapping: Record<string, TripType> = {

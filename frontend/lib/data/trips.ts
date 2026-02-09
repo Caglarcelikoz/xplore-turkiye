@@ -12,9 +12,8 @@ export const trips: Trip[] = [
     region: "marmara",
     duration: 5,
     price: "Vanaf €790",
-    priceText: "per persoon op basis van een tweepersoonskamer",
-    priceNote:
-      "Opgelet: dit is slechts een richtprijs gebaseerd op vertrek in laagseizoen. Wij maken voor jullie steeds een voorstel op maat.",
+    priceText: "",
+    priceNote: "",
     bestTravelTime: "april - mei, september - oktober",
     bestTravelTimeDetailed: `Istanbul is het hele jaar door te bezoeken, maar elk seizoen geeft de stad een ander karakter. Lente en herfst zijn over het algemeen de meest aangename periodes. In april, mei, september en oktober zijn de temperaturen mild, is het licht mooi en komt de stad tot leven met culturele evenementen en tentoonstellingen. Dit zijn ideale maanden om zowel monumenten te bezoeken als wijken te verkennen te voet, zonder de drukte of de hitte van de zomer.
 
@@ -122,8 +121,7 @@ export const trips: Trip[] = [
     region: "centraal-anatolie",
     duration: 6,
     price: "Op aanvraag", // Op aanvraag
-    priceNote:
-      "Per persoon op basis van een tweepersoonskamer. Opgelet: dit is slechts een richtprijs gebaseerd op vertrek in laagseizoen. Wij maken voor jullie steeds een voorstel op maat.",
+    priceNote: "Wij maken voor jullie steeds een voorstel op maat.",
     bestTravelTime: "april - mei, september - oktober",
     bestTravelTimeDetailed: `Cappadocië is het hele jaar door toegankelijk, maar lente (april–mei) en herfst (september–oktober) bieden de meest aangename omstandigheden. In deze periodes zijn de temperaturen mild en zijn wandelingen door valleien en bezoeken aan openluchtlocaties comfortabel.
 
@@ -254,7 +252,7 @@ export const trips: Trip[] = [
     duration: 7,
     price: "Op aanvraag",
     priceText: "",
-    priceNote: "",
+    priceNote: "Wij maken voor jullie steeds een voorstel op maat.",
     bestTravelTime: "april - mei, september - oktober",
     bestTravelTimeDetailed:
       "De beste periode om Zuidoost-Anatolië te bezoeken is het voorjaar (april–mei) en het najaar (september–oktober). In deze maanden zijn de temperaturen aangenaam en zijn zowel stadsbezoeken als archeologische sites comfortabel te verkennen.",

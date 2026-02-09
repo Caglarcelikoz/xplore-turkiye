@@ -63,8 +63,7 @@ Deze reizen bieden structuur en verdieping. Dankzij begeleiding en context krijg
     name: "XPLORE DIFFERENT",
     shortName: "Different",
     tagline: "",
-    description:
-      "Niet elke reis past in een vast format. En dat hoeft ook niet.",
+    description: "Niet elke reis past in een vast formaat.",
     longDescription: `XPLORE DIFFERENT is ontstaan vanuit de nood aan flexibiliteit en creativiteit.
 
 Hier brengen we ideeën samen die een reis verdiepen of uitbreiden. Denk aan pré-stays of verlengingen bij een bestaand programma, kleinschalige trajecten, bijzondere excursies of combinatiereizen waarbij Turkije wordt verbonden met een ander land.

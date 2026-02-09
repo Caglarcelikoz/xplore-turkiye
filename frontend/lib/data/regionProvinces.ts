@@ -1,0 +1,108 @@
+import type { Region } from "@/types";
+
+/**
+ * Official Turkish geographical region → province names (il adları).
+ * Matches properties.name in public/turkey-provinces.json.
+ * Based on the 7 regions defined at the First Geography Congress (1941).
+ */
+export const regionProvinces: Record<Region, string[]> = {
+  marmara: [
+    "Balıkesir",
+    "Bilecik",
+    "Bursa",
+    "Çanakkale",
+    "Edirne",
+    "İstanbul",
+    "Kırklareli",
+    "Kocaeli",
+    "Sakarya",
+    "Tekirdağ",
+    "Yalova",
+  ],
+  "egeische-kust": [
+    "Afyon",
+    "Aydın",
+    "Denizli",
+    "İzmir",
+    "Kütahya",
+    "Manisa",
+    "Muğla",
+    "Uşak",
+  ],
+  "mediterrane-riviera": [
+    "Adana",
+    "Antalya",
+    "Burdur",
+    "Hatay",
+    "Isparta",
+    "Kahramanmaraş",
+    "Mersin",
+    "Osmaniye",
+  ],
+  "centraal-anatolie": [
+    "Aksaray",
+    "Ankara",
+    "Çankırı",
+    "Eskişehir",
+    "Karaman",
+    "Kayseri",
+    "Kırıkkale",
+    "Kırşehir",
+    "Konya",
+    "Nevşehir",
+    "Niğde",
+    "Sivas",
+    "Yozgat",
+  ],
+  "zwarte-zee": [
+    "Amasya",
+    "Artvin",
+    "Bartın",
+    "Bayburt",
+    "Bolu",
+    "Çorum",
+    "Düzce",
+    "Giresun",
+    "Gümüşhane",
+    "Karabük",
+    "Kastamonu",
+    "Ordu",
+    "Rize",
+    "Samsun",
+    "Sinop",
+    "Tokat",
+    "Trabzon",
+    "Zonguldak",
+  ],
+  "oost-turkije": [
+    "Ağrı",
+    "Ardahan",
+    "Bingöl",
+    "Bitlis",
+    "Elazığ",
+    "Erzincan",
+    "Erzurum",
+    "Hakkari",
+    "Iğdır",
+    "Kars",
+    "Malatya",
+    "Muş",
+    "Tunceli",
+    "Van",
+  ],
+  "zuidoost-mesopotamie": [
+    "Adıyaman",
+    "Batman",
+    "Diyarbakır",
+    "Gaziantep",
+    "Kilis",
+    "Mardin",
+    "Siirt",
+    "Şanlıurfa",
+    "Şırnak",
+  ],
+};
+
+export function getProvincesForRegion(regionId: Region): string[] {
+  return regionProvinces[regionId] ?? [];
+}

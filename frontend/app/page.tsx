@@ -6,6 +6,8 @@ import {
 } from "@/types/strapi";
 import AboutSection from "@/components/sections/AboutSection";
 import FeaturedTrips from "@/components/sections/FeaturedTrips";
+import XploreYourWaySection from "@/components/sections/XploreYourWaySection";
+import RegionsSection from "@/components/sections/RegionsSection";
 import WhyUsSection from "@/components/sections/WhyUsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import ComingSoon from "@/components/ComingSoon";
@@ -53,11 +55,14 @@ export default function Home() {
       {/* Wie wij zijn — replaces the old Strapi about section */}
       <AboutSection />
 
+      {/* Xplore Your Way - Trip Types Section */}
+      <XploreYourWaySection />
+
       {/* Render hardcoded sections that are not yet in Strapi */}
       {/* These will be replaced incrementally as content is added to Strapi */}
 
       {/* Featured Trips Section - render if not in Strapi */}
-      {/* {!hasBlockType(blocks, "blocks.featured-trips") && <FeaturedTrips />} */}
+      {!hasBlockType(blocks, "blocks.featured-trips") && <FeaturedTrips />}
 
       {/* Why Us Section - render if not in Strapi */}
       {!hasBlockType(blocks, "blocks.why-us") && <WhyUsSection />}

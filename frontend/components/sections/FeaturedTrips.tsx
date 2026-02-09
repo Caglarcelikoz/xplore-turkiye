@@ -12,7 +12,7 @@ export default function FeaturedTrips() {
   const featuredTrips = getFeaturedTrips();
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-background">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ export default function FeaturedTrips() {
             href="/reizen"
             className={cn(
               buttonStyles.getClasses("outline", "lg"),
-              "w-full sm:w-auto flex items-center justify-center"
+              "w-full sm:w-auto flex items-center justify-center",
             )}
           >
             Bekijk Alle Reizen

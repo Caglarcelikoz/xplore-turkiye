@@ -1,16 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/layout/CookieConsent";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
   adjustFontFallback: true,
   preload: true,
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-lora",
+  adjustFontFallback: true,
 });
 
 const showComingSoon = process.env.NEXT_PUBLIC_SHOW_COMING_SOON === 'true';
@@ -38,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="nl" className={inter.variable}>
-      <body className={inter.className} suppressHydrationWarning>
+    <html lang="nl" className={`${inter.variable} ${lora.variable}`}>
+      <body className="font-heading antialiased" suppressHydrationWarning>
         {!showComingSoon && <Header />}
         <main className="min-h-screen">{children}</main>
         {!showComingSoon && <Footer />}

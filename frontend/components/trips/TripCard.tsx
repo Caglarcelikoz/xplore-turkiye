@@ -25,7 +25,7 @@ export default function TripCard({ trip }: TripCardProps) {
       whileHover={{ y: -8 }}
       className="group"
     >
-      <Link href={`/reizen/${trip.type}/${trip.slug}`} className="block h-full">
+      <Link href={`/reizen/${trip.slug}`} className="block h-full">
         <div className="h-full flex flex-col bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-primary/10 min-h-[500px] sm:min-h-[550px]">
           {/* Image Container */}
           <div className="relative h-48 sm:h-56 md:h-64 w-full overflow-hidden flex-shrink-0">
@@ -37,7 +37,7 @@ export default function TripCard({ trip }: TripCardProps) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            
+
             {/* Featured Badge */}
             {trip.featured && (
               <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-20">
@@ -49,23 +49,24 @@ export default function TripCard({ trip }: TripCardProps) {
 
             {/* Region Badge */}
             <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20">
-              <Badge variant="secondary" className="bg-white/90 backdrop-blur-sm text-primary border-0 text-xs">
+              <Badge
+                variant="secondary"
+                className="bg-white/90 backdrop-blur-sm text-primary border-0 text-xs"
+              >
                 {region?.name}
               </Badge>
             </div>
 
             {/* Price Overlay */}
-            <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 z-20">
+            {/* <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 z-20">
               <div className="bg-white/95 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-lg">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-[10px] sm:text-xs text-muted-foreground">Vanaf</span>
                   <span className="text-lg sm:text-xl md:text-2xl font-bold text-primary">
-                    €{trip.price.toLocaleString()}
+                    {trip.price.toLocaleString()}
                   </span>
-                  <span className="text-xs sm:text-sm text-muted-foreground">p.p.</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Content */}
@@ -89,7 +90,7 @@ export default function TripCard({ trip }: TripCardProps) {
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-primary/10 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0">
                   <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                 </div>
-                <span className="truncate">{trip.departureCity}</span>
+                <span className="truncate">{trip.departureNote}</span>
               </div>
             </div>
 

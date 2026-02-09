@@ -3,7 +3,26 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, MapPin, Euro, ChevronDown, ChevronUp, Check, X, Sparkles, Clock } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Euro,
+  ChevronDown,
+  ChevronUp,
+  Check,
+  X,
+  Sparkles,
+  Clock,
+  Hotel,
+  Plane,
+  Info,
+  Sun,
+  Cloud,
+  Snowflake,
+  Tag,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Trip } from "@/types";
@@ -15,12 +34,24 @@ interface TripDetailProps {
 
 export default function TripDetail({ trip }: TripDetailProps) {
   const [openDayIndex, setOpenDayIndex] = useState<number | null>(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const region = getRegionById(trip.region);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % trip.images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex(
+      (prev) => (prev - 1 + trip.images.length) % trip.images.length,
+    );
+  };
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative min-h-[70vh] sm:min-h-[80vh] flex items-end overflow-hidden">
+      {/* Hero Section - Mobile First */}
+      <section className="relative min-h-[100dvh] sm:min-h-[90vh] lg:min-h-[85vh] flex items-start sm:items-center overflow-hidden">
+        {/* Background Image */}
         <div className="absolute inset-0">
           <Image
             src={trip.images[0]}
@@ -30,116 +61,357 @@ export default function TripDetail({ trip }: TripDetailProps) {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/80 to-primary-dark/60" />
-        </div>
-        
-        {/* Floating Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute top-20 right-20 w-32 h-32 bg-accent/20 rounded-full blur-2xl"
-          />
+          {/* Mobile: stronger overlay, Desktop: subtle overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-br from-primary-dark via-primary-dark/85 to-primary-dark/70 sm:from-primary-dark/70 sm:via-primary-dark/50 sm:to-primary-dark/70" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 pb-8 sm:pb-12 text-white w-full">
-          <div className="max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Badge className="mb-4 bg-accent/20 backdrop-blur-sm border border-accent/30 text-white">
-                {region?.name}
-              </Badge>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-                {trip.title}
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 text-white/95">
-                {trip.subtitle}
-              </p>
-
-              {/* Quick Info Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        {/* Content Container */}
+        <div className="relative z-10 w-full">
+          <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start lg:items-end">
+              {/* Title & Description - Mobile First */}
+              <div className="lg:col-span-7 order-1 lg:order-1">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4"
+                  transition={{ duration: 0.7 }}
                 >
-                  <div className="flex items-center gap-2 mb-2">
-                    <Euro className="h-5 w-5 text-accent" />
-                    <span className="text-xs text-white/80">Prijs vanaf</span>
-                  </div>
-                  <div className="text-2xl font-bold">€{trip.price.toLocaleString()}</div>
-                  <div className="text-xs text-white/70 mt-1">per persoon</div>
-                </motion.div>
+                  {/* Tags & Region */}
+                  {/* <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-6">
+                    <Badge className="bg-accent hover:bg-accent/90 border-0 text-white px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-semibold shadow-lg">
+                      {region?.name}
+                    </Badge>
+                    {trip.tags &&
+                      trip.tags.slice(0, 2).map((tag, index) => (
+                        <Badge
+                          key={index}
+                          className="bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/20 text-white px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-medium"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                  </div> */}
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <Calendar className="h-5 w-5 text-accent" />
-                    <span className="text-xs text-white/80">Duur</span>
-                  </div>
-                  <div className="text-2xl font-bold">{trip.duration}</div>
-                  <div className="text-xs text-white/70 mt-1">dagen</div>
-                </motion.div>
+                  {/* Title - Mobile First Sizing */}
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 text-white leading-[1.1] tracking-tight">
+                    {trip.title}
+                  </h1>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <MapPin className="h-5 w-5 text-accent" />
-                    <span className="text-xs text-white/80">Vertrek</span>
-                  </div>
-                  <div className="text-xl font-bold">{trip.departureCity}</div>
-                  <div className="text-xs text-white/70 mt-1">Beste tijd: {trip.bestTravelTime}</div>
+                  {/* Subtitle - Mobile First Sizing */}
+                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-6 sm:mb-8 text-white/95 font-light leading-relaxed max-w-2xl">
+                    {trip.subtitle}
+                  </p>
+
+                  {/* CTA Buttons - Hidden on Mobile (shown in price card) */}
+                  {/* <div className="hidden sm:flex flex-col sm:flex-row gap-3 lg:gap-4">
+                      <Button
+                        size="lg"
+                        className="bg-accent hover:bg-accent/90 text-white border-0 shadow-2xl hover:shadow-accent/50 hover:scale-105 transition-all duration-300 text-base lg:text-lg px-6 lg:px-8 py-5 lg:py-6 font-semibold"
+                      >
+                        Reis Aanvragen
+                      </Button>
+                    </div> */}
                 </motion.div>
               </div>
 
-              <p className="text-sm text-white/80">{trip.priceNote}</p>
-            </motion.div>
+              {/* Price Card - Mobile First Design */}
+              <div className="lg:col-span-5 order-2 lg:order-2">
+                <motion.div
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                  className="relative"
+                >
+                  {/* Glow effect - subtle on mobile */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 lg:from-accent/30 lg:to-primary/30 rounded-2xl lg:rounded-3xl blur-xl lg:blur-2xl opacity-60" />
+
+                  {/* Card - Compact on Mobile */}
+                  <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl lg:rounded-3xl p-5 sm:p-6 lg:p-8 shadow-2xl border border-white/20">
+                    {/* Price Header - Mobile Optimized */}
+                    <div className="mb-5 sm:mb-6 pb-5 sm:pb-6 border-b border-primary/10">
+                      <div className="flex items-baseline gap-2 mb-1 sm:mb-2">
+                        <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
+                          {trip.price.toLocaleString()}
+                        </span>
+                        {trip.priceText && (
+                          <span className="text-base sm:text-lg text-muted-foreground">
+                            {trip.priceText}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs sm:text-sm text-muted-foreground">
+                        {trip.priceNote || ""}
+                      </p>
+                    </div>
+
+                    {/* Trip Details - Compact on Mobile */}
+                    <div className="space-y-3 sm:space-y-4 mb-5 sm:mb-6">
+                      <div className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors">
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-[10px] sm:text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                            Duur
+                          </div>
+                          <div className="text-sm sm:text-base font-bold text-primary">
+                            {trip.duration} dagen
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors">
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-[10px] sm:text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                            Vertrek
+                          </div>
+                          <div className="text-sm sm:text-base font-bold text-primary">
+                            {trip.departureNote}
+                          </div>
+                        </div>
+                      </div>
+
+                      {trip.accommodation && (
+                        <div className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors">
+                          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <Hotel className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[10px] sm:text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                              Accommodatie
+                            </div>
+                            <div className="text-sm sm:text-base font-bold text-primary">
+                              {typeof trip.accommodation === "string"
+                                ? trip.accommodation.split("|")[0]
+                                : trip.accommodation.name}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Included Benefits */}
+                    {trip.transportationIncluded && (
+                      <div className="pt-5 sm:pt-6 border-t border-primary/10 mb-5 sm:mb-0">
+                        <div className="flex items-start gap-2.5 sm:gap-3">
+                          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <Check className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+                          </div>
+                          <div>
+                            <p className="text-xs sm:text-sm font-semibold text-primary mb-0.5 sm:mb-1">
+                              Inclusief vluchten
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Mobile CTA Buttons - Only visible on mobile */}
+                    <div className="flex flex-col gap-2.5 sm:hidden pt-5 border-t border-primary/10">
+                      <Button
+                        size="default"
+                        className="w-full bg-accent hover:bg-accent/90 text-white border-0 shadow-lg font-semibold text-sm py-5"
+                      >
+                        Reis Aanvragen
+                      </Button>
+                      <Button
+                        size="default"
+                        variant="outline"
+                        className="w-full bg-primary/5 hover:bg-primary/10 text-primary border-2 border-primary/20 hover:border-primary/30 font-semibold text-sm py-5"
+                      >
+                        Meer Informatie
+                      </Button>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Accent bar - responsive height */}
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-accent via-primary to-accent opacity-60" />
       </section>
 
       {/* Overview Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-background">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-background via-white to-primary/5">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-8">
                 <div className="w-1 h-12 bg-accent rounded-full" />
-                <h2 className="text-3xl sm:text-4xl font-bold text-primary">Over deze reis</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold text-primary">
+                  Over deze reis
+                </h2>
               </div>
-              <p className="text-lg sm:text-xl text-foreground leading-relaxed">
-                {trip.overview}
-              </p>
+
+              <div className="grid lg:grid-cols-2 gap-8 items-start">
+                {/* Text Content */}
+                <div className="space-y-6">
+                  <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-primary/10 shadow-lg">
+                    {trip.introductionText && (
+                      <div className="text-base text-foreground/90 leading-relaxed whitespace-pre-line space-y-4">
+                        {trip.introductionText
+                          .split("\n\n")
+                          .map((paragraph, index) => (
+                            <p key={index}>{paragraph}</p>
+                          ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Image */}
+                {trip.images && trip.images.length > 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2, duration: 0.6 }}
+                    className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl group"
+                  >
+                    <Image
+                      src={trip.images[1]}
+                      alt={trip.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </motion.div>
+                )}
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Highlights Section */}
+      {/* Image Carousel */}
+      {trip.images.length > 1 && (
+        <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-background via-white to-primary/5">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-5xl mx-auto"
+            >
+              <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-8 text-center">
+                Impressie van jouw reis
+              </h2>
+
+              <div className="relative">
+                {/* Carousel Container */}
+                <div className="relative h-[400px] sm:h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={currentImageIndex}
+                      initial={{ opacity: 0, x: 300 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -300 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="absolute inset-0"
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(e, { offset, velocity }) => {
+                        const swipe = Math.abs(offset.x) * velocity.x;
+                        if (swipe < -10000) {
+                          nextImage();
+                        } else if (swipe > 10000) {
+                          prevImage();
+                        }
+                      }}
+                    >
+                      <Image
+                        src={trip.images[currentImageIndex]}
+                        alt={`${trip.title} - Foto ${currentImageIndex + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                        className="object-cover"
+                        priority={currentImageIndex === 0}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/30 via-transparent to-transparent" />
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Navigation Buttons */}
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm border border-white/20 shadow-lg flex items-center justify-center text-primary hover:bg-white hover:scale-110 transition-all group"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft className="h-6 w-6 group-hover:-translate-x-0.5 transition-transform" />
+                  </button>
+
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm border border-white/20 shadow-lg flex items-center justify-center text-primary hover:bg-white hover:scale-110 transition-all group"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="h-6 w-6 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+
+                  {/* Image Counter */}
+                  <div className="absolute top-4 right-4 z-20 bg-primary-dark/80 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium border border-white/20">
+                    {currentImageIndex + 1} / {trip.images.length}
+                  </div>
+                </div>
+
+                {/* Dot Indicators */}
+                <div className="flex justify-center gap-2 mt-6">
+                  {trip.images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`transition-all duration-300 rounded-full ${
+                        index === currentImageIndex
+                          ? "w-8 h-3 bg-primary"
+                          : "w-3 h-3 bg-primary/30 hover:bg-primary/50"
+                      }`}
+                      aria-label={`Go to image ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Thumbnail Preview (Optional - for larger screens) */}
+                <div className="hidden lg:grid grid-cols-5 gap-3 mt-6">
+                  {trip.images.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`relative h-20 rounded-lg overflow-hidden transition-all ${
+                        index === currentImageIndex
+                          ? "ring-2 ring-primary scale-105 shadow-lg"
+                          : "opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`Thumbnail ${index + 1}`}
+                        fill
+                        sizes="(max-width: 1024px) 0vw, 200px"
+                        className="object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* Itinerary Section with Accordion */}
       <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -151,49 +423,10 @@ export default function TripDetail({ trip }: TripDetailProps) {
               className="mb-12"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Sparkles className="h-8 w-8 text-accent" />
-                <h2 className="text-3xl sm:text-4xl font-bold text-primary">
-                  Wat kan ik tijdens deze reis bezoeken?
-                </h2>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {trip.highlights.map((highlight, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="group relative overflow-hidden bg-gradient-to-br from-primary/5 to-background rounded-xl p-5 border border-primary/10 hover:border-primary/30 transition-all"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
-                        {index + 1}
-                      </div>
-                      <p className="text-foreground font-medium pt-2">{highlight}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Itinerary Section with Accordion */}
-      <section className="py-12 sm:py-16 md:py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="mb-12"
-            >
-              <div className="flex items-center gap-3 mb-6">
                 <Clock className="h-8 w-8 text-primary" />
-                <h2 className="text-3xl sm:text-4xl font-bold text-primary">Reisplan per dag</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold text-primary">
+                  Reisplan per dag
+                </h2>
               </div>
 
               <div className="space-y-4">
@@ -250,21 +483,18 @@ export default function TripDetail({ trip }: TripDetailProps) {
                           >
                             <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
                               <div className="pl-16 border-l-2 border-primary/20">
-                                <p className="text-base text-foreground mb-4 leading-relaxed">
+                                <p className="text-base text-foreground mb-4 leading-relaxed whitespace-pre-line">
                                   {day.description}
                                 </p>
-                                {day.locations && day.locations.length > 0 && (
-                                  <div className="flex flex-wrap gap-2">
-                                    {day.locations.map((location, locIndex) => (
-                                      <Badge
-                                        key={locIndex}
-                                        variant="secondary"
-                                        className="bg-primary/10 text-primary border-primary/20"
-                                      >
-                                        <MapPin className="h-3 w-3 mr-1" />
-                                        {location}
-                                      </Badge>
-                                    ))}
+                                {day.image && (
+                                  <div className="relative w-full h-48 sm:h-64 rounded-lg overflow-hidden mb-4">
+                                    <Image
+                                      src={day.image}
+                                      alt={day.title}
+                                      fill
+                                      sizes="(max-width: 768px) 100vw, 50vw"
+                                      className="object-cover"
+                                    />
                                   </div>
                                 )}
                               </div>
@@ -281,148 +511,187 @@ export default function TripDetail({ trip }: TripDetailProps) {
         </div>
       </section>
 
-      {/* Included/Excluded Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
+      {/* Highlights Section */}
+      {/* <section className="py-12 sm:py-16 md:py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-primary/5 to-background rounded-2xl p-6 sm:p-8 border border-primary/10"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                  <Check className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-bold text-primary">Reis is inclusief</h3>
-              </div>
-              <ul className="space-y-3">
-                {trip.included.map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05, duration: 0.3 }}
-                    className="flex items-start gap-3"
-                  >
-                    <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-foreground">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-muted to-background rounded-2xl p-6 sm:p-8 border border-primary/10"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-muted-foreground/20 flex items-center justify-center">
-                  <X className="h-6 w-6 text-muted-foreground" />
-                </div>
-                <h3 className="text-2xl font-bold text-primary">Reis is exclusief</h3>
-              </div>
-              <ul className="space-y-3">
-                {trip.excluded.map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: 10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05, duration: 0.3 }}
-                    className="flex items-start gap-3"
-                  >
-                    <X className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
-                    <span className="text-foreground">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Image Gallery */}
-      {trip.images.length > 1 && (
-        <section className="py-12 sm:py-16 md:py-20 bg-background">
-          <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="max-w-6xl mx-auto"
+              className="mb-12"
             >
-              <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-8 text-center">
-                Impressie van jouw reis
-              </h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {trip.images.slice(1).map((image, index) => (
+              <div className="flex items-center gap-3 mb-6">
+                <Sparkles className="h-8 w-8 text-accent" />
+                <h2 className="text-3xl sm:text-4xl font-bold text-primary">
+                  Wat kan ik tijdens deze reis bezoeken?
+                </h2>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {trip.highlights.map((highlight, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="relative h-64 sm:h-80 rounded-xl overflow-hidden group cursor-pointer"
+                    className="group relative overflow-hidden bg-gradient-to-br from-primary/5 to-background rounded-xl p-5 border border-primary/10 hover:border-primary/30 transition-all"
                   >
-                    <Image
-                      src={image}
-                      alt={`${trip.title} - Foto ${index + 2}`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
+                        {index + 1}
+                      </div>
+                      <p className="text-foreground font-medium pt-2">
+                        {highlight}
+                      </p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
           </div>
+        </div>
+      </section> */}
+
+      {/* Best Travel Time Section */}
+      {trip.bestTravelTimeDetailed && (
+        <section className="py-12 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <Sun className="h-8 w-8 text-accent" />
+                  <h2 className="text-3xl sm:text-4xl font-bold text-primary">
+                    Beste reistijd
+                  </h2>
+                </div>
+                <div className="bg-white rounded-xl p-6 border border-primary/10 shadow-sm">
+                  <p className="text-base sm:text-lg text-foreground leading-relaxed whitespace-pre-line">
+                    {trip.bestTravelTimeDetailed}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-primary to-primary-dark text-white">
+      {/* Included/Excluded Section */}
+      <section className=" bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center"
+            className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Klaar voor jouw avontuur?
+            <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-8">
+              Wat is inbegrepen?
             </h2>
-            <p className="text-lg sm:text-xl mb-8 text-white/90">
-              Neem contact met ons op voor meer informatie of vraag direct een reis aan.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-white text-primary hover:bg-white/90 border-white"
-              >
-                Reis Aanvragen
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10"
-              >
-                Meer Informatie
-              </Button>
+
+            <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+              {/* Inclusief */}
+              <div className="relative bg-white rounded-xl border border-primary/10 overflow-hidden shadow-sm">
+                <div
+                  className="absolute left-0 top-0 bottom-0 w-1 sm:w-1.5 rounded-l-xl bg-green-600"
+                  aria-hidden
+                />
+                <div className="pl-5 sm:pl-6 pr-5 sm:pr-6 py-5 sm:py-6">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-green-600 mb-4">
+                    Inclusief
+                  </p>
+                  <ul className="space-y-2.5">
+                    {trip.included.map((item, index) => (
+                      <li
+                        key={index}
+                        className="flex items-start gap-2.5 text-sm sm:text-base text-foreground leading-snug"
+                      >
+                        <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Exclusief */}
+              <div className="relative bg-white rounded-xl border border-primary/10 overflow-hidden shadow-sm">
+                <div
+                  className="absolute left-0 top-0 bottom-0 w-1 sm:w-1.5 rounded-l-xl bg-accent"
+                  aria-hidden
+                />
+                <div className="pl-5 sm:pl-6 pr-5 sm:pr-6 py-5 sm:py-6">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">
+                    Exclusief
+                  </p>
+                  <ul className="space-y-2.5">
+                    {trip.excluded.map((item, index) => (
+                      <li
+                        key={index}
+                        className="flex items-start gap-2.5 text-sm sm:text-base text-foreground/90 leading-snug"
+                      >
+                        <X className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
+
+      {/* Important Notes Section – per notitie een apart blok met info-styling */}
+      {trip.importantNotes &&
+        (() => {
+          const notes = Array.isArray(trip.importantNotes)
+            ? trip.importantNotes
+            : [trip.importantNotes];
+          return (
+            <section className="py-12 bg-background">
+              <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto">
+                  <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-2xl sm:text-3xl font-bold text-primary mb-6"
+                  >
+                    Belangrijk om te weten
+                  </motion.h2>
+                  <div className="space-y-4">
+                    {notes.map((note, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                        className="flex items-start gap-3 rounded-xl border border-blue-200 bg-blue-50/90 p-4 sm:p-5"
+                      >
+                        <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                          <Info className="h-4 w-4 text-blue-700" />
+                        </div>
+                        <p className="text-sm sm:text-base text-foreground leading-relaxed pt-0.5">
+                          {note}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        })()}
     </div>
   );
 }

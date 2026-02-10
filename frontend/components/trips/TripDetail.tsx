@@ -315,10 +315,10 @@ export default function TripDetail({ trip }: TripDetailProps) {
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.div
                       key={currentImageIndex}
-                      initial={{ opacity: 0, x: 300 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -300 }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
                       className="absolute inset-0"
                       drag="x"
                       dragConstraints={{ left: 0, right: 0 }}
@@ -336,7 +336,7 @@ export default function TripDetail({ trip }: TripDetailProps) {
                         src={trip.images[currentImageIndex]}
                         alt={`${trip.title} - Foto ${currentImageIndex + 1}`}
                         fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
                         className="object-cover"
                         priority={currentImageIndex === 0}
                       />

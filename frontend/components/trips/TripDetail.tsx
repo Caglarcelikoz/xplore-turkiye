@@ -210,7 +210,7 @@ export default function TripDetail({ trip }: TripDetailProps) {
                     )}
 
                     {/* Mobile CTA Buttons - Only visible on mobile */}
-                    <div className="flex flex-col gap-2.5 sm:hidden pt-5 border-t border-primary/10">
+                    {/* <div className="flex flex-col gap-2.5 sm:hidden pt-5 border-t border-primary/10">
                       <Button
                         size="default"
                         className="w-full bg-accent hover:bg-accent/90 text-white border-0 shadow-lg font-semibold text-sm py-5"
@@ -224,7 +224,7 @@ export default function TripDetail({ trip }: TripDetailProps) {
                       >
                         Meer Informatie
                       </Button>
-                    </div>
+                    </div> */}
                   </div>
                 </motion.div>
               </div>

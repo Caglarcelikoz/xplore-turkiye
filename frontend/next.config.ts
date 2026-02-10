@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  headers: async () => {
+    return [
+      {
+        source: "/_next/image(.*)",
+        headers: [
+          {
+            key: "cache-control",
+            // 1 day cache (86400 seconds) - matches minimumCacheTTL
+            value: "public, max-age=86400, must-revalidate",
+          },
+        ],
+      },
+    ];
+  },
   images: {
     // Enable modern formats for production optimization
     // AVIF: 30-50% smaller than WebP, WebP fallback for older browsers

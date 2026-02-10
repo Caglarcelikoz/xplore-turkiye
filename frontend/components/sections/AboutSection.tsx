@@ -17,12 +17,12 @@ export default function AboutSection() {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
           {/* Text column */}
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.8 }}
-            className="order-1 md:order-1"
+            className="order-1 lg:order-1"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
               <Users className="h-4 w-4 text-primary" />
@@ -65,7 +65,7 @@ export default function AboutSection() {
           </motion.div>
 
           {/* Map column */}
-          <div className="order-2 md:order-2 relative z-10">
+          <div className="order-2 lg:order-2 relative z-10">
             <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl blur-xl opacity-50" />
             <div className="relative bg-background rounded-2xl shadow-2xl border border-primary/10 p-2 sm:p-4">
               <TurkeyMap />

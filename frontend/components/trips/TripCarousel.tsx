@@ -39,20 +39,24 @@ export default function TripCarousel({ trips }: TripCarouselProps) {
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
-      const newIndex = direction === "right" 
-        ? Math.min(currentIndex + cardsPerView, maxIndex)
-        : Math.max(currentIndex - cardsPerView, 0);
-      
+      const newIndex =
+        direction === "right"
+          ? Math.min(currentIndex + cardsPerView, maxIndex)
+          : Math.max(currentIndex - cardsPerView, 0);
+
       setCurrentIndex(newIndex);
-      
-      // Scroll to the target card
+
+      // Scroll so the target card is at the left edge (full cards visible on tablet/desktop)
       const targetCard = container.children[newIndex] as HTMLElement;
       if (targetCard) {
         const containerWidth = container.offsetWidth;
         const cardWidth = targetCard.offsetWidth;
-        const gap = 16; // gap-4
-        const scrollPosition = targetCard.offsetLeft - (containerWidth - cardWidth) / 2;
-        
+        // On single-card view (mobile) center the card; otherwise left-align to avoid half cards
+        const scrollPosition =
+          cardsPerView === 1
+            ? targetCard.offsetLeft - (containerWidth - cardWidth) / 2
+            : targetCard.offsetLeft;
+
         container.scrollTo({
           left: Math.max(0, scrollPosition),
           behavior: "smooth",
@@ -67,14 +71,14 @@ export default function TripCarousel({ trips }: TripCarouselProps) {
       <div
         ref={scrollContainerRef}
         className={cn(
-          "flex gap-4 overflow-x-hidden overflow-y-hidden pb-4",
+          "flex gap-4 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth",
           trips.length <= cardsPerView && "justify-center",
         )}
       >
         {trips.map((trip) => (
           <div
             key={trip.id}
-            className="flex-shrink-0 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)]"
+            className="flex-shrink-0 w-[calc(100%-0px)] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)]"
           >
             <TripCard trip={trip} />
           </div>
@@ -88,7 +92,7 @@ export default function TripCarousel({ trips }: TripCarouselProps) {
           size="icon"
           onClick={() => scroll("left")}
           disabled={currentIndex === 0}
-          className="bg-white/90 backdrop-blur-sm border-2 border-primary/20 hover:border-primary hover:bg-white shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-white/90 backdrop-blur-sm border-2 border-primary/20 hover:border-primary  hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Vorige"
         >
           <ChevronLeft className="h-5 w-5" />

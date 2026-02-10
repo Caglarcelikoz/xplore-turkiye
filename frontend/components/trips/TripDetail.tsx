@@ -50,7 +50,7 @@ export default function TripDetail({ trip }: TripDetailProps) {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Mobile First */}
-      <section className="relative min-h-[100dvh] sm:min-h-[90vh] lg:min-h-[85vh] flex items-start sm:items-center overflow-hidden">
+      <section className="relative min-h-[70dvh] sm:min-h-[65vh] lg:min-h-[55vh] flex items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image

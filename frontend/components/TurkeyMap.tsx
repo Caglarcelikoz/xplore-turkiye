@@ -262,7 +262,7 @@ function TurkeyMap({
     (provinceName: string) => {
       const isHighlighted =
         highlightProvinces != null && highlightProvinces.includes(provinceName);
-      const fill = isHighlighted ? highlightColor : "url(#mapGrad)";
+      const fill = isHighlighted ? highlightColor : (highlightProvinces != null ? "#f5f5f5" : "url(#mapGrad)");
       const fillOpacity =
         highlightProvinces != null
           ? isHighlighted

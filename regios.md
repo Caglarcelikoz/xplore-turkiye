@@ -84,3 +84,16 @@ XPLORE INSIGHT – Zuidoost-Anatolië (apart blokje)
 Şanlıurfa staat bekend als een stad van profeten. De stad wordt in verband gebracht met Abraham (Ibrahim), een belangrijke figuur voor joden, christenen en moslims. Dat maakt Şanlıurfa tot een plek waar verschillende geloven al eeuwenlang samen bestaan en waar geloof deel uitmaakt van het dagelijkse leven.
 
 --
+
+
+De Marmara-regio is één van de meest bepalende regio’s van Turkije. Ze vormt het geografische en historische kruispunt tussen Europa en Azië en speelde doorheen de eeuwen een centrale rol in handel, macht en culturele uitwisseling. Dankzij haar ligging rond de Zee van Marmara en de strategische zeestraten van de Bosporus en de Dardanellen was deze regio altijd richtinggevend voor het land.
+Met Istanbul als kern weerspiegelt Marmara de opeenvolging van beschavingen die Turkije hebben gevormd. De stad was hoofdstad van zowel het Byzantijnse als het Ottomaanse rijk en groeide uit tot een kosmopolitisch centrum waar verschillende religies, culturen en levenswijzen samenkomen. Tegelijk reikt de regio verder dan Istanbul alleen. Bursa, één van de eerste Ottomaanse hoofdsteden, Edirne aan de Europese grens en Çanakkale aan de Dardanellen tonen andere facetten van dezelfde historische continuïteit.
+Ook in de moderne geschiedenis blijft Marmara van groot belang. De Gallipoli-campagne tijdens de Eerste Wereldoorlog onderstreepte het strategische gewicht van de regio als toegangspoort tussen zeeën en continenten. Vandaag vormt dit erfgoed een belangrijk historisch referentiepunt dat de rol van Marmara binnen en buiten Turkije verduidelijkt.
+Aardrijkskundig is Marmara compact maar veelzijdig. Kustgebieden, eilanden, vruchtbare landbouwgronden en heuvelachtig binnenland liggen dicht bij elkaar. Het gematigde klimaat en de korte afstanden maken de regio bijzonder geschikt voor combinatiereizen. De Prinseneilanden bieden rust en een ander tempo, terwijl Trakya bekendstaat om zijn landelijke karakter en wijncultuur.
+Cultureel is Marmara uitgesproken divers en stedelijk. Door eeuwenlange migratie en culturele uitwisseling ontstond een regio waar traditie en moderniteit naast elkaar bestaan. Die diversiteit is zichtbaar in het dagelijkse leven, de keuken en de manier waarop verleden en heden hier samenkomen.
+Voor XPLORE TÜRKIYE staat de Marmara-regio voor context en contrast. Een regio die inzicht geeft in de vorming van Turkije en tegelijk uitnodigt om verder te reizen en te verdiepen.
+
+
+
+XPLORE INSIGHT – Marmara
+Wist je dat de Marmara-regio eeuwenlang werd beschouwd als de sleutel tot wereldhandel? Wie controle had over de Bosporus en de Dardanellen bepaalde niet alleen regionale macht, maar beïnvloedde ook handelsroutes tussen Europa, Azië en het Midden-Oosten. Die strategische ligging verklaart waarom deze regio altijd een machtscentrum is geweest.

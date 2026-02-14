@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/layout/CookieConsent";
+import { generateSEOMetadata } from "@/lib/seo/metadata";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,11 +21,13 @@ const lora = Lora({
   adjustFontFallback: true,
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generateSEOMetadata({
   title: "Xplore Turkiye & Beyond | Groepsreizen en Maatwerk Reizen",
   description:
     "Ontdek de mooiste reizen naar Turkije. Groepsreizen, maatwerk reizen, self drives en citytrips. Persoonlijk reisadvies en begeleiding bij elke stap.",
-};
+  path: "",
+  image: "/og-homepage.jpg", // Will fall back to /og-default.jpg if not available
+});
 
 export const viewport: Viewport = {
   width: "device-width",

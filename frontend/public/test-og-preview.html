@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OG Preview Tester - Xplore Turkiye</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .preview-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .preview-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .preview-header {
+      padding: 20px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .preview-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .facebook-icon { background: #1877f2; }
+    .twitter-icon { background: #1da1f2; }
+    .linkedin-icon { background: #0a66c2; }
+    .whatsapp-icon { background: #25d366; }
+
+    .preview-title {
+      font-weight: 600;
+      color: #333;
+      font-size: 18px;
+    }
+
+    /* Facebook Style */
+    .facebook-preview .og-image {
+      width: 100%;
+      aspect-ratio: 1.91 / 1;
+      object-fit: cover;
+      background: #f0f2f5;
+    }
+
+    .facebook-preview .og-content {
+      padding: 12px;
+      background: #f0f2f5;
+      border-top: 1px solid #dadde1;
+    }
+
+    .facebook-preview .og-url {
+      font-size: 12px;
+      color: #65676b;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .facebook-preview .og-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #050505;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .facebook-preview .og-description {
+      font-size: 14px;
+      color: #65676b;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Twitter Style */
+    .twitter-preview .og-image {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      object-fit: cover;
+      border: 1px solid #cfd9de;
+      border-radius: 12px;
+    }
+
+    .twitter-preview .og-content {
+      padding: 12px 16px;
+    }
+
+    .twitter-preview .og-title {
+      font-size: 15px;
+      font-weight: 400;
+      color: #0f1419;
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+
+    .twitter-preview .og-description {
+      font-size: 15px;
+      color: #536471;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+
+    .twitter-preview .og-url {
+      font-size: 15px;
+      color: #536471;
+    }
+
+    /* LinkedIn Style */
+    .linkedin-preview .og-image {
+      width: 100%;
+      aspect-ratio: 1.91 / 1;
+      object-fit: cover;
+    }
+
+    .linkedin-preview .og-content {
+      padding: 12px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-top: none;
+    }
+
+    .linkedin-preview .og-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.9);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .linkedin-preview .og-url {
+      font-size: 12px;
+      color: rgba(0,0,0,0.6);
+    }
+
+    /* WhatsApp Style */
+    .whatsapp-preview .og-content {
+      padding: 0;
+      background: #e7ffdb;
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 400px;
+    }
+
+    .whatsapp-preview .og-image {
+      width: 100%;
+      aspect-ratio: 1.91 / 1;
+      object-fit: cover;
+    }
+
+    .whatsapp-preview .og-text {
+      padding: 12px;
+    }
+
+    .whatsapp-preview .og-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 4px;
+    }
+
+    .whatsapp-preview .og-description {
+      font-size: 13px;
+      color: #667781;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .whatsapp-preview .og-url {
+      font-size: 12px;
+      color: #00a884;
+      text-decoration: underline;
+    }
+
+    .info-box {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .info-box h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .info-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-box li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e9ecef;
+      color: #495057;
+      font-size: 16px;
+    }
+
+    .info-box li:last-child {
+      border-bottom: none;
+    }
+
+    .info-box code {
+      background: #f8f9fa;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: #e83e8c;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #28a745;
+      color: white;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Open Graph Preview Tester</h1>
+
+    <div class="preview-grid">
+      <!-- Facebook Preview -->
+      <div class="preview-card facebook-preview">
+        <div class="preview-header">
+          <div class="preview-icon facebook-icon">📘</div>
+          <div class="preview-title">Facebook Preview</div>
+        </div>
+        <img src="/og-homepage.jpg" alt="OG Preview" class="og-image">
+        <div class="og-content">
+          <div class="og-url">xploreturkiye.com</div>
+          <div class="og-title">Xplore Turkiye & Beyond | Groepsreizen en Maatwerk Reizen</div>
+          <div class="og-description">Ontdek de mooiste reizen naar Turkije. Groepsreizen, maatwerk reizen, self drives en citytrips.</div>
+        </div>
+      </div>
+
+      <!-- Twitter Preview -->
+      <div class="preview-card twitter-preview">
+        <div class="preview-header">
+          <div class="preview-icon twitter-icon">𝕏</div>
+          <div class="preview-title">Twitter/X Preview</div>
+        </div>
+        <div class="og-content">
+          <img src="/og-homepage.jpg" alt="OG Preview" class="og-image">
+          <div class="og-title">Xplore Turkiye & Beyond | Groepsreizen en Maatwerk Reizen</div>
+          <div class="og-description">Ontdek de mooiste reizen naar Turkije. Groepsreizen, maatwerk reizen, self drives en citytrips.</div>
+          <div class="og-url">🔗 xploreturkiye.com</div>
+        </div>
+      </div>
+
+      <!-- LinkedIn Preview -->
+      <div class="preview-card linkedin-preview">
+        <div class="preview-header">
+          <div class="preview-icon linkedin-icon">💼</div>
+          <div class="preview-title">LinkedIn Preview</div>
+        </div>
+        <img src="/og-default.jpg" alt="OG Preview" class="og-image">
+        <div class="og-content">
+          <div class="og-title">Xplore Turkiye & Beyond | Groepsreizen en Maatwerk Reizen</div>
+          <div class="og-url">xploreturkiye.com</div>
+        </div>
+      </div>
+
+      <!-- WhatsApp Preview -->
+      <div class="preview-card whatsapp-preview">
+        <div class="preview-header">
+          <div class="preview-icon whatsapp-icon">💬</div>
+          <div class="preview-title">WhatsApp Preview</div>
+        </div>
+        <div class="og-content">
+          <img src="/og-contact.jpg" alt="OG Preview" class="og-image">
+          <div class="og-text">
+            <div class="og-title">Xplore Turkiye & Beyond</div>
+            <div class="og-description">Neem contact op voor vragen over reizen naar Turkije</div>
+            <div class="og-url">xploreturkiye.com/contact</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h2>✅ OG Tags Status <span class="badge">Actief</span></h2>
+      <ul>
+        <li>✅ <code>og-homepage.jpg</code> - Homepage (117KB, 1200×630px)</li>
+        <li>✅ <code>og-default.jpg</code> - Fallback (116KB, 1200×630px)</li>
+        <li>✅ <code>og-contact.jpg</code> - Contact (34KB, 1200×630px)</li>
+        <li>✅ Alle pagina's hebben Open Graph meta tags</li>
+        <li>✅ Twitter Card tags ingeschakeld</li>
+        <li>✅ Canonical URLs geconfigureerd</li>
+      </ul>
+    </div>
+
+    <div class="info-box" style="margin-top: 20px;">
+      <h2>🧪 Lokaal Testen</h2>
+      <ul>
+        <li><strong>1. Start dev server:</strong> <code>npm run dev</code></li>
+        <li><strong>2. Open deze preview:</strong> <code>http://localhost:3000/test-og-preview.html</code></li>
+        <li><strong>3. Bekijk page source:</strong> Right-click → "View Page Source" op elke pagina</li>
+        <li><strong>4. Zoek naar OG tags:</strong> CMD+F → <code>og:image</code></li>
+        <li><strong>5. Test verschillende routes:</strong> /, /regios/marmara, /reizen/istanbul-citytrip, /contact</li>
+      </ul>
+    </div>
+
+    <div class="info-box" style="margin-top: 20px;">
+      <h2>🚀 Na Deployment Testen</h2>
+      <ul>
+        <li>📘 <strong>Facebook:</strong> <a href="https://developers.facebook.com/tools/debug/" target="_blank">developers.facebook.com/tools/debug</a></li>
+        <li>𝕏 <strong>Twitter:</strong> <a href="https://cards-dev.twitter.com/validator" target="_blank">cards-dev.twitter.com/validator</a></li>
+        <li>💼 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/post-inspector/" target="_blank">linkedin.com/post-inspector</a></li>
+        <li>🌐 <strong>Universal:</strong> <a href="https://www.opengraph.xyz/" target="_blank">opengraph.xyz</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

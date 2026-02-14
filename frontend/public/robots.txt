@@ -1,0 +1,10 @@
+# robots.txt for Xplore Turkiye & Beyond
+
+User-agent: *
+Allow: /
+
+# Block admin and private areas
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://xploreturkiye.be/sitemap.xml

@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "motion/react";
 import { getAllRegions } from "@/lib/data/regions";
-import { ArrowRight } from "lucide-react";
 import RegionCard from "@/components/regions/RegionCard";
 
 export default function RegionsSection() {
@@ -43,22 +41,6 @@ export default function RegionsSection() {
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mt-10"
-        >
-          <Link
-            href="/regios"
-            className="inline-flex items-center gap-2 text-primary hover:text-accent font-semibold transition-colors group"
-          >
-            <span>Bekijk alle regio&apos;s</span>
-            <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

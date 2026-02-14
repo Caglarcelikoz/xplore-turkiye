@@ -11,7 +11,7 @@ export const regions: RegionInfo[] = [
       [26.0, 39.5],
       [30.0, 41.5],
     ],
-    color: "#1e40af", // Deep blue
+    color: "#fbbf24", // Warm amber-yellow
     images: ["/images/regions/marmara-hero.jpg"],
   },
   {
@@ -35,7 +35,7 @@ Cultureel staat de Egeïsche regio bekend om haar nuchtere, open karakter. Dorpe
       [26.0, 36.0],
       [29.0, 40.0],
     ],
-    color: "#0891b2", // Cyan
+    color: "#c4b5fd", // Lighter purple (violet-300)
     images: ["/images/regions/egeische-hero.jpg"],
   },
   {
@@ -61,7 +61,7 @@ Typische specialiteiten zoals künefe – een warm dessert van fijn deeg, gesmol
       [29.0, 35.0],
       [36.5, 38.0],
     ],
-    color: "#ea580c", // Orange
+    color: "#3b82f6", // Vibrant blue
     images: ["/images/regions/mediterrane-hero.jpg"],
   },
   {
@@ -85,7 +85,7 @@ Cultureel wordt Centraal-Anatolië gekenmerkt door soberheid, traditie en een st
       [32.0, 37.0],
       [37.0, 41.0],
     ],
-    color: "#c2410c", // Warm brown
+    color: "#ef4444", // Bright red
     images: ["/images/regions/centraal-anatolie-hero.jpg"],
   },
   {
@@ -111,7 +111,7 @@ Voor XPLORE TÜRKIYE staat de Zwarte Zee-regio voor contrast en authenticiteit. 
       [32.0, 40.0],
       [42.0, 42.0],
     ],
-    color: "#16a34a", // Green
+    color: "#047857", // Dark emerald green
     images: ["/images/regions/zwarte-zee-hero.jpg"],
   },
   {
@@ -135,7 +135,7 @@ Geschiedkundig is Oost-Anatolië diep gelaagd. Van oude koninkrijken zoals Urart
       [38.0, 37.0],
       [44.5, 42.0],
     ],
-    color: "#7c3aed", // Purple
+    color: "#4ade80", // Light green (swapped from Zuidoost)
     images: ["/images/regions/oost-anatolie-hero.jpg"],
   },
   {
@@ -159,7 +159,7 @@ Zuidoost-Anatolië is geen regio die je vluchtig ontdekt. Ze vraagt aandacht en 
       [37.0, 36.0],
       [43.0, 39.0],
     ],
-    color: "#dc2626", // Red
+    color: "#f97316", // Vibrant orange (swapped from Oost)
     images: ["/images/regions/zuidoost-hero.jpg"],
   },
 ];

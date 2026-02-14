@@ -6,11 +6,14 @@ import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getAllTripTypes } from "@/lib/data/tripTypes";
+import { getAllRegions } from "@/lib/data/regions";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [xploreMenuOpen, setXploreMenuOpen] = useState(false);
+  const [regiosMenuOpen, setRegiosMenuOpen] = useState(false);
   const tripTypesData = getAllTripTypes();
+  const regionsData = getAllRegions();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -57,12 +60,28 @@ export default function Header() {
             </div>
           </div>
 
-          <Link
-            href="/regios"
-            className="text-sm font-medium text-foreground transition-colors hover:text-primary"
-          >
-            Regio&apos;s
-          </Link>
+          {/* Regio's Dropdown (alleen detailpagina's) */}
+          <div className="relative group">
+            <span className="text-sm font-medium text-foreground transition-colors hover:text-primary flex items-center gap-1 cursor-default">
+              Xplore Regions
+              <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+            </span>
+            <div className="absolute left-0 mt-2 w-64 rounded-xl bg-white shadow-xl border border-primary/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="my-1 border-t border-primary/10" />
+              {regionsData.map((region) => (
+                <Link
+                  key={region.id}
+                  href={`/regios/${region.id}`}
+                  className="block px-4 py-2.5 text-sm text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                >
+                  <div className="font-medium">{region.name}</div>
+                  <div className="text-xs text-muted-foreground">
+                    {region.shortDescription}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link
             href="/over-ons"
             className="text-sm font-medium text-foreground transition-colors hover:text-primary"
@@ -133,13 +152,35 @@ export default function Header() {
               )}
             </div>
 
-            <Link
-              href="/regios"
-              className="block text-sm font-medium text-foreground"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Regio&apos;s
-            </Link>
+            {/* Regio's Mobile Menu */}
+            <div className="space-y-2">
+              <button
+                onClick={() => setRegiosMenuOpen(!regiosMenuOpen)}
+                className="flex items-center justify-between w-full text-sm font-semibold text-primary"
+              >
+                Xplore Regions
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    regiosMenuOpen && "rotate-180",
+                  )}
+                />
+              </button>
+              {regiosMenuOpen && (
+                <div className="pl-4 space-y-2 pt-2">
+                  {regionsData.map((region) => (
+                    <Link
+                      key={region.id}
+                      href={`/regios/${region.id}`}
+                      className="block text-sm text-foreground"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {region.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             <Link
               href="/over-ons"
               className="block text-sm font-medium text-foreground"

@@ -20,6 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { TripType } from "@/types";
 import TripListWithRegionFilter from "@/components/trips/TripListWithRegionFilter";
+import { generateSEOMetadata } from "@/lib/seo/metadata";
 
 const iconMap = {
   Landmark,
@@ -54,10 +55,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  // Use the trip type's hero image for OG tags
+  const heroImage = getTripTypeHeroImage(tripType.id);
+
+  return generateSEOMetadata({
     title: `${tripType.name} - ${tripType.tagline}`,
     description: tripType.longDescription,
-  };
+    path: `/xplore-your-way/${type}`,
+    image: heroImage,
+  });
 }
 
 export default async function TripTypePage({ params }: PageProps) {

@@ -5,10 +5,11 @@ import Image from "next/image";
 import { getRegionBySlug, getAllRegions } from "@/lib/data/regions";
 import { getRegionImage } from "@/lib/data/regionImages";
 import { trips } from "@/lib/data/trips";
-import { MapPin, ArrowRight, Lightbulb } from "lucide-react";
+import { MapPin, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TripListWithTypeFilter from "@/components/trips/TripListWithTypeFilter";
 import TurkeyMap from "@/components/TurkeyMap";
+import { generateSEOMetadata } from "@/lib/seo/metadata";
 
 interface PageProps {
   params: Promise<{
@@ -35,10 +36,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  // Use the region's hero image for OG tags
+  const heroImage = regionData.images?.[0] ?? getRegionImage(regionData.id);
+
+  return generateSEOMetadata({
     title: `${regionData.name} - Ontdek de regio`,
     description: regionData.description,
-  };
+    path: `/regios/${region}`,
+    image: heroImage,
+  });
 }
 
 export default async function RegionPage({ params }: PageProps) {
@@ -86,14 +92,6 @@ export default async function RegionPage({ params }: PageProps) {
 
         <div className="relative z-10 w-full">
           <div className="container mx-auto px-4 py-6 sm:py-8 text-center">
-            <Link
-              href="/regios"
-              className="inline-flex items-center justify-center gap-2 text-sm text-white/80 hover:text-white mb-3 transition-colors"
-            >
-              <ArrowRight className="h-4 w-4 rotate-180" />
-              Terug naar alle regio&apos;s
-            </Link>
-
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-white leading-[1.15] tracking-tight">
               {regionData.name}
             </h1>
@@ -308,34 +306,32 @@ export default async function RegionPage({ params }: PageProps) {
         <hr className="border-0 border-t border-primary/15" aria-hidden />
       </div>
 
-      {/* CTA Block */}
-      <section className="py-16 sm:py-20 px-4">
+      {/* Ontdek Andere Regio's - Compact */}
+      <section className="py-12 sm:py-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <div className="overflow-hidden rounded-2xl border-2 border-primary/20 bg-white shadow-[0_4px_24px_rgba(41,77,84,0.08)] py-10 sm:py-12 px-6 sm:px-8 lg:px-10 text-center">
-            <h2 className="text-xl sm:text-2xl font-bold text-primary mb-3">
-              Ontdek andere regio&apos;s
-            </h2>
-            <p className="text-foreground/80 mb-6 leading-relaxed max-w-xl mx-auto">
-              Elke regio van Turkije heeft zijn eigen unieke karakter en
-              verhaal. Verken de andere regio&apos;s of laat ons een reis op
-              maat voor je samenstellen.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                asChild
-                variant="outline"
-                className="border-primary/30"
-              >
-                <Link href="/regios">Alle Regio&apos;s</Link>
-              </Button>
-              <Button
-                size="lg"
-                asChild
-                className="bg-accent hover:bg-accent/90 text-white"
-              >
-                <Link href="/contact">Reis Op Maat</Link>
-              </Button>
+          <div className="text-center mb-6">
+            <h3 className="text-lg sm:text-xl font-semibold text-primary mb-2">
+              Ontdek ook
+            </h3>
+            {/* Compact Region Pills - 3 per rij */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 max-w-2xl mx-auto">
+              {getAllRegions()
+                .filter((r) => r.id !== regionData.id)
+                .map((region) => (
+                  <Link
+                    key={region.id}
+                    href={`/regios/${region.id}`}
+                    className="group flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-white border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 hover:scale-105 shadow-sm"
+                  >
+                    <div
+                      className="w-3 h-3 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: region.color || "#294d54" }}
+                    />
+                    <span className="text-sm font-medium text-primary group-hover:text-accent transition-colors whitespace-nowrap">
+                      {region.name}
+                    </span>
+                  </Link>
+                ))}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { buttonStyles } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

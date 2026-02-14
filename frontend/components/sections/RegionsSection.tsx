@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { getAllRegions } from "@/lib/data/regions";
 import { ArrowRight } from "lucide-react";
 import RegionCard from "@/components/regions/RegionCard";

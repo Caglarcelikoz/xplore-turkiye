@@ -57,12 +57,12 @@ export default function Header() {
             </div>
           </div>
 
-          {/* <Link
+          <Link
             href="/regios"
             className="text-sm font-medium text-foreground transition-colors hover:text-primary"
           >
             Regio&apos;s
-          </Link> */}
+          </Link>
           <Link
             href="/over-ons"
             className="text-sm font-medium text-foreground transition-colors hover:text-primary"
@@ -133,13 +133,13 @@ export default function Header() {
               )}
             </div>
 
-            {/* <Link
+            <Link
               href="/regios"
               className="block text-sm font-medium text-foreground"
               onClick={() => setMobileMenuOpen(false)}
             >
               Regio&apos;s
-            </Link> */}
+            </Link>
             <Link
               href="/over-ons"
               className="block text-sm font-medium text-foreground"

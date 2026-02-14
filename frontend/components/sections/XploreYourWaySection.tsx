@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { getAllTripTypes } from "@/lib/data/tripTypes";
 import { ArrowRight, Route } from "lucide-react";
 import TripTypeCard from "@/components/trip-types/TripTypeCard";

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { MapPin } from "lucide-react";
 import Image from "next/image";
 import { regions } from "@/lib/data/regions";

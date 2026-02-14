@@ -1,11 +1,11 @@
-import * as React from "react";
+import { cloneElement, isValidElement } from "react";
+import type { ButtonHTMLAttributes, ReactElement } from "react";
 import { cn } from "@/lib/utils";
 
 type ButtonVariant = "default" | "outline";
 type ButtonSize = "default" | "lg" | "icon";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   asChild?: boolean;
@@ -42,9 +42,9 @@ export function Button({
     className
   );
 
-  if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children as React.ReactElement<{ className?: string }>, {
-      className: cn(buttonClassName, (children as React.ReactElement<{ className?: string }>).props?.className),
+  if (asChild && isValidElement(children)) {
+    return cloneElement(children as ReactElement<{ className?: string }>, {
+      className: cn(buttonClassName, (children as ReactElement<{ className?: string }>).props?.className),
     });
   }
 

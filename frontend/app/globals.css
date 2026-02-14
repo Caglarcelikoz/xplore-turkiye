@@ -1,34 +1,52 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-@layer base {
-  :root {
-    --background: 250 249 247;
-    --foreground: 24 46 50;
-    --radius: 0.5rem;
-  }
+/* Theme configuration - replaces tailwind.config.ts */
+@theme {
+  /* Custom Colors */
+  --color-background: #faf9f7;
+  --color-foreground: #182e32;
+  --color-primary: #294d54;
+  --color-primary-dark: #182e32;
+  --color-primary-light: #3a6c76;
+  --color-accent: #d44e42;
+  --color-accent-hover: #b83a2f;
+  --color-muted: #eee8e3;
+  --color-muted-foreground: #3a6c76;
+  --color-border: #294d54;
+
+  /* Font Families */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-heading: var(--font-lora), Georgia, serif;
+
+  /* Border Radius */
+  --radius: 0.5rem;
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
+/* Base layer styles */
 @layer base {
   :root {
     --background: 250 249 247;
     --foreground: 24 46 50;
-    --radius: 0.5rem;
   }
-  
+
   html {
     font-size: 16px;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
-  
+
   * {
-    @apply border-primary/20;
+    border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
   }
-  
+
   body {
-    @apply bg-background text-foreground font-heading;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-heading);
     font-size: 1rem;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -39,12 +57,11 @@
   }
 }
 
-@layer utilities {
-  .scrollbar-hide::-webkit-scrollbar {
+/* Custom utilities - MUST use @utility directive in v4 */
+@utility scrollbar-hide {
+  &::-webkit-scrollbar {
     display: none;
   }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

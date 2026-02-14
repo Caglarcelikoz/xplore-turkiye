@@ -60,16 +60,12 @@ Maps Strapi enum values (e.g., "MAP_PIN", "CALENDAR") to Lucide React icons via 
 ### Dynamic Zone Blocks (`types/strapi.ts`)
 Content blocks are defined as a union type `DynamicZoneBlock`. Use type guards `isHeroBlock()` and `isAboutBlock()` to narrow block types.
 
-### Coming Soon Mode
-Controlled by `NEXT_PUBLIC_SHOW_COMING_SOON` env variable. When `true`, shows only the coming soon page.
-
 ## Environment Variables
 
 ### Frontend (.env.local)
 ```
 NEXT_PUBLIC_STRAPI_API_URL=http://localhost:1337/api
 STRAPI_API_TOKEN=<optional, for protected endpoints>
-NEXT_PUBLIC_SHOW_COMING_SOON=false
 ```
 
 ### CMS (.env)

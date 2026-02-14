@@ -20,15 +20,10 @@ const lora = Lora({
   adjustFontFallback: true,
 });
 
-const showComingSoon = process.env.NEXT_PUBLIC_SHOW_COMING_SOON === 'true';
-
 export const metadata: Metadata = {
-  title: showComingSoon
-    ? "Xplore Turkiye & Beyond | Binnenkort beschikbaar"
-    : "Xplore Turkiye & Beyond | Groepsreizen en Maatwerk Reizen",
-  description: showComingSoon
-    ? "We werken hard aan een geweldige reiservaring voor jou. Blijf op de hoogte!"
-    : "Ontdek de mooiste reizen naar Turkije. Groepsreizen, maatwerk reizen, self drives en citytrips. Persoonlijk reisadvies en begeleiding bij elke stap.",
+  title: "Xplore Turkiye & Beyond | Groepsreizen en Maatwerk Reizen",
+  description:
+    "Ontdek de mooiste reizen naar Turkije. Groepsreizen, maatwerk reizen, self drives en citytrips. Persoonlijk reisadvies en begeleiding bij elke stap.",
 };
 
 export const viewport: Viewport = {
@@ -47,10 +42,10 @@ export default function RootLayout({
   return (
     <html lang="nl" className={`${inter.variable} ${lora.variable}`}>
       <body className="font-heading antialiased" suppressHydrationWarning>
-        {!showComingSoon && <Header />}
+        <Header />
         <main className="min-h-screen">{children}</main>
-        {!showComingSoon && <Footer />}
-        {!showComingSoon && <CookieConsent />}
+        <Footer />
+        <CookieConsent />
       </body>
     </html>
   );

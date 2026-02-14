@@ -78,14 +78,12 @@ Zie Strapi documentatie voor benodigde environment variables.
 
 ```
 NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
-NEXT_PUBLIC_SHOW_COMING_SOON=false
 ```
 
 Voor productie:
 
 ```
 NEXT_PUBLIC_STRAPI_URL=https://your-strapi-domain.com
-NEXT_PUBLIC_SHOW_COMING_SOON=true  # Zet op false wanneer site klaar is
 ```
 
 ## Deployment
@@ -105,15 +103,6 @@ Dit is een monorepo met beide projecten in dezelfde repository. Dit maakt het ma
 - Wijzigingen tussen frontend en CMS te coördineren
 - Versiebeheer te synchroniseren
 - Deployment te stroomlijnen
-
-## Coming Soon Mode
-
-De frontend ondersteunt een "coming soon" mode via de `NEXT_PUBLIC_SHOW_COMING_SOON` environment variable:
-
-- `true`: Toont alleen een coming soon pagina, alle andere routes worden geblokkeerd
-- `false`: Normale website functionaliteit
-
-Zie `frontend/middleware.ts` voor implementatie details.
 
 ## License
 
